@@ -1,0 +1,108 @@
+/* =========================================================
+   MATORI · depth and contrast pass (loaded after styles.css)
+   Stronger section rhythm, grounded shadows, phone fixes.
+   ========================================================= */
+
+/* ---------- Section rhythm: dark bands so the page is not one flat cream ----------
+   Sections are targeted by their aria-labelledby so app.js stays untouched. */
+section[aria-labelledby="sci-title"] { background: #4A5243; color: #EFE6D8; }
+section[aria-labelledby="sci-title"] .h2, section[aria-labelledby="sci-title"] .h3 { color: #F4ECDF; }
+section[aria-labelledby="sci-title"] .lead, section[aria-labelledby="sci-title"] p, section[aria-labelledby="sci-title"] .principles p { color: #D5CCBC; }
+section[aria-labelledby="sci-title"] .label { color: #E8B48F; }
+section[aria-labelledby="sci-title"] .principles, section[aria-labelledby="sci-title"] .principles > div { border-color: rgba(244,236,223,.18); }
+section[aria-labelledby="sci-title"] .principles h3 { color: #F4ECDF; }
+section[aria-labelledby="sci-title"] .text-link { color: #F4ECDF; }
+section[aria-labelledby="sci-title"] .btn--ghost { color: #F4ECDF; border-color: rgba(244,236,223,.45); }
+section[aria-labelledby="sci-title"] .btn--ghost:hover { border-color: #F4ECDF; }
+
+section[aria-labelledby="collab-title"] {
+  background-color: var(--kraft);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .27  0 0 0 0 .2  0 0 0 .3 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+    linear-gradient(180deg, rgba(255,255,255,.18), transparent 40%, rgba(62,43,33,.08));
+}
+section[aria-labelledby="collab-title"] .pathway-list { border-top-color: rgba(62,43,33,.4); }
+section[aria-labelledby="collab-title"] .pathway-list li { border-bottom-color: rgba(62,43,33,.22); }
+section[aria-labelledby="collab-title"] .pathway-list span:last-child { color: #5A4B3E; }
+section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
+
+/* Soft vignette at the edges of the big stages so objects sit in a space, not on a sheet */
+.unbox-sticky::after, .lab-stage::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(90% 80% at 50% 45%, transparent 55%, rgba(62,43,33,.14));
+}
+.unbox { background: #E2D6C6; }
+.unbox-panel.is-active, .unbox-copy .h2 { position: relative; z-index: 3; }
+
+/* ---------- Grounded shadows under every carton ---------- */
+.cat-visual, .product-row .mini { position: relative; }
+.cat-visual::after, .product-row .mini::after {
+  content: ""; position: absolute; left: 22%; right: 18%; bottom: 10%; height: 8%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(62,43,33,.42), transparent 70%); filter: blur(4px);
+}
+.cat-card .cat-visual {
+  background:
+    radial-gradient(100% 60% at 70% 10%, rgba(255,250,242,.9), transparent 55%),
+    linear-gradient(170deg, #E9DCCB 0%, #D7C7B3 60%, #C9B79F 100%);
+  box-shadow: inset 0 -40px 60px -40px rgba(62,43,33,.35);
+}
+.product-row .mini {
+  background:
+    radial-gradient(100% 60% at 70% 10%, rgba(255,250,242,.9), transparent 55%),
+    linear-gradient(170deg, #E9DCCB 0%, #D7C7B3 60%, #C9B79F 100%);
+}
+.niche { box-shadow: inset 0 60px 90px -50px rgba(62,43,33,.28), inset 30px 0 70px -40px rgba(62,43,33,.22); }
+.niche::after { background: linear-gradient(180deg, rgba(255,255,255,.3), transparent 14%), linear-gradient(180deg, #D3BFA8, #BBA48B); }
+.hero-scene .ledge { box-shadow: 0 -26px 50px -24px rgba(62,43,33,.5); }
+.wall { background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+    radial-gradient(70% 90% at 78% 20%, rgba(255,247,236,.9), transparent 60%),
+    linear-gradient(118deg, transparent 0 46%, rgba(62,43,33,.1) 46% 60%, transparent 60%),
+    radial-gradient(120% 100% at 50% 50%, transparent 50%, rgba(62,43,33,.16)),
+    linear-gradient(100deg, #DFCBB4 0%, #EDE1D2 40%, #E6D5C0 75%, #CFB89E 100%); }
+.sp-carton::after { background: radial-gradient(50% 50% at 50% 50%, rgba(62,43,33,.5), transparent 70%); height: calc(var(--u) * 28); }
+.sp-sachet { filter: drop-shadow(-14px 22px 22px rgba(62,43,33,.3)); }
+.sp-patch { filter: drop-shadow(0 10px 12px rgba(62,43,33,.3)); }
+
+/* Mosaic tiles: give the two photo-less tiles real depth */
+.tile-skin {
+  background:
+    radial-gradient(60% 50% at 40% 38%, rgba(255,245,232,.8), transparent 60%),
+    radial-gradient(90% 80% at 50% 50%, transparent 55%, rgba(62,43,33,.28)),
+    linear-gradient(160deg, #E8D3BD, #CDB197);
+}
+.tile-skin .skin-patch { filter: drop-shadow(0 10px 14px rgba(62,43,33,.35)); }
+.tile-stone { box-shadow: inset 0 -40px 60px -40px rgba(62,43,33,.4); }
+.mosaic { background: #3E2B21; gap: 1px; }
+.tile-text { box-shadow: inset 0 0 0 1px rgba(62,43,33,.06); }
+
+/* ---------- Type contrast ---------- */
+:root { --ink-soft: #4E463F; --ink-faint: #6F665C; }
+.lead { color: #4E463F; }
+.scene-copy .lead { color: #3F362E; }
+.meta { color: #6F665C; }
+
+/* ---------- Phone fixes ---------- */
+@media (max-width: 979px) {
+  /* Hero: give the products a proper stage and keep the caption off the text */
+  .scene-products { height: clamp(440px, 110vw, 560px); --u: clamp(0.72px, 0.16vw + 0.2px, 1px); }
+  .scene-bg .ledge { height: 19%; }
+  .scene-bg .stone-block { bottom: 17%; height: 30%; }
+  .sp-carton { right: 10%; bottom: 14%; }
+  .sp-sachet { right: calc(10% + var(--u) * 135); bottom: 12.5%; }
+  .sp-patch { right: calc(10% + var(--u) * 82); bottom: 10%; }
+  .scene-note { position: static; display: block; padding: 10px var(--gutter) 14px; text-align: right; background: #CDB89E; color: #4A3D32; }
+  .hero-scene { padding-bottom: 0; }
+  /* Unboxing: bigger carton, note out of the way, copy readable over the stage */
+  .unbox-stage { --u: clamp(0.72px, 0.18vw + 0.1px, 0.9px); }
+  .unbox-note { display: none; }
+  .unbox-copy { background: linear-gradient(180deg, rgba(226,214,198,0), rgba(226,214,198,.92) 30%, #E2D6C6 60%); padding-top: 90px; }
+  .unbox-rail { margin-top: 18px; }
+  .unbox-stage > .stage { padding: 0 0 230px; }
+}
+@media (max-width: 560px) {
+  .scene-copy { padding-bottom: 8px; }
+  .hero-cats { margin-top: 28px; }
+  .mosaic .tile { min-height: 300px; }
+  .tile-text { padding: 28px 22px; }
+}
