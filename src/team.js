@@ -30,6 +30,7 @@ function orbitHTML() {
         <div class="orbit-stage" id="orbit-stage" tabindex="0" role="group" aria-label="Team ring. Drag or use the arrow keys to turn it.">
           <div class="orbit-scene">
             <div class="orbit-world">
+              ${geoConstruct("orbit-geo")}
               <div class="orbit-equator orbit-equator--outer"></div>
               <div class="orbit-equator"></div>
               <div class="orbit-ticks" aria-hidden="true">${Array.from({ length: 36 }, (_, k) => `<span style="--k:${k}"></span>`).join("")}</div>
@@ -112,6 +113,8 @@ function mountOrbit(root) {
       const W = stage.clientWidth, H = stage.clientHeight, cw = card.offsetWidth, ch = card.offsetHeight;
       const settled = Math.abs(target - a) < 1.5 && !dragging;
       const tPull = settled ? ease((performance.now() - t0) / 650) : 0, tRing = settled ? ease((performance.now() - t0 + 250) / 450) : 0;
+      root.style.setProperty("--g", tRing.toFixed(3));
+      root.classList.toggle("is-settled", settled);
       const docked = W < 760;
       const fx = docked ? (W - cw) / 2 : Math.min(W - cw - 24, an.x + 150), fy = docked ? H - ch - 16 : Math.max(16, Math.min(H - ch - 16, an.y - ch / 2));
       const cx = lerp(an.x - cw / 2, fx, tPull), cy = lerp(an.y - ch / 2, fy, tPull);
@@ -148,6 +151,17 @@ mountPage = function () {
   __mountPage();
   const o = document.getElementById("orbit");
   if (o) cleanup.push(mountOrbit(o));
+  const rig = document.querySelector(".unbox-rig");
+  if (rig && !rig.querySelector(".cage")) {
+    // Hexagonal cage around the carton: six panels that peel open from the base as you scroll
+    rig.insertAdjacentHTML("afterbegin", `<div class="cage" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((k) => `
+      <div class="cage-panel" style="--k:${k}"><svg viewBox="0 0 100 190" fill="none" stroke="currentColor" stroke-width=".8">
+        <polygon points="50,8 86,29 86,71 50,92 14,71 14,29"/><polygon points="50,30 68,40 68,60 50,70 32,60 32,40"/>
+        <line x1="50" y1="92" x2="50" y2="182"/><line x1="14" y1="120" x2="86" y2="120"/><line x1="14" y1="150" x2="86" y2="150"/>
+        <circle cx="50" cy="182" r="2.5" fill="currentColor"/></svg></div>`).join("")}</div>`);
+    const layers = document.querySelector(".unbox-layers");
+    if (layers && !layers.querySelector(".ul-geo-wall")) layers.insertAdjacentHTML("afterbegin", geoConstruct("ul-geo-wall"));
+  }
 };
 
 /* Unboxing depth: the camera dollies in, the carton comes toward you,
