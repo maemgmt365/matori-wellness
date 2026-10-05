@@ -292,3 +292,23 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .orbit-disc { width: clamp(84px, 10vw, 128px); }
 .orbit-card { width: 320px; }
 @media (max-width: 760px) { .orbit-stage { height: 680px; } .orbit-world { --R: clamp(120px, 32vw, 160px); top: 30%; } }
+
+/* ---------- Unboxing focus: the carton is the sharp thing in front; everything else falls back ---------- */
+.unbox-stage { --u: clamp(0.72px, 0.06vw + 0.5px, 1.2px); }
+.unbox-layers { filter: blur(1.6px); }
+.ul-geo-wall { opacity: .18; transform: translate(-50%, -50%) scale(calc(.7 + var(--p) * .25)) rotate(calc(var(--p) * -20deg)); }
+.ul-geo { opacity: .34; }
+.ul-contour { opacity: .08; filter: blur(2px); }
+.ul-mark { opacity: .02; }
+.cage-panel { opacity: calc(.34 - var(--open) * .14); filter: blur(calc(.4px + var(--open) * 1.2px)); }
+.cage-panel svg { opacity: .55; }
+/* The three panels facing the camera would sit over the carton, so they are faintest */
+.cage-panel[style*="--k:0"], .cage-panel[style*="--k:1"], .cage-panel[style*="--k:5"] { opacity: calc(.18 - var(--open) * .08); }
+/* Spotlight: the stage darkens toward its edges as the box opens, pulling the eye to the centre */
+.unbox-sticky::after {
+  background:
+    radial-gradient(60% 55% at 61% 48%, transparent 40%, rgba(43,47,53,calc(.08 + var(--p) * .16)) 100%);
+}
+@media (max-width: 979px) { .unbox-sticky::after { background: radial-gradient(70% 50% at 50% 40%, transparent 40%, rgba(43,47,53,calc(.08 + var(--p) * .16)) 100%); } }
+.unbox-rig::after { background: radial-gradient(50% 50% at 50% 50%, rgba(43,47,53,.55), transparent 70%); }
+.unbox-copy { filter: none; }
