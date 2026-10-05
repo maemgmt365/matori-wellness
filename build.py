@@ -9,7 +9,7 @@ MARK = ('<svg viewBox="0 0 64 48" fill="none" stroke="currentColor" stroke-width
         '<path d="M35 39.4 L42.4 25.6 Q45.8 20.6 49.2 25.6 L61.5 45"/><circle cx="32.2" cy="17.2" r="3.7" fill="currentColor" stroke="none"/>'
         '<path d="M32.2 2.4v5.6M22.6 6.6l4.6 4.8M41.8 6.6l-4.6 4.8M17.6 14l6.4 1.8M46.8 14l-6.4 1.8" stroke-width="2.4"/></svg>')
 html = (src / "index.html").read_text()
-css = (src / "styles.css").read_text()
+css = (src / "styles.css").read_text() + "\n" + (src / "depth.css").read_text()
 js = "\n".join((src / f).read_text() for f in ["data.js", "components.js", "app.js"])
 out = html.replace("/*__CSS__*/", css).replace("/*__JS__*/", js).replace("<!--MARK-->", MARK)
 def asset(m):
