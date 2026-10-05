@@ -167,8 +167,8 @@ mountPage = function () {
 /* Unboxing depth: the camera dollies in, the carton comes toward you,
    and the patch finishes close to the lens. */
 Object.assign(UNBOX_TIMELINE, {
-  rigZ:   [[0, -520], [0.14, -40], [0.50, -40], [0.70, 60], [0.86, 140]],
-  rigY:   [[0, 60], [0.36, 40], [0.50, 110], [0.68, 240], [0.86, 280]],
+  rigZ:   [[0, -200], [0.14, 40], [0.50, 40], [0.70, 110], [0.86, 170]],
+  rigY:   [[0, 60], [0.36, 40], [0.50, 120], [0.68, 310], [0.86, 330]],
   patchZ: [[0.82, 0], [0.89, 220], [0.99, 240]],
   patchS: [[0.84, 1], [0.90, 1.25], [0.99, 1.3]]
 });
