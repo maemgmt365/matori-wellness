@@ -10,7 +10,7 @@ MARK = ('<svg viewBox="0 0 64 48" fill="none" stroke="currentColor" stroke-width
         '<path d="M32.2 2.4v5.6M22.6 6.6l4.6 4.8M41.8 6.6l-4.6 4.8M17.6 14l6.4 1.8M46.8 14l-6.4 1.8" stroke-width="2.4"/></svg>')
 html = (src / "index.html").read_text()
 css = (src / "styles.css").read_text() + "\n" + (src / "depth.css").read_text()
-js = "\n".join((src / f).read_text() for f in ["data.js", "components.js", "app.js"])
+js = "\n".join((src / f).read_text() for f in ["data.js", "components.js", "app.js", "team.js"])
 out = html.replace("/*__CSS__*/", css).replace("/*__JS__*/", js).replace("<!--MARK-->", MARK)
 def asset(m):
     # Images live in src/assets either as the binary file or as <name>.b64 (base64 text)
