@@ -11,6 +11,16 @@ const MARK_INNER = `<path d="M3 45 L15.4 25.6 Q18.8 20.6 22.2 25.6 L34 45"/>
     <path d="M35 39.4 L42.4 25.6 Q45.8 20.6 49.2 25.6 L61.5 45"/>
     <circle cx="32.2" cy="17.2" r="3.7" fill="currentColor" stroke="none"/>
     <path d="M32.2 2.4v5.6M22.6 6.6l4.6 4.8M41.8 6.6l-4.6 4.8M17.6 14l6.4 1.8M46.8 14l-6.4 1.8" stroke-width="2.4"/>`;
+/* Wordmark drawn as geometry (thin strokes, hexagon O), matching the embossed logo lockup.
+   Fill/stroke come from the shared #copper-grad gradient defined in index.html. */
+const WORDMARK_SVG = (cls = "") => `<svg class="wordmark-svg ${cls}" viewBox="0 0 566 108" fill="none" stroke="url(#copper-grad-wm)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="MATORI"><g transform="translate(5 4)">
+    <polyline points="0,100 0,0 42,70 84,0 84,100"/>
+    <polyline points="118,100 160,0 202,100"/><line x1="136" y1="60" x2="184" y2="60"/>
+    <line x1="236" y1="0" x2="308" y2="0"/><line x1="272" y1="0" x2="272" y2="100"/>
+    <polygon points="380,0 418,25 418,75 380,100 342,75 342,25"/>
+    <line x1="452" y1="0" x2="452" y2="100"/><path d="M452 0 H490 Q518 0 518 27 Q518 54 490 54 H452"/><line x1="486" y1="54" x2="518" y2="100"/>
+    <line x1="552" y1="0" x2="552" y2="100"/>
+  </g></svg>`;
 const MARK_SVG = (cls = "") => `<svg class="${cls}" viewBox="0 0 64 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${MARK_INNER}</svg>`;
 
 /* Blurred olive-branch shadow for the hero wall and stone tile */
@@ -99,7 +109,7 @@ function carton(p, opts = {}) {
   const front = `
     <div class="art">
       ${ICON.mark("art-mark")}
-      <div class="art-word">MATORI</div>
+      <div class="art-word">${WORDMARK_SVG()}</div>
       <div class="art-tag">Wear your wellness</div>
       <div class="art-sku">
         <div class="art-name">${p.boxName.map(esc).join("<br>")}</div>
@@ -158,7 +168,7 @@ const sachetRig = (p, A = () => "") => `
     <div class="us-body">
       <div class="pouch-card">
         ${ICON.mark("art-mark")}
-        <div class="pw">MATORI</div>
+        <div class="pw">${WORDMARK_SVG()}</div>
         <div class="ps"><b>${p.boxName.map(esc).join("<br>")}</b>${ICON.tilde("art-tilde")}<span>${esc(p.benefit.slice(0, 2).join(" / "))}</span><span>${esc(p.benefit[2] || "")}</span></div>
         ${ICON.contour("art-contour")}
       </div>
@@ -171,7 +181,7 @@ const sachetArt = (p) => `
   <div class="pouch-body"></div>
   <div class="pouch-card">
     ${ICON.mark("art-mark")}
-    <div class="pw">MATORI</div>
+    <div class="pw">${WORDMARK_SVG()}</div>
     <div class="ps"><b>${p.boxName.map(esc).join("<br>")}</b>${ICON.tilde("art-tilde")}<span>${esc(p.benefit.slice(0, 2).join(" / "))}</span><span>${esc(p.benefit[2] || "")}</span></div>
     ${ICON.contour("art-contour")}
   </div>`;
