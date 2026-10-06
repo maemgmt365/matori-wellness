@@ -312,3 +312,175 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 @media (max-width: 979px) { .unbox-sticky::after { background: radial-gradient(70% 50% at 50% 40%, transparent 40%, rgba(43,47,53,calc(.08 + var(--p) * .16)) 100%); } }
 .unbox-rig::after { background: radial-gradient(50% 50% at 50% 50%, rgba(43,47,53,.55), transparent 70%); }
 .unbox-copy { filter: none; }
+
+/* ---------- Harmony: every move of the geometry is caused by a move of the box ----------
+   Step 1 arrive  0.00–0.14 : outer ring draws as the carton comes forward
+   Step 2 turn    0.16–0.34 : hexagon + spokes draw, constructions turn with the box, cage peels one panel per 60°
+   Step 3 tray    0.34–0.50 : floor spreads outward as the tray slides up
+   Step 4 sachet  0.50–0.70 : petal circles bloom as the sachet lifts
+   Step 5 open    0.70–0.84 : tick ring appears as the sachet tears
+   Step 6 patch   0.84–1.00 : the floor rises to stand behind the patch                     */
+.unbox {
+  --g1: clamp(0, calc(var(--p) * 7.2), 1);
+  --g2: clamp(0, calc((var(--p) - .16) * 5.5), 1);
+  --g3: clamp(0, calc((var(--p) - .50) * 5), 1);
+  --g4: clamp(0, calc((var(--p) - .70) * 7), 1);
+  --spread: clamp(0, calc((var(--p) - .34) * 6.2), 1);
+  --lift: clamp(0, calc((var(--p) - .84) * 6.5), 1);
+  --open: 0;
+}
+/* Floor: turns with the carton, spreads with the tray, rises for the patch */
+.ul-geo {
+  opacity: calc(.26 + var(--spread) * .14);
+  transform:
+    translate(-50%, calc(var(--lift) * -46%)) perspective(900px)
+    rotateX(calc(64deg - var(--lift) * 64deg))
+    scale(calc(.78 + var(--spread) * .5 - var(--lift) * .55))
+    rotate(calc(var(--ry, 0deg) * -1 + 24deg));
+}
+.ul-geo .g4 { display: block; }
+/* Wall: counter-turns slightly behind the box (parallax), brightens briefly while it turns */
+.ul-geo-wall {
+  opacity: calc(.12 + var(--g2) * (1 - var(--g3)) * .14);
+  transform: translate(-50%, -50%) scale(calc(.72 + var(--spread) * .2)) rotate(calc(var(--ry, 0deg) * .35));
+}
+/* Cage: one panel opens per 60 degrees of the turn, in the direction the box turns */
+.cage-panel {
+  --open: clamp(0, calc((var(--p) - .16 - var(--k) * .028) * 6), 1);
+  transform: rotateY(calc(var(--k) * 60deg)) translateZ(calc(var(--u) * 215)) rotateX(calc(var(--open) * -96deg));
+  opacity: calc(.34 - var(--open) * .16); filter: blur(calc(.4px + var(--open) * 1.2px));
+}
+.cage-panel[style*="--k:0"], .cage-panel[style*="--k:1"], .cage-panel[style*="--k:5"] { opacity: calc(.18 - var(--open) * .1); }
+.cage { transform: translateY(calc(var(--h) * .5 + var(--u) * 8)) scale(calc(.92 + var(--spread) * .5)); }
+
+/* ---------- Team ring v3: the front bubble opens into the card; the rest fall back and skew ---------- */
+.orbit-stage { height: clamp(700px, 92vh, 900px); }
+.orbit-scene { perspective: 1500px; perspective-origin: 50% 38%; }
+.orbit-world { --R: clamp(200px, 25vw, 360px); top: 50%; transform: rotateX(-10deg) rotateY(var(--a, 0deg)); }
+.orbit-node {
+  transform:
+    rotateY(calc(var(--i) * 90deg)) translateZ(var(--R)) rotateY(calc(var(--i) * -90deg - var(--a, 0deg)))
+    rotateY(calc(var(--rel, 0deg) * -.28)) rotateX(10deg);
+  opacity: calc(.35 + (var(--depth, 1) + 1) * .325);
+  filter: blur(calc((1 - var(--depth, 1)) * .9px));
+  transition: none; translate: -50% -50%;
+}
+.orbit-node .orbit-disc { transition: transform .5s var(--ease), opacity .4s var(--ease), box-shadow .5s var(--ease); transform: scale(calc(.7 + (var(--depth, 1) + 1) * .18)); }
+.orbit-node .orbit-tag { transition: opacity .3s var(--ease); }
+.orbit-node.is-open .orbit-disc, .orbit-node.is-open .orbit-tag { opacity: 0; pointer-events: none; transform: scale(.4); }
+.orbit-panel {
+  position: absolute; left: 50%; top: 50%; translate: -50% -56%;
+  width: min(880px, calc(100vw - 2 * var(--gutter))); display: grid; grid-template-columns: 300px 1fr; gap: 0;
+  background: var(--surface); border-left: 2px solid var(--copper);
+  box-shadow: 0 40px 70px -30px rgba(43,47,53,.55), 0 0 0 1px rgba(43,47,53,.06);
+  opacity: 0; transform: scale(.42); transform-origin: 50% 50%; pointer-events: none;
+  transition: opacity .45s var(--ease) .15s, transform .65s var(--ease) .1s;
+}
+.orbit-node.is-open .orbit-panel { opacity: 1; transform: scale(1); pointer-events: auto; }
+.orbit-portrait { aspect-ratio: 4 / 5; border-radius: var(--radius-arch); overflow: hidden; margin: 24px 0 24px 24px; background: radial-gradient(60% 60% at 35% 30%, #FBF6EE, #E6D9C8); display: grid; place-items: center; color: var(--slate-ink); }
+.orbit-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.orbit-portrait .orbit-initial { font-size: 3rem; }
+.orbit-text { padding: 36px 36px 32px 32px; display: flex; flex-direction: column; justify-content: center; }
+.orbit-text .h3 { font-size: 2rem; margin: 6px 0 4px; }
+.orbit-text .orbit-role { margin-bottom: 14px; }
+.orbit-text .orbit-bio { font-size: var(--fs-small); }
+.orbit-controls { bottom: 24px; gap: 20px; }
+.orbit-equator, .orbit-equator--outer { opacity: .5; }
+.orbit-geo { opacity: calc(.14 + var(--g, 0) * .22); }
+@media (max-width: 860px) {
+  .orbit-stage { height: 760px; }
+  .orbit-world { --R: clamp(130px, 34vw, 170px); top: 44%; }
+  .orbit-panel { grid-template-columns: 1fr; width: min(360px, calc(100vw - 32px)); translate: -50% -50%; }
+  .orbit-portrait { aspect-ratio: 16 / 9; margin: 16px 16px 0; border-radius: 999px 999px 0 0; }
+  .orbit-text { padding: 18px 20px 22px; }
+  .orbit-text .h3 { font-size: 1.5rem; }
+  .orbit-controls { top: auto; bottom: 16px; }
+}
+
+/* Panels live on a flat layer over the ring, centred where the front bubble sits */
+.orbit-panels { position: absolute; inset: 0; pointer-events: none; }
+.orbit-panel { left: 50%; top: 56%; translate: -50% -50%; }
+.orbit-panel.is-open { opacity: 1; transform: scale(1); pointer-events: auto; }
+@media (max-width: 860px) { .orbit-panel { top: 52%; } }
+/* Keep the other three in view: ring sits higher, the open card sits at the front of the ring */
+.orbit-world { top: 40%; }
+.orbit-panel { top: 68%; width: min(680px, calc(100vw - 2 * var(--gutter))); grid-template-columns: 220px 1fr; }
+.orbit-portrait { margin: 20px 0 20px 20px; }
+.orbit-text { padding: 28px 28px 26px 26px; }
+.orbit-text .h3 { font-size: 1.75rem; }
+.orbit-controls { bottom: 18px; }
+@media (max-width: 860px) {
+  .orbit-world { top: 30%; }
+  .orbit-panel { top: 62%; width: min(340px, calc(100vw - 32px)); grid-template-columns: 1fr; }
+  .orbit-portrait { aspect-ratio: 16 / 7; margin: 14px 14px 0; }
+  .orbit-text { padding: 16px 18px 20px; }
+  .orbit-text .h3 { font-size: 1.375rem; }
+  .orbit-stage { height: 760px; }
+}
+
+/* ---------- Team ring v4: one hexagon per person, size comes from perspective ----------
+   The hexagon keeps its shape on the ring. Up close it is large and holds the full profile;
+   at the back it is small and shows only the portrait. Nothing swaps form.                */
+.orbit-stage { height: clamp(680px, 90vh, 860px); overflow: visible; }
+.orbit-scene { perspective: 1200px; perspective-origin: 50% 30%; }
+.orbit-world { --R: clamp(230px, 27vw, 400px); top: 50%; transform: rotateX(-6deg) rotateY(var(--a, 0deg)); }
+.orbit-node {
+  --near: calc((var(--depth, 1) + 1) / 2);                                 /* 0 back, 1 front */
+  transform: rotateY(calc(var(--i) * 90deg)) translateZ(var(--R)) rotateY(calc(var(--i) * -90deg - var(--a, 0deg))) rotateX(6deg);
+  translate: -50% -50%; opacity: calc(.45 + var(--near) * .55); filter: blur(calc((1 - var(--near)) * 1.1px));
+  transition: none;
+}
+.orbit-node .orbit-disc, .orbit-node .orbit-tag, .orbit-panels { display: none; }
+.hexnode {
+  --size: calc(var(--u-hex, 1px) * 150 + var(--near) * var(--near) * var(--u-hex, 1px) * 330);
+  position: relative; width: var(--size); height: calc(var(--size) * 1.1547);
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  padding: calc(var(--size) * .17) calc(var(--size) * .16) calc(var(--size) * .14);
+  cursor: pointer; user-select: none; text-align: center; color: var(--slate-ink);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: linear-gradient(170deg, #FBF6EE 0%, #EFE4D6 55%, #E2D4C2 100%);
+}
+.orbit { --u-hex: 1px; }
+@media (max-width: 860px) { .orbit { --u-hex: .62px; } }
+.hex-frame { position: absolute; inset: 0; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); box-shadow: inset 0 0 0 calc(2px + var(--near) * 1px) var(--copper); pointer-events: none; }
+.hex-frame::after { content: ""; position: absolute; inset: calc(var(--size) * .035); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); box-shadow: inset 0 0 0 1px rgba(207,90,30,.35); }
+.hex-portrait {
+  width: calc(var(--size) * (.68 - var(--near) * .3)); aspect-ratio: 1 / 1.1547; flex: none;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: radial-gradient(60% 60% at 35% 30%, #FFF9F1, #E3D5C3); display: grid; place-items: center;
+  margin-top: calc(var(--size) * .02);
+}
+.hex-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.hex-portrait .orbit-initial { font-size: calc(var(--size) * .12); }
+.hex-text {
+  margin-top: calc(var(--size) * .04); width: 100%;
+  opacity: clamp(0, calc((var(--near) - .78) * 5), 1);
+  transform: translateY(calc((1 - var(--near)) * 12px));
+  transition: opacity .25s linear;
+}
+.hex-text .label { margin: 0 0 4px; font-size: calc(var(--size) * .025); }
+.hex-text .h3 { font-size: calc(var(--size) * .058); line-height: 1.1; margin-bottom: 4px; }
+.hex-text .orbit-role { font-size: calc(var(--size) * .026); margin-bottom: calc(var(--size) * .02); letter-spacing: .1em; }
+.hex-text .orbit-bio { font-size: calc(var(--size) * .03); line-height: 1.45; color: var(--ink-soft); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.hex-text .text-link { font-size: calc(var(--size) * .026); margin-top: 6px; display: inline-block; }
+.orbit-node.is-front .hexnode { box-shadow: none; }
+/* soft contact shadow under each hexagon, stronger up close */
+.orbit-node::after { content: ""; position: absolute; left: 50%; top: 100%; width: 70%; height: 10%; translate: -50% -10%; background: radial-gradient(50% 50% at 50% 50%, rgba(43,47,53,calc(.15 + var(--near) * .3)), transparent 70%); filter: blur(5px); pointer-events: none; }
+.orbit-controls { bottom: 14px; }
+.orbit-geo { opacity: calc(.14 + var(--g, 0) * .16); }
+@media (max-width: 860px) { .orbit-stage { height: 640px; } .orbit-world { --R: clamp(130px, 36vw, 170px); top: 48%; } .orbit-scene { perspective: 900px; perspective-origin: 50% 32%; } }
+
+/* v4 refinements: true hexagon outline, calmer size, readable text on phones */
+.hex-frame { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--copper); pointer-events: none; }
+.hex-frame polygon { vector-effect: non-scaling-stroke; stroke-width: calc(1.5px + var(--near) * 1.5px); }
+.hex-frame .inner { stroke-width: 1px; opacity: .4; }
+.hex-frame::after { display: none; }
+.hexnode { --size: calc(var(--u-hex, 1px) * 150 + var(--near) * var(--near) * var(--u-hex, 1px) * 250); }
+.hex-text .label { font-size: max(10px, calc(var(--size) * .025)); }
+.hex-text .h3 { font-size: max(15px, calc(var(--size) * .058)); }
+.hex-text .orbit-role { font-size: max(9px, calc(var(--size) * .026)); }
+.hex-text .orbit-bio { font-size: max(11px, calc(var(--size) * .03)); }
+@media (max-width: 860px) { .orbit { --u-hex: .74px; } .hex-text .orbit-bio { -webkit-line-clamp: 3; } .orbit-stage { height: 600px; } }
+.orbit-world { top: 46%; }
+.orbit-stage { height: clamp(720px, 92vh, 900px); }
+@media (max-width: 860px) { .orbit { --u-hex: .68px; } .orbit-stage { height: 620px; } .orbit-world { top: 44%; } }
