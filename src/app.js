@@ -103,6 +103,22 @@ Pages.home = () => `
 
   ${unboxHTML(PRODUCTS[1])}
 
+<section class="routine-cta" aria-labelledby="routine-cta-title">
+<div class="wrap routine-cta-inner">
+<div>
+<span class="label label--rule">Find your routine</span>
+<h2 class="h2" id="routine-cta-title">What do you want more of?</h2>
+<p class="lead">Pick one and we'll suggest where to start.</p>
+</div>
+<div class="routine-cta-goals">
+<a class="goal-chip" href="#/assessment?goal=sleep" style="--cat:var(--cat-sleep)"><span class="hex-dot" aria-hidden="true"></span>Better sleep</a>
+<a class="goal-chip" href="#/assessment?goal=energy" style="--cat:var(--cat-energy)"><span class="hex-dot" aria-hidden="true"></span>Steady daytime energy</a>
+<a class="goal-chip" href="#/assessment?goal=nutrients" style="--cat:var(--cat-cellular)"><span class="hex-dot" aria-hidden="true"></span>Everyday nutrients</a>
+<a class="text-link routine-cta-unsure" href="#/assessment">Not sure yet? Start here</a>
+</div>
+</div>
+</section>
+
   <section class="section" aria-labelledby="sizes-title">
     <div class="wrap grid-2">
       <figure class="size-board">
@@ -170,11 +186,6 @@ function unboxHTML(p) {
   return `
   <section class="unbox" id="unbox" aria-labelledby="unbox-title" style="--p:0">
     <div class="unbox-sticky">
-      <div class="unbox-layers" aria-hidden="true">
-        ${geoConstruct("ul-geo")}
-        ${ICON.mark("ul-mark")}
-        ${ICON.contour("ul-contour")}
-      </div>
       <div class="wrap unbox-grid">
         <div class="unbox-copy">
           <h2 class="h2" id="unbox-title">Open the box.</h2>
@@ -194,11 +205,11 @@ function unboxHTML(p) {
         </div>
         <div class="unbox-stage" id="unbox-stage" tabindex="0" role="group" aria-label="MATORI ${esc(p.name)} carton. Scroll to unpack it, drag or use the left and right arrow keys to turn it.">
           <div class="stage">
-            <div class="unbox-rig">${carton(p, { unbox: true, rx: -4, ry: 205, id: "unbox-carton" })}</div>
+            <div class="unbox-rig">${carton(p, { unbox: true, rx: -6, ry: -30, id: "unbox-carton" })}</div>
           </div>
         </div>
       </div>
-      <p class="unbox-hint meta" id="unbox-hint">Scroll to unpack. Drag to turn.</p>
+      <p class="unbox-hint meta" id="unbox-hint">Scroll to open. Drag to turn.</p>
       <p class="unbox-note meta">Concept render. Not a photograph of the finished product.</p>
     </div>
   </section>`;
@@ -627,7 +638,7 @@ Pages.notFound = () => `
 
 /* ---------- ROUTER ---------- */
 const ROUTES = [
-  { re: /^\/?$/, page: () => Pages.home(), title: "MATORI | Wear your wellness", nav: "" },
+   { re: /^\/?$/, page: () => Pages.home(), title: "MATORI | Wellness, worn differently", nav: "" },
   { re: /^\/products\/?$/, page: () => Pages.products(), title: "Products | MATORI", nav: "products" },
   { re: /^\/products\/([\w-]+)\/?$/, page: (m) => Pages.product(m[1]), title: (m) => `${productBySlug(m[1])?.name || "Not found"} | MATORI`, nav: "products" },
   { re: /^\/science\/?$/, page: () => Pages.science(), title: "The Science | MATORI", nav: "science" },
@@ -906,7 +917,8 @@ function mountUnbox(section) {
     st.setProperty("--sy", `calc(var(--h) * ${v("sachetY").toFixed(4)})`);
     st.setProperty("--sz", `calc(var(--u) * ${v("sachetZ").toFixed(1)})`);
     // counter-rotate the sachet so it ends up facing the viewer
-    st.setProperty("--sry", (-(ry - spin) * face).toFixed(2) + "deg");
+    const ryN = ((((ry - spin) % 360) + 540) % 360) - 180; // -180..180, so a full turn earlier never unwinds here
+     st.setProperty("--sry", (-ryN * face).toFixed(2) + "deg");
     st.setProperty("--srx", (-rx * face).toFixed(2) + "deg");
     st.setProperty("--boxFade", v("boxFade").toFixed(3));
     st.setProperty("--tear", v("tear").toFixed(3));
@@ -917,7 +929,6 @@ function mountUnbox(section) {
     st.setProperty("--peel", v("peel").toFixed(3));
     st.setProperty("--sFade", v("sFade").toFixed(3));
     rig.style.transform = `translate3d(0, calc(var(--u) * ${v("rigY").toFixed(1)}), calc(var(--u) * ${v("rigZ").toFixed(1)}))`;
-    section.style.setProperty("--p", p.toFixed(4));
     const step = Math.max(0, UNBOX_STEPS.findIndex((s) => p >= s.from && p < s.to));
     if (step !== activeStep) {
       activeStep = step;
@@ -931,7 +942,9 @@ function mountUnbox(section) {
     if (staticMode) return;
     const r = section.getBoundingClientRect();
     const total = section.offsetHeight - window.innerHeight;
-    p = Math.min(1, Math.max(0, -r.top / (total || 1)));
+    const np = Math.min(1, Math.max(0, -r.top / (total || 1)));
+     if (Math.abs(np - p) < 0.0005 && np !== 0 && np !== 1) return;
+     p = np;
     if (p > 0.02) hint.style.opacity = 0;
     schedule();
   };
@@ -1094,6 +1107,10 @@ function mountGoals() {
     if (focus) b.focus();
     out.innerHTML = goalResult(GOALS.find((g) => g.id === b.dataset.goal)); out.hidden = false;
   };
+   // Arriving from the homepage prompt (#/assessment?goal=sleep): preselect that goal
+   const want = new URLSearchParams(location.hash.split("?")[1] || "").get("goal");
+   const pre = btns.find((b) => b.dataset.goal === want);
+   if (pre) { select(pre); requestAnimationFrame(() => out.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "center" })); }
   btns.forEach((b, i) => {
     b.addEventListener("click", () => select(b));
     b.addEventListener("keydown", (e) => {
