@@ -128,30 +128,6 @@ mountPage = function () {
   __mountPage();
   const o = document.getElementById("orbit");
   if (o) cleanup.push(mountOrbit(o));
-  const rig = document.querySelector(".unbox-rig");
-  if (rig && !rig.querySelector(".cage")) {
-    // Hexagonal cage around the carton: six panels that peel open from the base as you scroll
-    rig.insertAdjacentHTML("afterbegin", `<div class="cage" aria-hidden="true">${[0, 1, 2, 3, 4, 5].map((k) => `
-      <div class="cage-panel" style="--k:${k}"><svg viewBox="0 0 100 190" fill="none" stroke="currentColor" stroke-width=".8">
-        <polygon points="50,8 86,29 86,71 50,92 14,71 14,29"/><polygon points="50,30 68,40 68,60 50,70 32,60 32,40"/>
-        <line x1="50" y1="92" x2="50" y2="182"/><line x1="14" y1="120" x2="86" y2="120"/><line x1="14" y1="150" x2="86" y2="150"/>
-        <circle cx="50" cy="182" r="2.5" fill="currentColor"/></svg></div>`).join("")}</div>`);
-    const layers = document.querySelector(".unbox-layers");
-    if (layers && !layers.querySelector(".ul-geo-wall")) layers.insertAdjacentHTML("afterbegin", geoConstruct("ul-geo-wall"));
-    // Mirror the carton's rotation onto the section so the constructions turn with the box
-    const section = document.getElementById("unbox"), cartonEl = document.getElementById("unbox-carton");
-    if (section && cartonEl) cleanup.push(whileVisible(section, () => {
-      const ry = cartonEl.style.getPropertyValue("--ry") || "0deg";
-      if (section.style.getPropertyValue("--ry") !== ry) section.style.setProperty("--ry", ry);
-    }));
-  }
 };
 
-/* Unboxing depth: the camera dollies in, the carton comes toward you,
-   and the patch finishes close to the lens. */
-Object.assign(UNBOX_TIMELINE, {
-  rigZ:   [[0, -200], [0.14, 40], [0.50, 40], [0.70, 110], [0.86, 170]],
-  rigY:   [[0, 60], [0.36, 40], [0.50, 120], [0.68, 310], [0.86, 330]],
-  patchZ: [[0.82, 0], [0.89, 220], [0.99, 240]],
-  patchS: [[0.84, 1], [0.90, 1.25], [0.99, 1.3]]
-});
+
