@@ -110,7 +110,7 @@ function carton(p, opts = {}) {
     <div class="art">
       ${ICON.mark("art-mark")}
       <div class="art-word">${WORDMARK_SVG()}</div>
-      <div class="art-tag">Wear your wellness</div>
+      <div class="art-tag">Wellness, worn differently</div>
       <div class="art-sku">
         <div class="art-name">${p.boxName.map(esc).join("<br>")}</div>
         ${ICON.tilde("art-tilde")}
@@ -128,7 +128,7 @@ function carton(p, opts = {}) {
       <p style="margin:0">Apply to clean, dry skin. Directions to be confirmed.</p>
     </div>`;
   const side = `<div class="art-side"><span class="vert">${esc(p.name)}</span><span class="dim" aria-hidden="true"></span><span class="vert">30 wearables</span></div>${A("right")}`;
-  const sideL = `<div class="art-side"><span class="vert">MATORI</span><span class="vert">Wear your wellness</span></div>`;
+  const sideL = `<div class="art-side"><span class="vert">MATORI</span><span class="vert">Wellness, worn differently</span></div>`;
 
   // Tray is always present (its top end closes the open sleeve); sachet only where it can be seen
   const tray = `
