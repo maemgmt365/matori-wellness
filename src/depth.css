@@ -484,3 +484,37 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .orbit-world { top: 46%; }
 .orbit-stage { height: clamp(720px, 92vh, 900px); }
 @media (max-width: 860px) { .orbit { --u-hex: .68px; } .orbit-stage { height: 620px; } .orbit-world { top: 44%; } }
+
+/* ---------- Unbox v3 (2026-10-08): simplified for clarity and smooth scrolling ----------
+   The carton stays front-facing; the geometric cage and floor constructions are gone, and nothing
+   in this section runs a filter, blur or continuous animation while you scroll. */
+.unbox { height: 480vh; }
+.unbox-layers, .cage { display: none; }
+.unbox-stage > .stage { animation: none; }
+.unbox-sticky::after { background: radial-gradient(60% 55% at 61% 48%, transparent 45%, rgba(43,47,53,.14) 100%); }
+@media (max-width: 979px) { .unbox-sticky::after { background: radial-gradient(70% 50% at 50% 40%, transparent 45%, rgba(43,47,53,.14) 100%); } }
+.unbox-rig { will-change: transform; }
+.unbox-rig::after { display: none; }
+.unbox .patch { filter: none; }
+
+/* ---------- Routine prompt (2026-10-10): sits right after the unboxing; the first question of the quiz, asked on the homepage ---------- */
+.routine-cta { padding: clamp(64px, 9vw, 120px) 0; background: var(--bg); border-top: 1px solid var(--rule); }
+.routine-cta-inner { display: grid; gap: clamp(28px, 4vw, 56px); grid-template-columns: 1fr; align-items: end; }
+@media (min-width: 900px) { .routine-cta-inner { grid-template-columns: 1fr 1fr; } }
+.routine-cta .h2 { margin: 16px 0 14px; }
+.routine-cta .lead { margin: 0; }
+.routine-cta-goals { display: grid; gap: 10px; }
+.goal-chip {
+     display: flex; align-items: center; gap: 14px; padding: 18px 22px; text-decoration: none;
+     font-family: var(--serif); font-size: 1.375rem; line-height: 1.2; color: var(--ink);
+     background: var(--surface); border: 1px solid var(--rule-strong); border-radius: var(--radius-s);
+     transition: border-color .25s var(--ease), transform .25s var(--ease);
+}
+.goal-chip::after { content: "\2192"; margin-left: auto; font-family: var(--sans); font-size: 1rem; color: var(--accent); transition: transform .25s var(--ease); }
+.goal-chip:hover, .goal-chip:focus-visible { border-color: var(--cat); }
+.goal-chip:hover::after, .goal-chip:focus-visible::after { transform: translateX(4px); }
+.goal-chip .hex-dot { width: 12px; height: 12px; }
+.routine-cta-unsure { justify-self: start; margin-top: 6px; }
+
+/* Tagline is longer than the old one; size it down so it sits inside the wordmark width on every carton */
+.art-tag { font-size: calc(var(--w) * .04); letter-spacing: .05em; }
