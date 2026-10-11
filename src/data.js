@@ -7,7 +7,7 @@
 
 const SITE = {
   name: "MATORI",
-  tagline: "Wear your wellness.",
+  tagline: "Wellness, worn differently.",
   /* publicMode: true hides internal review labels ("Photography needed",
      placeholder founder cards, draft notes). Set false for internal review. */
   publicMode: true,
@@ -106,31 +106,33 @@ const FOUNDERS = [
    progress is inside [from, to). TIMELINE keys are [progress, value] pairs;
    values ease between keys. Edit timing here, not in the animation code.   */
 const UNBOX_STEPS = [
-  { from: 0.00, to: 0.16, title: "The carton", body: "A slim kraft sleeve printed in a single copper ink. Drag it to turn it in your hand." },
-  { from: 0.16, to: 0.34, title: "Turn it over", body: "Dark brown side panels and a matchbox build. The back carries the formula and directions.", dl: [["Carton", "3.5 × 6 × 0.75 in (concept)"]] },
-  { from: 0.34, to: 0.50, title: "Slide the tray", body: "Press the thumb notch and the kraft inner tray rises out of the sleeve." },
-  { from: 0.50, to: 0.70, title: "Lift the sachet", body: "A clear, resealable sachet with a printed card holds the wearables.", dl: [["Contents", "30 wearables (proposed)"]] },
-  { from: 0.70, to: 0.84, title: "Open", body: "Tear at the top and the first patch slides free." },
-  { from: 0.84, to: 1.01, title: "Peel and wear", body: "Peel the two-part liner, press onto clean, dry skin and hold for a few seconds. Placement and wear time will be confirmed through testing.", dl: [["Sizes", "34.6, 40.4, 46.2 mm (proposed)"]], cta: { label: "Explore Efficient Energy", href: "#/products/efficient-energy" } }
-];
+   { from: 0.00, to: 0.16, title: "The carton", body: "A slim kraft sleeve printed in a single copper ink. Drag to turn it in your hand." },
+   { from: 0.16, to: 0.34, title: "Turn it over", body: "Dark brown side panels and a matchbox build. The back carries the formula and directions.", dl: [["Carton", "3.5 × 6 × 0.75 in (concept)"]] },
+   { from: 0.34, to: 0.52, title: "Slide the tray", body: "Press the thumb notch and the kraft inner tray rises out of the sleeve." },
+   { from: 0.52, to: 0.76, title: "Lift the sachet", body: "A clear sachet with a printed card holds the wearables. Tear at the top to open.", dl: [["Contents", "30 wearables (proposed)"]] },
+   { from: 0.76, to: 1.01, title: "Peel and wear", body: "Peel the two-part liner, press onto clean, dry skin and hold for a few seconds. Placement and wear time will be confirmed through testing.", dl: [["Sizes", "34.6, 40.4, 46.2 mm (proposed)"]], cta: { label: "Explore Efficient Energy", href: "#/products/efficient-energy" } }
+   ];
 
+/* v4: one smooth full turn during "Turn it over" (pausing on the back), and the carton is facing
+   front again before the next title appears. Every other step happens front-on.
+      ry runs past 360 after the turn; the sachet's counter-rotation normalises it in mountUnbox. */
 const UNBOX_TIMELINE = {
-  ry:      [[0, 205], [0.14, -24], [0.20, -24], [0.26, -82], [0.30, -82], [0.36, -24]],   // pivot (deg)
-  rx:      [[0, -4], [0.14, -10], [0.36, -10], [0.44, -16]],                               // tilt (deg)
-  rigZ:    [[0, -260], [0.12, 0]],                                                          // carton approaches (u)
-  rigY:    [[0, 40], [0.36, 40], [0.50, 110], [0.68, 250]],                                 // camera follows the action (u)
-  slide:   [[0.36, 0], [0.48, -0.42]],                                                      // tray, fraction of height
-  sachetY: [[0.50, 0], [0.62, -0.62]],                                                      // sachet lift, fraction of height
-  sachetZ: [[0.60, 0], [0.68, 110]],                                                        // sachet forward (u)
-  face:    [[0.58, 0], [0.68, 1]],                                                          // sachet turns to face viewer (0 to 1)
-  boxFade: [[0.60, 1], [0.70, 0.16]],
-  tear:    [[0.70, 0], [0.77, 1]],
-  patchY:  [[0.76, 0], [0.83, -170], [0.89, -110], [0.99, -30]],                                        // patch rises out, then settles (u)
-  patchZ:  [[0.82, 0], [0.89, 220]],
-  patchS:  [[0.84, 1], [0.90, 1.3]],
-  patchRy: [[0.85, 0], [0.89, 180], [0.94, 180], [0.99, 360]],                              // show liner, then face
-  peel:    [[0.89, 0], [0.94, 1]],
-  sFade:   [[0.86, 1], [0.92, 0.2]]
+     ry:      [[0, -30], [0.16, -24], [0.20, -24], [0.25, 156], [0.27, 156], [0.32, 336], [0.52, 342], [0.76, 346]],
+     rx:      [[0, -6], [0.30, -10], [0.50, -12]],
+     rigZ:    [[0, -160], [0.14, 0], [0.62, 40], [0.86, 120]],
+     rigY:    [[0, 40], [0.36, 40], [0.50, 110], [0.68, 260], [0.86, 300]],
+     slide:   [[0.36, 0], [0.50, -0.42]],
+     sachetY: [[0.54, 0], [0.66, -0.62]],
+     sachetZ: [[0.64, 0], [0.72, 110]],
+     face:    [[0.62, 0], [0.72, 1]],
+     boxFade: [[0.64, 1], [0.74, 0.22]],
+     tear:    [[0.70, 0], [0.76, 1]],
+     patchY:  [[0.77, 0], [0.83, -170], [0.89, -110], [0.95, -30]],
+     patchZ:  [[0.81, 0], [0.88, 220], [0.95, 240]],
+     patchS:  [[0.83, 1], [0.89, 1.25], [0.95, 1.3]],
+     patchRy: [[0.85, 0], [0.88, 180], [0.91, 180], [0.95, 360]],
+     peel:    [[0.88, 0], [0.91, 1]],
+     sFade:   [[0.85, 1], [0.90, 0.08]]
 };
 
 /* ---------- Patch sizes (proposed; load per size intentionally not published) ---------- */
