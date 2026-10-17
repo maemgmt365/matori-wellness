@@ -115,7 +115,7 @@ section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
   --copper-tint: #F3DCCB;
   --charcoal: var(--slate-ink); --ink: var(--slate-ink);
   --olive: var(--slate); --sage: #8A9199;
-  --cat-sleep: #5E6672; --cat-cellular: #7C8894;
+  --cat-sleep: #5E6672; --cat-cellular: #A8875C;
   --rule: rgba(43, 47, 53, 0.14); --rule-strong: rgba(43, 47, 53, 0.3);
   --focus: var(--copper-ink);
 }
@@ -518,3 +518,5 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 
 /* Tagline is longer than the old one; size it down so it sits inside the wordmark width on every carton */
 .art-tag { font-size: calc(var(--w) * .04); letter-spacing: .05em; }
+/* Day-arc range (2026-10-12): each pack keeps the same kraft and copper ink, with its own side-panel tone */
+.carton .board-dark { background-color: var(--side, var(--brown)); }
