@@ -18,7 +18,7 @@ const SITE = {
 };
 
 /* ---------- Products (proposed formulations) ---------- */
-const PRODUCTS = [const PRODUCTS = [
+const PRODUCTS = [
    {
       slug: "morning-energy",
       aliases: ["efficient-energy", "clean-energy"],
