@@ -18,69 +18,77 @@ const SITE = {
 };
 
 /* ---------- Products (proposed formulations) ---------- */
-const PRODUCTS = [
-  {
-    slug: "sleep",
-    name: "Sleep",
-    boxName: ["Sleep"],
-    benefit: ["Wind down", "Evening routine", "Overnight recovery"], // placeholder benefit line
-    category: "Sleep and recovery",
-    cat: "var(--cat-sleep)",
-    timeOfDay: "Evening",
-    short: "An evening patch concept built around winding down and overnight recovery.",
-    purpose: "Sleep is being developed as an evening routine patch. The proposed formula pairs ingredients commonly associated with the body's sleep and relaxation processes. Final purpose statements will follow formulation and claims review.",
-    ingredients: [
-      { name: "Melatonin", role: "A hormone involved in regulating the sleep and wake cycle.", dose: null },
-      { name: "L-Theanine", role: "An amino acid found in tea leaves, studied in the context of relaxation.", dose: null },
-      { name: "5-HTP", role: "A compound the body uses in producing serotonin.", dose: null }
-    ],
-    considerations: [
-      { title: "Melatonin", text: "Can cause drowsiness. Guidance for pregnancy, breastfeeding, children and people taking sedating medications must be confirmed before launch." },
-      { title: "5-HTP", text: "May interact with serotonergic medications, including certain antidepressants. This formula requires product-specific safety and regulatory review before it is marketed or recommended." }
-    ]
-  },
-  {
-    slug: "efficient-energy",
-    aliases: ["clean-energy"],
-    name: "Efficient Energy",
-    boxName: ["Efficient", "Energy"],
-    benefit: ["Clean energy", "Mental focus", "Lasting performance"], // from packaging render
-    category: "Daytime energy and focus",
-    cat: "var(--cat-energy)",
-    timeOfDay: "Morning or midday",
-    short: "A daytime patch concept for steady energy and focus through the working day.",
-    purpose: "Efficient Energy is being developed as a daytime patch. The proposed formula combines caffeine with L-Theanine, a pairing that is widely studied, alongside vitamin B12. Final purpose statements will follow formulation and claims review.",
-    ingredients: [
-      { name: "Caffeine", role: "A stimulant naturally present in coffee, tea and cacao.", dose: null },
-      { name: "L-Theanine", role: "An amino acid found in tea leaves, often studied alongside caffeine.", dose: null },
-      { name: "Vitamin B12 (methylcobalamin)", role: "Contributes to normal energy-yielding metabolism.", dose: null }
-    ],
-    considerations: [
-      { title: "Caffeine", text: "Total daily caffeine from all sources matters. Guidance for caffeine sensitivity, pregnancy, heart conditions and late-day use must be confirmed before launch." }
-    ]
-  },
-  {
-    slug: "cellular-essentials",
-    name: "Cellular Essentials",
-    boxName: ["Cellular", "Essentials"],
-    benefit: ["Daily essentials", "Core micronutrients", "Everyday routine"], // placeholder benefit line
-    category: "Core micronutrients",
-    cat: "var(--cat-cellular)",
-    timeOfDay: "Any time",
-    short: "A daily patch concept for foundational micronutrients.",
-    purpose: "Cellular Essentials is being developed as an everyday nutrient patch. The proposed formula centers on vitamins D3, K2 and B12, with additional trace cofactors still under evaluation.",
-    ingredients: [
-      { name: "Vitamin D3", role: "A fat-soluble vitamin involved in calcium absorption and bone maintenance.", dose: null },
-      { name: "Vitamin K2 (MK-7)", role: "A form of vitamin K involved in calcium metabolism.", dose: null },
-      { name: "Vitamin B12", role: "Contributes to normal energy-yielding metabolism.", dose: null },
-      { name: "Trace cofactors", role: "Still being defined by the formulation team.", dose: null }
-    ],
-    considerations: [
-      { title: "Vitamin K", text: "Vitamin K can interact with anticoagulant medications such as warfarin. Product-specific guidance must be confirmed before launch." },
-      { title: "Vitamin D", text: "Upper intake limits apply across all sources. Dosing guidance will follow final formulation." }
-    ]
-  }
-];
+const PRODUCTS = [const PRODUCTS = [
+   {
+      slug: "morning-energy",
+      aliases: ["efficient-energy", "clean-energy"],
+      name: "Morning Energy",
+      boxName: ["Morning", "Energy"],
+      mark: "sunrise",
+      side: "#5E3220",
+      benefit: ["Clean energy", "Mental focus", "Lasting performance"], // from packaging render
+      category: "Morning energy and focus",
+      cat: "var(--cat-energy)",
+      timeOfDay: "Morning",
+      short: "A morning patch concept for steady energy and focus through the working day.",
+      purpose: "Morning Energy is being developed as a morning patch. The proposed formula combines caffeine with L-Theanine, a pairing that is widely studied, alongside vitamin B12. Final purpose statements will follow formulation and claims review.",
+      ingredients: [
+         { name: "Caffeine", role: "A stimulant naturally present in coffee, tea and cacao.", dose: null },
+         { name: "L-Theanine", role: "An amino acid found in tea leaves, often studied alongside caffeine.", dose: null },
+         { name: "Vitamin B12 (methylcobalamin)", role: "Contributes to normal energy-yielding metabolism.", dose: null }
+         ],
+      considerations: [
+         { title: "Caffeine", text: "Total daily caffeine from all sources matters. Guidance for caffeine sensitivity, pregnancy, heart conditions and late-day use must be confirmed before launch." }
+         ]
+   },
+   {
+      slug: "everyday-essentials",
+      aliases: ["cellular-essentials"],
+      name: "Everyday Essentials",
+      boxName: ["Everyday", "Essentials"],
+      mark: "sun",
+      side: "#4A3A2C",
+      benefit: ["Daily essentials", "Core nutrients", "Everyday routine"], // placeholder benefit line
+      category: "Everyday micronutrients",
+      cat: "var(--cat-cellular)",
+      timeOfDay: "Every day",
+      short: "A daily patch concept for foundational micronutrients.",
+      purpose: "Everyday Essentials is being developed as an everyday nutrient patch. The proposed formula centers on vitamins D3, K2 and B12, with additional trace cofactors still under evaluation.",
+      ingredients: [
+         { name: "Vitamin D3", role: "A fat-soluble vitamin involved in calcium absorption and bone maintenance.", dose: null },
+         { name: "Vitamin K2 (MK-7)", role: "A form of vitamin K involved in calcium metabolism.", dose: null },
+         { name: "Vitamin B12", role: "Contributes to normal energy-yielding metabolism.", dose: null },
+         { name: "Trace cofactors", role: "Still being defined by the formulation team.", dose: null }
+         ],
+      considerations: [
+         { title: "Vitamin K", text: "Vitamin K can interact with anticoagulant medications such as warfarin. Product-specific guidance must be confirmed before launch." },
+         { title: "Vitamin D", text: "Upper intake limits apply across all sources. Dosing guidance will follow final formulation." }
+         ]
+   },
+   {
+      slug: "evening-unwind",
+      aliases: ["sleep"],
+      name: "Evening Unwind",
+      boxName: ["Evening", "Unwind"],
+      mark: "moon",
+      side: "#2E3238",
+      benefit: ["Wind down", "Evening routine", "Overnight recovery"], // placeholder benefit line
+      category: "Evening wind-down",
+      cat: "var(--cat-sleep)",
+      timeOfDay: "Evening",
+      short: "An evening patch concept built around winding down and overnight recovery.",
+      purpose: "Evening Unwind is being developed as an evening routine patch. The proposed formula pairs ingredients commonly associated with the body's sleep and relaxation processes. Final purpose statements will follow formulation and claims review.",
+      ingredients: [
+         { name: "Melatonin", role: "A hormone involved in regulating the sleep and wake cycle.", dose: null },
+         { name: "L-Theanine", role: "An amino acid found in tea leaves, studied in the context of relaxation.", dose: null },
+         { name: "5-HTP", role: "A compound the body uses in producing serotonin.", dose: null }
+         ],
+      considerations: [
+         { title: "Melatonin", text: "Can cause drowsiness. Guidance for pregnancy, breastfeeding, children and people taking sedating medications must be confirmed before launch." },
+         { title: "5-HTP", text: "May interact with serotonergic medications, including certain antidepressants. This formula requires product-specific safety and regulatory review before it is marketed or recommended." }
+         ]
+   }
+   ];
 
 /* Specs shared by all products (concept references from the founder questionnaire) */
 const SPECS = [
@@ -110,7 +118,7 @@ const UNBOX_STEPS = [
    { from: 0.16, to: 0.34, title: "Turn it over", body: "Dark brown side panels and a matchbox build. The back carries the formula and directions.", dl: [["Carton", "3.5 × 6 × 0.75 in (concept)"]] },
    { from: 0.34, to: 0.52, title: "Slide the tray", body: "Press the thumb notch and the kraft inner tray rises out of the sleeve." },
    { from: 0.52, to: 0.76, title: "Lift the sachet", body: "A clear sachet with a printed card holds the wearables. Tear at the top to open.", dl: [["Contents", "30 wearables (proposed)"]] },
-   { from: 0.76, to: 1.01, title: "Peel and wear", body: "Peel the two-part liner, press onto clean, dry skin and hold for a few seconds. Placement and wear time will be confirmed through testing.", dl: [["Sizes", "34.6, 40.4, 46.2 mm (proposed)"]], cta: { label: "Explore Efficient Energy", href: "#/products/efficient-energy" } }
+   { from: 0.76, to: 1.01, title: "Peel and wear", body: "Peel the two-part liner, press onto clean, dry skin and hold for a few seconds. Placement and wear time will be confirmed through testing.", dl: [["Sizes", "34.6, 40.4, 46.2 mm (proposed)"]], cta: { label: "Explore Morning Energy", href: "#/products/morning-energy" } }
    ];
 
 /* v4: one smooth full turn during "Turn it over" (pausing on the back), and the carton is facing
@@ -157,21 +165,21 @@ const INGREDIENT_SCIENCE = [
 /* ---------- Assessment goals ---------- */
 const GOALS = [
   {
-    id: "sleep", product: "sleep", title: "Sleep and recovery",
+    id: "sleep", product: "evening-unwind", title: "Sleep and recovery",
     blurb: "Winding down in the evening and recovering overnight.",
-    next: "Start with the basics that shape sleep for everyone: a consistent schedule, light exposure early in the day, and a dim, cool room at night. The Sleep patch concept is designed to sit inside an evening routine like this, not replace it.",
+    next: "Start with the basics that shape sleep for everyone: a consistent schedule, light exposure early in the day, and a dim, cool room at night. The Evening Unwind concept is designed to sit inside an evening routine like this, not replace it.",
     read: "How transdermal delivery differs from oral supplements"
   },
   {
-    id: "energy", product: "efficient-energy", title: "Daytime focus and energy",
+    id: "energy", product: "morning-energy", title: "Daytime focus and energy",
     blurb: "Steady energy through the working day.",
-    next: "It helps to know your current caffeine intake from coffee, tea and other sources before adding anything new. The Efficient Energy concept is intended as a measured daytime option within that total.",
+    next: "It helps to know your current caffeine intake from coffee, tea and other sources before adding anything new. The Morning Energy concept is intended as a measured daytime option within that total.",
     read: "Why ingredient properties matter"
   },
   {
-    id: "nutrients", product: "cellular-essentials", title: "Everyday nutrient routine",
+    id: "nutrients", product: "everyday-essentials", title: "Everyday nutrient routine",
     blurb: "Covering foundational micronutrients day to day.",
-    next: "Diet comes first, and only a blood test can show an actual deficiency. If you are curious about your levels, a conversation with a healthcare professional is the right starting point. Cellular Essentials is being designed as a simple daily routine.",
+    next: "Diet comes first, and only a blood test can show an actual deficiency. If you are curious about your levels, a conversation with a healthcare professional is the right starting point. Everyday Essentials is being designed as a simple daily routine.",
     read: "What is known about each proposed ingredient"
   }
 ];
