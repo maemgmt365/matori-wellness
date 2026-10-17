@@ -23,6 +23,22 @@ const WORDMARK_SVG = (cls = "") => `<svg class="wordmark-svg ${cls}" viewBox="0 
   </g></svg>`;
 const MARK_SVG = (cls = "") => `<svg class="${cls}" viewBox="0 0 64 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${MARK_INNER}</svg>`;
 
+/* Day-arc marks: the same two peaks, with the sky changing per pack.
+sunrise = Morning Energy, sun = Everyday Essentials, moon = Evening Unwind */
+const PEAKS = `<path d="M3 45 L15.4 25.6 Q18.8 20.6 22.2 25.6 L34 45"/>
+<path d="M35 39.4 L42.4 25.6 Q45.8 20.6 49.2 25.6 L61.5 45"/>`;
+const SKY = {
+   sunrise: `<circle cx="32.2" cy="27" r="3.9" fill="currentColor" stroke="none"/>
+   <path d="M32.2 14.6v5.2M23.4 18.4l3.6 3.8M41 18.4l-3.6 3.8M18.6 25.4l5 1.2M45.8 25.4l-5 1.2" stroke-width="2.4"/>`,
+   sun: `<circle cx="32.2" cy="12" r="4.4" fill="currentColor" stroke="none"/>
+   <path d="M32.2 1.4v4M32.2 18.6v3.6M21.6 12h4M38.8 12h4M24.7 4.5l2.8 2.8M39.7 4.5l-2.8 2.8M24.7 19.5l2.8-2.8M39.7 19.5l-2.8-2.8" stroke-width="2.2"/>`,
+   moon: `<path d="M31.3 7.61 A6.6 6.6 0 1 0 37.68 16.76 A5.6 5.6 0 1 1 31.3 7.61 Z" fill="currentColor" stroke="none"/>
+   <circle cx="44.6" cy="7.4" r="1.15" fill="currentColor" stroke="none"/><circle cx="21.4" cy="11.2" r=".9" fill="currentColor" stroke="none"/>`
+};
+const markFor = (p, cls = "") => SKY[p && p.mark]
+? `<svg class="${cls}" viewBox="0 0 64 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${PEAKS}${SKY[p.mark]}</svg>`
+   : MARK_SVG(cls);
+
 /* Blurred olive-branch shadow for the hero wall and stone tile */
 function leafShadow(cls = "") {
   let leaves = "";
@@ -108,7 +124,7 @@ function carton(p, opts = {}) {
     : `<span class="anchor" data-anchor="${a.id}" style="left:${a.x}%;top:${a.y}%"></span>`).join("");
   const front = `
     <div class="art">
-      ${ICON.mark("art-mark")}
+      ${markFor(p, "art-mark")}
       <div class="art-word">${WORDMARK_SVG()}</div>
       <div class="art-tag">Wellness, worn differently</div>
       <div class="art-sku">
@@ -142,7 +158,7 @@ function carton(p, opts = {}) {
     </div>`;
 
   return `
-    <div class="carton" ${id ? `id="${id}"` : ""} style="--cat:${p.cat};--rx:${rx}deg;--ry:${ry}deg">
+    <div class="carton" ${id ? `id="${id}"` : ""} style="--cat:${p.cat};--side:${p.side || "var(--brown)"};--rx:${rx}deg;--ry:${ry}deg">
       ${tray}
       <div class="sleeve">
         <div class="face kraft f-back">${back}</div>
@@ -167,7 +183,7 @@ const sachetRig = (p, A = () => "") => `
     </div>
     <div class="us-body">
       <div class="pouch-card">
-        ${ICON.mark("art-mark")}
+        ${markFor(p, "art-mark")}
         <div class="pw">${WORDMARK_SVG()}</div>
         <div class="ps"><b>${p.boxName.map(esc).join("<br>")}</b>${ICON.tilde("art-tilde")}<span>${esc(p.benefit.slice(0, 2).join(" / "))}</span><span>${esc(p.benefit[2] || "")}</span></div>
         ${ICON.contour("art-contour")}
@@ -180,7 +196,7 @@ const sachetRig = (p, A = () => "") => `
 const sachetArt = (p) => `
   <div class="pouch-body"></div>
   <div class="pouch-card">
-    ${ICON.mark("art-mark")}
+    ${markFor(p, "art-mark")}
     <div class="pw">${WORDMARK_SVG()}</div>
     <div class="ps"><b>${p.boxName.map(esc).join("<br>")}</b>${ICON.tilde("art-tilde")}<span>${esc(p.benefit.slice(0, 2).join(" / "))}</span><span>${esc(p.benefit[2] || "")}</span></div>
     ${ICON.contour("art-contour")}
