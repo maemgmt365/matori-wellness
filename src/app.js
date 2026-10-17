@@ -33,8 +33,8 @@ Pages.home = () => `
       </div>
       <div class="scene-products hero-intro" id="hero-products" aria-hidden="true">
         <div class="hero-geo-wrap" data-depth="0.04">${geoConstruct("hero-geo")}</div>
-        <div class="sp sp-carton" data-par="1" data-depth="0.08"><div class="stage">${carton(PRODUCTS[1], { rx: -4, ry: -22 })}</div></div>
-        <div class="sp sp-sachet" data-par="1.6" data-depth="0.16">${sachetArt(PRODUCTS[1])}</div>
+        <div class="sp sp-carton" data-par="1" data-depth="0.08"><div class="stage">${carton(PRODUCTS[0], { rx: -4, ry: -22 })}</div></div>
+        <div class="sp sp-sachet" data-par="1.6" data-depth="0.16">${sachetArt(PRODUCTS[0])}</div>
         <div class="sp sp-patch" data-par="2.2" data-depth="0.3">${patchArt()}</div>
       </div>
     </div>
@@ -89,8 +89,8 @@ Pages.home = () => `
           <p class="lead measure" style="margin-top:24px">Wellness should fit into the day you already have. MATORI is built around a few considered products rather than a cabinet of bottles.</p>
         </div>
         <figure class="still">
-          <div class="still-frame"><img src="__ASSET:packaging-still.webp__" alt="MATORI Efficient Energy sachet beside its kraft carton, printed in copper ink" loading="lazy" width="640" height="854"></div>
-          <figcaption class="meta">Concept render of the Efficient Energy sachet and carton.</figcaption>
+          <div class="still-frame"><img src="__ASSET:packaging-still.webp__" alt="Early MATORI concept render: an energy sachet beside its kraft carton, printed in copper ink" loading="lazy" width="640" height="854"></div>
+          <figcaption class="meta">Early concept render, shown under the energy patch's working name.</figcaption>
         </figure>
       </div>
       <div class="philosophy-body">
@@ -101,7 +101,7 @@ Pages.home = () => `
     </div>
   </section>
 
-  ${unboxHTML(PRODUCTS[1])}
+  ${unboxHTML(PRODUCTS[0])}
 
 <section class="routine-cta" aria-labelledby="routine-cta-title">
 <div class="wrap routine-cta-inner">
@@ -234,7 +234,7 @@ Pages.lab = () => `
         <button type="button" class="btn btn--ghost btn--small" id="lab-a-tour">Play tour</button>
       </div>
       <div class="lab-stage" id="lab-a-stage" tabindex="0" role="group" aria-label="Carton with detail callouts. Use arrow keys to turn it.">
-        <div class="stage"><div class="lab-rig">${carton(PRODUCTS[1], { id: "lab-a-carton", rx: -12, ry: -16, anchors: CALLOUTS.map((c) => ({ ...c, dot: true })) })}</div></div>
+        <div class="stage"><div class="lab-rig">${carton(PRODUCTS[0], { id: "lab-a-carton", rx: -12, ry: -16, anchors: CALLOUTS.map((c) => ({ ...c, dot: true })) })}</div></div>
         <svg class="lab-lines" aria-hidden="true">
           <polyline class="cl-line" points=""/>
           <circle class="cl-ring2" r="0"/><circle class="cl-ring1" r="0"/>
@@ -256,7 +256,7 @@ Pages.lab = () => `
         <button type="button" class="btn btn--ghost btn--small" id="lab-b-play">Play</button>
       </div>
       <div class="lab-stage" id="lab-b-stage" tabindex="0" role="group" aria-label="Exploded carton. Use arrow keys to turn it.">
-        <div class="stage"><div class="lab-rig">${carton(PRODUCTS[1], { id: "lab-b-carton", unbox: true, rx: -14, ry: -52, anchors: EXPLODE_PARTS })}</div></div>
+        <div class="stage"><div class="lab-rig">${carton(PRODUCTS[0], { id: "lab-b-carton", unbox: true, rx: -14, ry: -52, anchors: EXPLODE_PARTS })}</div></div>
         <svg class="lab-lines" aria-hidden="true">
           <polyline class="ex-axis" points=""/>
           ${EXPLODE_PARTS.map(() => `<g class="ex-node"><polyline class="ex-lead" points=""/><circle class="ex-ring" r="0"/><circle class="ex-dot" r="2.5"/></g>`).join("")}
