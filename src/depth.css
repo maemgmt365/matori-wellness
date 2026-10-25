@@ -19,17 +19,17 @@ section[aria-labelledby="collab-title"] {
   background-color: var(--kraft);
   background-image:
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .27  0 0 0 0 .2  0 0 0 .3 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
-    linear-gradient(180deg, rgba(255,255,255,.18), transparent 40%, rgba(62,43,33,.08));
+    linear-gradient(180deg, rgba(255,255,255,.18), transparent 40%, rgba(74,44,16,.08));
 }
-section[aria-labelledby="collab-title"] .pathway-list { border-top-color: rgba(62,43,33,.4); }
-section[aria-labelledby="collab-title"] .pathway-list li { border-bottom-color: rgba(62,43,33,.22); }
+section[aria-labelledby="collab-title"] .pathway-list { border-top-color: rgba(74,44,16,.4); }
+section[aria-labelledby="collab-title"] .pathway-list li { border-bottom-color: rgba(74,44,16,.22); }
 section[aria-labelledby="collab-title"] .pathway-list span:last-child { color: #5A4B3E; }
 section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
 
 /* Soft vignette at the edges of the big stages so objects sit in a space, not on a sheet */
 .unbox-sticky::after, .lab-stage::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(90% 80% at 50% 45%, transparent 55%, rgba(62,43,33,.14));
+  background: radial-gradient(90% 80% at 50% 45%, transparent 55%, rgba(74,44,16,.14));
 }
 .unbox { background: #E2D6C6; }
 .unbox-panel.is-active, .unbox-copy .h2 { position: relative; z-index: 3; }
@@ -38,49 +38,49 @@ section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
 .cat-visual, .product-row .mini { position: relative; }
 .cat-visual::after, .product-row .mini::after {
   content: ""; position: absolute; left: 22%; right: 18%; bottom: 10%; height: 8%;
-  background: radial-gradient(50% 50% at 50% 50%, rgba(62,43,33,.42), transparent 70%); filter: blur(4px);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(74,44,16,.42), transparent 70%); filter: blur(4px);
 }
 .cat-card .cat-visual {
   background:
     radial-gradient(100% 60% at 70% 10%, rgba(255,250,242,.9), transparent 55%),
     linear-gradient(170deg, #E9DCCB 0%, #D7C7B3 60%, #C9B79F 100%);
-  box-shadow: inset 0 -40px 60px -40px rgba(62,43,33,.35);
+  box-shadow: inset 0 -40px 60px -40px rgba(74,44,16,.35);
 }
 .product-row .mini {
   background:
     radial-gradient(100% 60% at 70% 10%, rgba(255,250,242,.9), transparent 55%),
     linear-gradient(170deg, #E9DCCB 0%, #D7C7B3 60%, #C9B79F 100%);
 }
-.niche { box-shadow: inset 0 60px 90px -50px rgba(62,43,33,.28), inset 30px 0 70px -40px rgba(62,43,33,.22); }
+.niche { box-shadow: inset 0 60px 90px -50px rgba(74,44,16,.28), inset 30px 0 70px -40px rgba(74,44,16,.22); }
 .niche::after { background: linear-gradient(180deg, rgba(255,255,255,.3), transparent 14%), linear-gradient(180deg, #D3BFA8, #BBA48B); }
-.hero-scene .ledge { box-shadow: 0 -26px 50px -24px rgba(62,43,33,.5); }
+.hero-scene .ledge { box-shadow: 0 -26px 50px -24px rgba(74,44,16,.5); }
 .wall { background:
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
-    radial-gradient(70% 90% at 78% 20%, rgba(255,247,236,.9), transparent 60%),
-    linear-gradient(118deg, transparent 0 46%, rgba(62,43,33,.1) 46% 60%, transparent 60%),
-    radial-gradient(120% 100% at 50% 50%, transparent 50%, rgba(62,43,33,.16)),
-    linear-gradient(100deg, #DFCBB4 0%, #EDE1D2 40%, #E6D5C0 75%, #CFB89E 100%); }
-.sp-carton::after { background: radial-gradient(50% 50% at 50% 50%, rgba(62,43,33,.5), transparent 70%); height: calc(var(--u) * 28); }
-.sp-sachet { filter: drop-shadow(-14px 22px 22px rgba(62,43,33,.3)); }
-.sp-patch { filter: drop-shadow(0 10px 12px rgba(62,43,33,.3)); }
+    radial-gradient(70% 90% at 78% 20%, rgba(255,252,247,.9), transparent 60%),
+    linear-gradient(118deg, transparent 0 46%, rgba(74,44,16,.1) 46% 60%, transparent 60%),
+    radial-gradient(120% 100% at 50% 50%, transparent 50%, rgba(74,44,16,.16)),
+    linear-gradient(100deg, #DFCBB4 0%, #F0ECE5 40%, #E6D5C0 75%, #CFB89E 100%); }
+.sp-carton::after { background: radial-gradient(50% 50% at 50% 50%, rgba(74,44,16,.5), transparent 70%); height: calc(var(--u) * 28); }
+.sp-sachet { filter: drop-shadow(-14px 22px 22px rgba(74,44,16,.3)); }
+.sp-patch { filter: drop-shadow(0 10px 12px rgba(74,44,16,.3)); }
 
 /* Mosaic tiles: give the two photo-less tiles real depth */
 .tile-skin {
   background:
     radial-gradient(60% 50% at 40% 38%, rgba(255,245,232,.8), transparent 60%),
-    radial-gradient(90% 80% at 50% 50%, transparent 55%, rgba(62,43,33,.28)),
+    radial-gradient(90% 80% at 50% 50%, transparent 55%, rgba(74,44,16,.28)),
     linear-gradient(160deg, #E8D3BD, #CDB197);
 }
-.tile-skin .skin-patch { filter: drop-shadow(0 10px 14px rgba(62,43,33,.35)); }
-.tile-stone { box-shadow: inset 0 -40px 60px -40px rgba(62,43,33,.4); }
-.mosaic { background: #3E2B21; gap: 1px; }
-.tile-text { box-shadow: inset 0 0 0 1px rgba(62,43,33,.06); }
+.tile-skin .skin-patch { filter: drop-shadow(0 10px 14px rgba(74,44,16,.35)); }
+.tile-stone { box-shadow: inset 0 -40px 60px -40px rgba(74,44,16,.4); }
+.mosaic { background: #4A2C10; gap: 1px; }
+.tile-text { box-shadow: inset 0 0 0 1px rgba(74,44,16,.06); }
 
 /* ---------- Type contrast ---------- */
-:root { --ink-soft: #4E463F; --ink-faint: #6F665C; }
-.lead { color: #4E463F; }
-.scene-copy .lead { color: #3F362E; }
-.meta { color: #6F665C; }
+:root { --ink-soft: #5C4A38; --ink-faint: #8A7660; }
+.lead { color: #5C4A38; }
+.scene-copy .lead { color: #4A3826; }
+.meta { color: #8A7660; }
 
 /* ---------- Phone fixes ---------- */
 @media (max-width: 979px) {
@@ -91,7 +91,7 @@ section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
   .sp-carton { right: 10%; bottom: 14%; }
   .sp-sachet { right: calc(10% + var(--u) * 135); bottom: 12.5%; }
   .sp-patch { right: calc(10% + var(--u) * 82); bottom: 10%; }
-  .scene-note { position: static; display: block; padding: 10px var(--gutter) 14px; text-align: right; background: #CDB89E; color: #4A3D32; }
+  .scene-note { position: static; display: block; padding: 10px var(--gutter) 14px; text-align: right; background: #CBC4B8; color: #4A3D32; }
   .hero-scene { padding-bottom: 0; }
   /* Unboxing: bigger carton, note out of the way, copy readable over the stage */
   .unbox-stage { --u: clamp(0.72px, 0.18vw + 0.1px, 0.9px); }
@@ -111,11 +111,11 @@ section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
    60 / 30 / 10: cream surfaces, kraft and warm-white supporting, copper for emphasis.
    Slate replaces olive and brown on the site (packaging keeps its own brown sides). */
 :root {
-  --slate: #3B4048; --slate-deep: #2E3238; --slate-ink: #2B2F35;
-  --copper-tint: #F3DCCB;
+  --slate: #6B4A2A; --slate-deep: #4A2C10; --slate-ink: #3A2412;
+  --copper-tint: #F1DDB8;
   --charcoal: var(--slate-ink); --ink: var(--slate-ink);
-  --olive: var(--slate); --sage: #8A9199;
-  --cat-sleep: #5E6672; --cat-cellular: #A8875C;
+  --olive: var(--slate); --sage: #D9A441;
+  --cat-sleep: #5E6672; --cat-cellular: #7C8894;
   --rule: rgba(43, 47, 53, 0.14); --rule-strong: rgba(43, 47, 53, 0.3);
   --focus: var(--copper-ink);
 }
@@ -134,9 +134,9 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--copper-ink); box-shadow: 0 0 0 1px var(--copper-ink); }
 .form-status { border-color: var(--copper-ink); }
 .tile-studio { background:
-    linear-gradient(180deg, transparent 50%, rgba(30,33,38,.6)),
-    repeating-linear-gradient(90deg, transparent 0 18%, rgba(255,240,220,.05) 18% 19%),
-    linear-gradient(120deg, #5B616A, #3B4048 60%, #2E3238); }
+    linear-gradient(180deg, transparent 50%, rgba(46,32,22,.55)),
+    repeating-linear-gradient(90deg, transparent 0 18%, rgba(255,240,220,.06) 18% 19%),
+    linear-gradient(120deg, #8A6A3C, #6B4A2A 60%, #4A2C10); }
 
 /* ---------- Wordmark: geometry everywhere it appears ---------- */
 .wordmark-svg { display: block; height: auto; }
@@ -157,12 +157,12 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .f-front::after, .f-back::after, .d-top::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background:
-    linear-gradient(118deg, rgba(255,250,240,.42) 0%, rgba(255,250,240,.12) 32%, transparent 50%, rgba(62,43,33,.10) 78%, rgba(62,43,33,.2) 100%);
+    linear-gradient(118deg, rgba(255,250,240,.42) 0%, rgba(255,250,240,.12) 32%, transparent 50%, rgba(74,44,16,.10) 78%, rgba(74,44,16,.2) 100%);
 }
 .f-right::after, .f-left::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,250,240,.12), transparent 40%, rgba(0,0,0,.22)); }
 .f-front > .art, .f-front > .anchor, .f-front > .anchor-dot { position: absolute; z-index: 1; }
-.f-front { box-shadow: inset 0 0 0 1px rgba(62,43,33,.08); }
-.patch { filter: drop-shadow(0 6px 8px rgba(62,43,33,.28)) drop-shadow(0 1px 1px rgba(62,43,33,.18)); }
+.f-front { box-shadow: inset 0 0 0 1px rgba(74,44,16,.08); }
+.patch { filter: drop-shadow(0 6px 8px rgba(74,44,16,.28)) drop-shadow(0 1px 1px rgba(74,44,16,.18)); }
 
 /* Less grain: the paper texture should be felt, not seen */
 .kraft {
@@ -176,7 +176,7 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .orbit { margin-top: clamp(32px, 5vw, 56px); }
 .orbit-stage {
   position: relative; height: clamp(520px, 72vh, 700px); overflow: hidden; border-radius: var(--radius-arch);
-  background: radial-gradient(70% 60% at 50% 30%, #F4ECE2, #DCCDBB 70%, #CDB9A3);
+  background: radial-gradient(70% 60% at 50% 30%, #F4ECE2, #DCCDBB 70%, #CEC7BB);
   box-shadow: inset 0 -60px 80px -50px rgba(43,47,53,.35);
   touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none;
 }
@@ -266,7 +266,7 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
   transform-origin: 50% 100%;
   transform: rotateY(calc(var(--k) * 60deg)) translateZ(calc(var(--u) * 215)) rotateX(calc(var(--open) * -96deg));
   border: 1px solid currentColor; border-top-width: 2px;
-  background: linear-gradient(180deg, rgba(207,90,30,.05), rgba(207,90,30,.0) 60%);
+  background: linear-gradient(180deg, rgba(74,44,16,.05), rgba(74,44,16,.0) 60%);
   opacity: calc(.55 - var(--open) * .2); backface-visibility: visible;
 }
 .cage-panel svg { position: absolute; inset: 8% 10%; width: 80%; height: 84%; opacity: .7; }
@@ -443,7 +443,7 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .orbit { --u-hex: 1px; }
 @media (max-width: 860px) { .orbit { --u-hex: .62px; } }
 .hex-frame { position: absolute; inset: 0; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); box-shadow: inset 0 0 0 calc(2px + var(--near) * 1px) var(--copper); pointer-events: none; }
-.hex-frame::after { content: ""; position: absolute; inset: calc(var(--size) * .035); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); box-shadow: inset 0 0 0 1px rgba(207,90,30,.35); }
+.hex-frame::after { content: ""; position: absolute; inset: calc(var(--size) * .035); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); box-shadow: inset 0 0 0 1px rgba(74,44,16,.35); }
 .hex-portrait {
   width: calc(var(--size) * (.68 - var(--near) * .3)); aspect-ratio: 1 / 1.1547; flex: none;
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
@@ -485,38 +485,345 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .orbit-stage { height: clamp(720px, 92vh, 900px); }
 @media (max-width: 860px) { .orbit { --u-hex: .68px; } .orbit-stage { height: 620px; } .orbit-world { top: 44%; } }
 
-/* ---------- Unbox v3 (2026-10-08): simplified for clarity and smooth scrolling ----------
-   The carton stays front-facing; the geometric cage and floor constructions are gone, and nothing
-   in this section runs a filter, blur or continuous animation while you scroll. */
-.unbox { height: 480vh; }
-.unbox-layers, .cage { display: none; }
+/* =====================================================================
+   AUDIT PASS (Oct 6): one idea per scene, nothing fuzzy, one voice.
+   1. Unboxing: the carton alone, sharp, on one floor construction that
+      turns with it. Cage, standing wall, contour, mark, blur and the
+      idle bob are gone.
+   2. Team ring: true depth scaling (small at the back, large in front),
+      shape never changes, every word stays inside the hexagon.
+   3. Consistency: one disclaimer (footer), one tracking value for all
+      small caps, wave motif retired everywhere.
+   ===================================================================== */
+
+/* ---- 1. Unboxing ---- */
+.unbox-layers { filter: none; }
+.ul-geo-wall, .cage, .ul-contour, .ul-mark { display: none; }
 .unbox-stage > .stage { animation: none; }
-.unbox-sticky::after { background: radial-gradient(60% 55% at 61% 48%, transparent 45%, rgba(43,47,53,.14) 100%); }
-@media (max-width: 979px) { .unbox-sticky::after { background: radial-gradient(70% 50% at 50% 40%, transparent 45%, rgba(43,47,53,.14) 100%); } }
-.unbox-rig { will-change: transform; }
-.unbox-rig::after { display: none; }
-.unbox .patch { filter: none; }
-
-/* ---------- Routine prompt (2026-10-10): sits right after the unboxing; the first question of the quiz, asked on the homepage ---------- */
-.routine-cta { padding: clamp(64px, 9vw, 120px) 0; background: var(--bg); border-top: 1px solid var(--rule); }
-.routine-cta-inner { display: grid; gap: clamp(28px, 4vw, 56px); grid-template-columns: 1fr; align-items: end; }
-@media (min-width: 900px) { .routine-cta-inner { grid-template-columns: 1fr 1fr; } }
-.routine-cta .h2 { margin: 16px 0 14px; }
-.routine-cta .lead { margin: 0; }
-.routine-cta-goals { display: grid; gap: 10px; }
-.goal-chip {
-     display: flex; align-items: center; gap: 14px; padding: 18px 22px; text-decoration: none;
-     font-family: var(--serif); font-size: 1.375rem; line-height: 1.2; color: var(--ink);
-     background: var(--surface); border: 1px solid var(--rule-strong); border-radius: var(--radius-s);
-     transition: border-color .25s var(--ease), transform .25s var(--ease);
+.ul-geo {
+  left: 61%; top: 72%; width: min(64vh, 600px);
+  opacity: calc(.22 + var(--spread) * .12);
+  transform:
+    translate(-50%, -50%) perspective(900px) rotateX(66deg)
+    scale(calc(.8 + var(--spread) * .3))
+    rotate(calc(var(--ry, 0deg) * -1 + 24deg));
 }
-.goal-chip::after { content: "\2192"; margin-left: auto; font-family: var(--sans); font-size: 1rem; color: var(--accent); transition: transform .25s var(--ease); }
-.goal-chip:hover, .goal-chip:focus-visible { border-color: var(--cat); }
-.goal-chip:hover::after, .goal-chip:focus-visible::after { transform: translateX(4px); }
-.goal-chip .hex-dot { width: 12px; height: 12px; }
-.routine-cta-unsure { justify-self: start; margin-top: 6px; }
+@media (max-width: 979px) { .ul-geo { left: 50%; top: 40%; width: min(80vw, 420px); } }
 
-/* Tagline is longer than the old one; size it down so it sits inside the wordmark width on every carton */
-.art-tag { font-size: calc(var(--w) * .04); letter-spacing: .05em; }
-/* Day-arc range (2026-10-12): each pack keeps the same kraft and copper ink, with its own side-panel tone */
-.carton .board-dark { background-color: var(--side, var(--brown)); }
+/* ---- 2. Team ring: solar-system scale ---- */
+.orbit-stage { height: clamp(560px, 80vh, 720px); }
+.orbit-scene { perspective: 2600px; perspective-origin: 50% 42%; }
+.orbit-world { --R: clamp(200px, 24vw, 340px); top: 47%; transform: rotateX(-4deg) rotateY(var(--a, 0deg)); }
+.orbit-node {
+  transform: rotateY(calc(var(--i) * 90deg)) translateZ(var(--R)) rotateY(calc(var(--i) * -90deg - var(--a, 0deg))) rotateX(4deg);
+  opacity: calc(.62 + var(--near) * .38); filter: none;
+}
+.orbit.is-settled .orbit-node:not(.is-front) { opacity: calc(.62 + var(--near) * .38); }
+.hexnode {
+  /* 60px at the back, ~380px in front; size grows with the square of nearness so the swing reads as depth */
+  --size: calc(var(--u-hex, 1px) * (60 + var(--near) * var(--near) * 320));
+  display: block; padding: 0;
+  background: linear-gradient(172deg, #FCF8F1 0%, #F1E7D9 60%, #E6D8C6 100%);
+}
+.hex-frame polygon { stroke-width: calc(1px + var(--near) * 1.2px); }
+.hex-portrait {
+  position: absolute; left: 50%; top: calc(50% - var(--near) * 24%); translate: -50% -50%; margin: 0;
+  width: calc(var(--size) * (.6 - var(--near) * .27));
+  background: radial-gradient(60% 60% at 35% 30%, #FFFBF4, #E8DCCB);
+}
+.hex-portrait .orbit-initial { font-size: calc(var(--size) * .11); color: var(--slate-ink); }
+.hex-text {
+  position: absolute; left: 17%; right: 17%; top: 49%; bottom: 13%; margin: 0; width: auto; transform: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start; overflow: hidden;
+  opacity: clamp(0, calc((var(--near) - .86) * 7), 1);
+}
+.hex-text .label { font-size: 10px; letter-spacing: .14em; margin: 0 0 6px; }
+.hex-text .h3 { font-size: clamp(15px, calc(var(--size) * .056), 24px); line-height: 1.15; margin: 0 0 4px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hex-text .orbit-role { font-size: 10px; letter-spacing: .14em; margin: 0 0 8px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hex-text .orbit-bio { font-size: clamp(11px, calc(var(--size) * .031), 13px); line-height: 1.45; -webkit-line-clamp: 4; }
+.hex-text .text-link { font-size: 10px; letter-spacing: .14em; margin-top: 6px; }
+.orbit-node::after { opacity: calc(.4 + var(--near) * .6); }
+.orbit-equator, .orbit-equator--outer { opacity: .35; }
+.orbit-geo { opacity: calc(.1 + var(--g, 0) * .12); }
+.orbit-controls { bottom: 10px; }
+@media (max-width: 860px) {
+  .orbit { --u-hex: .62px; }
+  .orbit-stage { height: 520px; }
+  .orbit-scene { perspective: 1800px; perspective-origin: 50% 44%; }
+  .orbit-world { --R: clamp(150px, 42vw, 178px); top: 47%; }
+  .hex-text .orbit-bio { -webkit-line-clamp: 2; }
+  .hex-text { top: 47%; bottom: 14%; }
+}
+
+/* ---- 3. Consistency ---- */
+.scene-note, .unbox-note, .lab-model .wrap > .meta[style] { display: none; }
+.art-contour { display: none; }
+.label, .tile-link, .btn, .nav-primary a, .header-actions .link-quiet, .attr-band li, .orbit-count { letter-spacing: .14em; }
+
+/* Philosophy still: a live render replaces the soft raster so the scene is sharp at every size */
+.still-live { position: relative; background: linear-gradient(160deg, #EFE6D9 0%, #E4D8C7 55%, #D9CBB7 100%); box-shadow: inset 0 0 0 1px rgba(43,47,53,.06); }
+.still-live::before { content: ""; position: absolute; inset: 0; background: linear-gradient(118deg, rgba(255,250,242,.55) 0%, transparent 42%, transparent 70%, rgba(74,44,16,.08) 100%); }
+.still-scene { position: absolute; inset: 0; --u: clamp(.5px, .055vw + .25px, 1px); }
+.still-scene .sp-carton { right: 15%; bottom: 17%; }
+.still-scene .sp-sachet { right: calc(15% + var(--u) * 150); bottom: 15%; width: calc(var(--u) * 170); height: calc(var(--u) * 300); }
+@media (max-width: 979px) { .still-scene { --u: clamp(.45px, .12vw + .1px, .7px); } .still-scene .sp-carton { right: 10%; } .still-scene .sp-sachet { right: calc(10% + var(--u) * 150); } }
+
+/* =====================================================================
+   SPEC v3 (Oct 6, evening). Two signature scenes, built to the agreed
+   timeline. Unboxing: hold, move, hold; one floor that draws in, turns
+   with the box and spreads with the tray. Ring: planets on one orbit,
+   uneven spacing, honest depth, the front one blooms open, an aurora
+   sun at the centre.
+   ===================================================================== */
+
+/* ---- Unboxing geometry: three jobs only ---- */
+.unbox {
+  --g1: clamp(0, calc((var(--p) - .02) * 12), 1);     /* outer ring + axes draw in during step 01 */
+  --g2: clamp(0, calc((var(--p) - .05) * 12), 1);     /* hexagon + spokes */
+  --g3: clamp(0, calc((var(--p) - .08) * 12), 1);     /* petals */
+  --g4: clamp(0, calc((var(--p) - .11) * 12), 1);     /* ticks */
+  --spread: clamp(0, calc((var(--p) - .37) * 14), 1); /* one ring wider as the tray slides */
+  --lift: 0;
+}
+.ul-geo { opacity: calc(.24 + var(--spread) * .08); }
+
+/* ---- Ring: orbit placement ---- */
+.orbit-stage { height: clamp(700px, 90vh, 820px); }
+.orbit-scene { perspective: 2400px; perspective-origin: 50% 40%; }
+.orbit-world { --R: clamp(210px, 25vw, 360px); top: 60%; transform: rotateX(-6deg) rotateY(var(--a, 0deg)); }
+.orbit-node {
+  transform: rotateY(var(--ang, 0deg)) translateZ(var(--R)) rotateY(calc(var(--ang, 0deg) * -1 - var(--a, 0deg))) rotateX(6deg);
+}
+.orbit-equator { opacity: .75; border: 1px solid rgba(74,44,16,.45); }
+.orbit-equator--outer { display: none; }
+
+/* planets: 20% of front size at the back, each with its own base size */
+.hexnode {
+  --size: calc(var(--u-hex, 1px) * var(--base, 1) * (76 + var(--near) * var(--near) * 304));
+  overflow: visible; clip-path: none; background: none;
+}
+.hexnode::before { content: ""; position: absolute; inset: 0; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: linear-gradient(172deg, #FCF8F1 0%, #F1E7D9 60%, #E6D8C6 100%); z-index: 0; }
+.hex-frame, .hex-portrait, .hex-text { z-index: 1; }
+.hex-text { top: 48%; }
+
+/* bloom: as the hexagon crosses into the front position, two outlines ripple outward and fade */
+.hexnode { --b: clamp(0, calc((var(--near) - .88) * 8.3), 1); }           /* 0 before the front, 1 at the front */
+.hex-frame { overflow: visible; }
+.hex-frame .ripple { transform-origin: 50% 50%; transform-box: fill-box; stroke-width: 1px; }
+.hex-frame .ripple--1 { transform: scale(calc(1 + var(--b) * .28)); opacity: calc((1 - var(--b)) * var(--b) * 2.6); }
+.hex-frame .ripple--2 { transform: scale(calc(1 + var(--b) * .56)); opacity: calc((1 - var(--b)) * var(--b) * 1.6); }
+
+/* ---- the sun: MATORI mark with an aurora behind it, seen through the floor lines ---- */
+.orbit-sun {
+  /* the sun sits above the ring plane at its centre, so it is never hidden behind the front planet */
+  position: absolute; left: 50%; top: calc(var(--R) * -.92); width: calc(var(--R) * .9); height: calc(var(--R) * .7);
+  translate: -50% -50%; transform: rotateY(calc(var(--a, 0deg) * -1)); pointer-events: none;
+}
+.orbit-sun-mark { position: absolute; left: 50%; bottom: 30%; width: calc(var(--R) * .19); translate: -50%; color: var(--copper); opacity: .9; z-index: 1; }
+.aurora {
+  /* curtains of light rising from the sun, dissolving upward */
+  position: absolute; inset: -30% -20% 14%; z-index: 0; overflow: visible;
+  -webkit-mask: linear-gradient(to top, transparent 0, #000 28%, rgba(0,0,0,.65) 62%, transparent 100%);
+          mask: linear-gradient(to top, transparent 0, #000 28%, rgba(0,0,0,.65) 62%, transparent 100%);
+  opacity: calc(.6 + var(--g, 0) * .4);
+  transition: opacity .8s var(--ease);
+}
+.aurora i {
+  position: absolute; bottom: 0; height: 100%; width: 16%; display: block; border-radius: 40% 40% 0 0;
+  filter: blur(12px); transform-origin: 50% 100%;
+  animation: aurora 12s ease-in-out infinite alternate;
+}
+.aurora i:nth-child(1) { left: 30%; background: linear-gradient(to top, rgba(74,44,16,.4), rgba(74,44,16,.12) 55%, transparent); animation-duration: 14s; }
+.aurora i:nth-child(2) { left: 46%; width: 14%; background: linear-gradient(to top, rgba(217,164,65,.5), rgba(217,164,65,.16) 60%, transparent); animation-duration: 19s; animation-delay: -6s; }
+.aurora i:nth-child(3) { left: 56%; width: 18%; background: linear-gradient(to top, rgba(255,246,232,.95), rgba(255,246,232,.35) 55%, transparent); animation-duration: 16s; animation-delay: -11s; }
+@keyframes aurora {
+  0%   { transform: skewX(-14deg) scaleY(.85) translateX(-6%); }
+  50%  { transform: skewX(8deg) scaleY(1.08) translateX(5%); }
+  100% { transform: skewX(-4deg) scaleY(.95) translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) { .aurora i { animation: none; } }
+.orbit-geo { opacity: calc(.12 + var(--g, 0) * .1); }
+
+
+@media (max-width: 860px) {
+  .orbit { --u-hex: .62px; }
+  .orbit-stage { height: 560px; }
+  .orbit-scene { perspective: 1700px; perspective-origin: 50% 42%; }
+  .orbit-world { --R: clamp(150px, 42vw, 180px); top: 58%; }
+  .orbit-sun { top: calc(var(--R) * -1.1); width: calc(var(--R) * 1.1); height: calc(var(--R) * .7); }
+  .hex-text { top: 45%; bottom: 12%; }
+  .hex-text .orbit-bio { font-size: 11px; }
+}
+
+/* =====================================================================
+   DEEP REST PACKAGING (Oct 24): hexagon rigid box, navy on textured white.
+   Replaces the kraft matchbox carton. Same hooks (--rx, --ry, --slide,
+   --sy, --sz, --sry, --boxFade, patch vars) so the unboxing engine is unchanged.
+   ===================================================================== */
+.board-cream {
+  background-color: #D1AF80; color: var(--copper);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.045 .09' numOctaves='3' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .32  0 0 0 0 .18  0 0 0 .28 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+    linear-gradient(165deg, rgba(255,245,225,.35), rgba(255,255,255,0) 50%, rgba(74,44,16,.08));
+}
+.board-navy {
+  /* gold board: the box edge, sides and interior */
+  background-color: #C9A061; color: #4A2C10;
+  background-image: linear-gradient(160deg, rgba(255,240,210,.45), transparent 45%, rgba(74,44,16,.22));
+}
+.hexbox {
+  --hw: calc(var(--u) * 300);                 /* point to point */
+  --hh: calc(var(--hw) * .866);               /* flat to flat */
+  --hd: calc(var(--u) * 62);                  /* depth */
+  --hs: calc(var(--hw) * .5);                 /* side length */
+  --w: var(--hw); --h: var(--hh); --d: var(--hd);
+  --hex: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%);
+  --hexmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><polygon points='0,50 25,0 75,0 100,50 75,100 25,100'/></svg>") center / 100% 100% no-repeat;
+  --lowmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><polygon points='0,50 100,50 75,100 25,100'/></svg>") center / 100% 100% no-repeat;
+  --upmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><polygon points='25,0 75,0 100,50 0,50'/></svg>") center / 100% 100% no-repeat;
+  width: var(--hw); height: var(--hh);
+}
+.hexbox > * { position: absolute; }
+.hexbox .hb-back { inset: 0; -webkit-mask: var(--hexmask); mask: var(--hexmask); transform: rotateY(180deg) translateZ(calc(var(--hd) * .5)); filter: brightness(.96); }
+.hexbox .hb-floor { inset: 0; transform: translateZ(calc(var(--hd) * -.5 + var(--u) * 1.5)); transform-style: preserve-3d; background: none; }
+.hexbox .hb-floor::before { content: ""; position: absolute; inset: 0; background: #D7B98C linear-gradient(160deg, rgba(255,245,225,.4), transparent 45%, rgba(74,44,16,.18)); -webkit-mask: var(--hexmask); mask: var(--hexmask); }
+.hexbox .hb-side {
+  left: 50%; top: 50%; width: var(--hs); height: var(--hd);
+  margin: calc(var(--hd) / -2) 0 0 calc(var(--hs) / -2);
+  transform: rotateZ(calc(var(--k) * 60deg)) translateY(calc(var(--hh) * -.5)) rotateX(90deg);
+  backface-visibility: visible; display: grid; place-items: center; overflow: hidden;
+}
+.hexbox .hb-side[style*="--k:0"] { filter: brightness(1.12); }
+.hexbox .hb-side[style*="--k:1"], .hexbox .hb-side[style*="--k:5"] { filter: brightness(1.0); }
+.hexbox .hb-side[style*="--k:2"], .hexbox .hb-side[style*="--k:4"] { filter: brightness(.8); }
+.hexbox .hb-side[style*="--k:3"] { filter: brightness(.7); }
+.hb-side-text { font-family: var(--brand); font-size: calc(var(--u) * 7); letter-spacing: .3em; text-transform: uppercase; font-weight: 500; white-space: nowrap; color: #5A3614; transform: rotate(180deg); }
+.hexbox .hb-front-low { inset: 0; -webkit-mask: var(--lowmask); mask: var(--lowmask); transform: translateZ(calc(var(--hd) * .5)); }
+/* lid hinge is the back edge of the box: the back half of the top lifts like a trunk lid, inner face toward you */
+.hexbox .hb-lid-wrap { inset: 0; transform-style: preserve-3d; transform-origin: 50% 0; transform: translateZ(calc(var(--hd) * .5)) rotateX(var(--open, 0deg)); }
+.hb-lid, .hb-lid-inner { position: absolute; inset: 0; -webkit-mask: var(--upmask); mask: var(--upmask); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.hb-lid-inner { transform: rotateX(180deg) translateZ(1px); background-color: #D1AF80; -webkit-mask: var(--lowmask); mask: var(--lowmask); }
+.hb-lid-inner .hart-lid { position: absolute; left: 0; right: 0; top: 50%; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(var(--u) * 6); color: var(--copper); }
+.hart-lid-line { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: calc(var(--hw) * .075); line-height: 1; }
+.hart-lid-sub { font-family: var(--brand); font-size: calc(var(--hw) * .024); letter-spacing: .04em; }
+/* hairline navy edges on the hexagon face, as on the box */
+.hb-front-low::before, .hb-lid::before { content: ""; position: absolute; inset: 0; -webkit-mask: var(--hexmask); mask: var(--hexmask); box-shadow: inset 0 0 0 calc(var(--u) * 2.2) #C9A061, inset 0 0 0 calc(var(--u) * 3) rgba(90,54,20,.25); pointer-events: none; }
+
+/* Front artwork, laid out from the Deep Rest render */
+.hart { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; padding-top: calc(var(--hh) * .11); font-family: var(--brand); color: var(--copper); overflow: hidden; }
+.hart-mark { width: calc(var(--hw) * .11); height: auto; }
+.hart-word { width: calc(var(--hw) * .36); margin-top: calc(var(--hh) * .012); }
+.hart-word .wordmark-svg { width: 100%; height: auto; display: block; }
+.hart-tag { margin-top: calc(var(--hh) * .02); font-size: calc(var(--hw) * .03); letter-spacing: .12em; font-weight: 500; white-space: nowrap; }
+.hart-name { margin-top: calc(var(--hh) * .05); font-family: var(--serif); font-weight: 700; font-size: calc(var(--hw) * .1); line-height: .92; letter-spacing: -.005em; text-align: center; }
+.hart-rule { display: flex; align-items: center; gap: calc(var(--u) * 5); margin: calc(var(--hh) * .02) 0 calc(var(--hh) * .012); color: #B9822A; }
+.hart-rule i { display: block; width: calc(var(--hw) * .11); height: 1px; background: currentColor; opacity: .7; }
+.hart-comb { width: calc(var(--hw) * .05); height: auto; }
+.hart-benefit { font-size: calc(var(--hw) * .028); letter-spacing: .06em; font-weight: 500; white-space: nowrap; }
+.hart-count { margin-top: calc(var(--hh) * .035); display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.hart-count b { font-size: calc(var(--hw) * .055); font-weight: 700; letter-spacing: .02em; }
+.hart-count span { font-size: calc(var(--hw) * .027); font-weight: 500; margin-top: calc(var(--u) * 2); }
+.hart-honey { position: absolute; inset: 0; width: 100%; height: 100%; color: #B9822A; opacity: .75; pointer-events: none; }
+
+/* Pouches: white hexagons in the navy interior */
+.hb-pouch { position: absolute; left: 50%; top: 50%; width: calc(var(--hw) * .3); height: calc(var(--hw) * .3 * .866); margin: calc(var(--hw) * -.13) 0 0 calc(var(--hw) * -.15); transform: translate3d(var(--px, 0px), var(--py0, 0px), calc(var(--u) * 5)); }
+.hb-pouch[style*="--k:1"] { --px: calc(var(--hw) * -.29); --py0: calc(var(--hh) * -.1); }
+.hb-pouch[style*="--k:2"] { --px: 0px; --py0: calc(var(--hh) * -.19); }
+.hb-pouch[style*="--k:3"] { --px: calc(var(--hw) * .29); --py0: calc(var(--hh) * -.1); }
+.hb-pouch[style*="--k:0"] { --px: 0px; --py0: calc(var(--hh) * .14); }
+.pouch-face {
+  position: absolute; inset: 0; -webkit-mask: var(--hexmask); mask: var(--hexmask);
+  background: linear-gradient(160deg, #FBFAF7, #E9E6E0); color: var(--copper);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(var(--u) * 1.5);
+  box-shadow: inset 0 0 0 1px rgba(74,44,16,.25);
+}
+.pouch-face::after { content: ""; position: absolute; inset: 7%; -webkit-mask: var(--hexmask); mask: var(--hexmask); box-shadow: inset 0 0 0 1px rgba(74,44,16,.18); }
+.pouch-mark { width: 22%; height: auto; }
+.pouch-word { width: 54%; display: block; }
+.pouch-word .wordmark-svg { width: 100%; height: auto; display: block; }
+.pouch-sub { font-family: var(--serif); font-weight: 700; font-size: calc(var(--hw) * .024); line-height: 1; }
+/* solo pouch (hero still life) */
+.hb-pouch--solo { position: relative; left: auto; top: auto; margin: 0; width: 100%; height: 100%; transform: none; filter: drop-shadow(-10px 16px 18px rgba(74,44,16,.25)); }
+
+/* the rig pouch lifts out along the same vars the old sachet used */
+.hexbox .u-sachet.hb-pouch--rig {
+  margin: calc(var(--hw) * -.13) 0 0 calc(var(--hw) * -.15); width: calc(var(--hw) * .3); height: calc(var(--hw) * .3 * .866);
+  transform: translate3d(0, calc(var(--hh) * .14 + var(--sy, 0px)), calc(var(--u) * 5 + var(--sz, 0px))) rotateY(var(--sry, 0deg)) rotateX(var(--srx, 0deg));
+  transform-style: preserve-3d; backface-visibility: visible;
+}
+.hexbox .us-body { position: absolute; inset: 0; opacity: var(--sFade, 1); }
+.hexbox .us-tear { display: none; }
+.hexbox .us-patch { top: 8%; width: 70%; height: 80%; left: 50%; margin-left: -35%; }
+/* fades: everything but the rig pouch dims with --boxFade */
+.unbox .hexbox > :not(.hb-floor), .unbox .hexbox .hb-floor > :not(.u-sachet) { opacity: var(--boxFade, 1); }
+.unbox .hexbox .hb-floor { opacity: 1; }
+.unbox .hexbox .hb-floor::before { opacity: var(--boxFade, 1); }
+
+/* Hero: the Deep Rest render stands on the ledge; edges dissolve into the wall */
+.sp-render { right: 4%; bottom: 9%; width: min(62%, calc(var(--u) * 620)); z-index: 1; }
+.hero-render { width: 100%; height: auto; display: block; }
+.sp-patch { right: calc(6% + var(--u) * 40); bottom: 9%; }
+@media (max-width: 979px) { .sp-render { right: 50%; translate: 50% 0; width: min(78%, 420px); bottom: 4%; } .sp-patch { right: 12%; bottom: 6%; } }
+.still-frame img { object-position: 50% 50%; }
+
+/* one product: the card becomes a feature row instead of a lonely column */
+.cat-grid > .cat-card:only-child { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 460px) 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; border-top: 0; padding-top: 0; }
+.cat-grid > .cat-card:only-child .cat-visual { margin-bottom: 0; --u: clamp(.7px, .07vw + .5px, 1.1px); }
+.cat-grid > .cat-card:only-child h3 { font-size: var(--fs-h2); }
+.cat-grid > .cat-card:only-child p { font-size: var(--fs-lead); max-width: 26em; }
+.cat-grid > .cat-card:only-child .ingredients { margin-top: 20px; }
+@media (max-width: 760px) { .cat-grid > .cat-card:only-child { grid-template-columns: 1fr; } }
+
+/* back label (printed on the back face of the hexagon box) */
+.hart-back { padding-top: calc(var(--hh) * .1); }
+.hart-back .hart-word { width: calc(var(--hw) * .28); }
+.hart-back-name { margin-top: calc(var(--hh) * .015); font-family: var(--serif); font-weight: 700; font-size: calc(var(--hw) * .05); line-height: 1; }
+.hart-back-sub { font-size: calc(var(--hw) * .022); letter-spacing: .08em; margin-top: calc(var(--u) * 2); }
+.hart-back-cols { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--hw) * .03); width: 62%; margin-top: calc(var(--hh) * .04); text-align: left; font-size: calc(var(--hw) * .017); line-height: 1.35; }
+.hart-back-cols h5 { margin: 0 0 calc(var(--u) * 2); font-family: var(--serif); font-weight: 700; font-size: calc(var(--hw) * .024); }
+.hart-back-cols p { margin: 0 0 calc(var(--u) * 3); }
+.hart-back-foot { margin-top: calc(var(--hh) * .03); display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
+.hart-back-foot b { font-family: var(--serif); font-weight: 700; font-size: calc(var(--hw) * .03); }
+.hart-back-foot span { font-size: calc(var(--hw) * .018); }
+/* pouches: kraft hexagons */
+.pouch-face { background: linear-gradient(160deg, #E6CDA6, #D1AF80); color: var(--copper); box-shadow: inset 0 0 0 1px rgba(90,54,20,.3); }
+.pouch-face::after { box-shadow: inset 0 0 0 1px rgba(90,54,20,.2); }
+.hexnode::before { background: linear-gradient(172deg, #FBF4E6 0%, #F1E3CB 60%, #E6D2B1 100%); }
+.hex-portrait { background: radial-gradient(60% 60% at 35% 30%, #FFF8EA, #E8D4B4); }
+
+/* =====================================================================
+   HONEY GLOW (Oct 25): warm palette, geometry retired. The construction
+   linework was built for the earlier brand; it reads cold next to kraft
+   and honey. Scenes now sit on a soft pool of warm light instead.
+   ===================================================================== */
+.hero-geo-wrap, .ul-geo, .orbit-geo, .ul-geo-wall, .cage { display: none !important; }
+.unbox-stage::before {
+  content: ""; position: absolute; left: 50%; top: 68%; width: min(70vw, 760px); height: min(26vw, 280px); translate: -50% -50%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(217,164,65,.28), rgba(217,164,65,.08) 55%, transparent 72%);
+  opacity: calc(.5 + var(--spread, 0) * .5); transform: scale(calc(.85 + var(--spread, 0) * .25)); pointer-events: none;
+}
+@media (max-width: 979px) { .unbox-stage::before { top: 36%; width: 90vw; height: 34vw; } }
+.orbit-stage::before {
+  content: ""; position: absolute; left: 50%; top: 58%; width: min(60vw, 720px); height: min(22vw, 240px); translate: -50% -50%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(217,164,65,.22), transparent 70%); pointer-events: none;
+}
+.orbit-equator { border-color: rgba(185,130,42,.45); }
+.hero-render { filter: drop-shadow(0 30px 40px rgba(74,44,16,.18)); }
+.attr-band { background: var(--kraft); color: var(--copper-ink); }
+.site-footer { background: #4A2C10; color: #F1E3CB; }
+.site-footer a, .footer-brand .wordmark { color: #F1E3CB; }
+.footer-brand .brand svg { color: #E0B25C; }
+.footer-tag, .site-footer h2, .disclaimer { color: #D9C3A0; }
+.footer-base { color: #C9AE86; border-top-color: #6B4A2A; }
+.footer-waves { display: none; }
+.mosaic .tile-text { background: var(--bg); }
+.btn { background: var(--copper-ink); border-color: var(--copper-ink); color: #FBF6EC; }
+.btn:hover { background: transparent; color: var(--copper-ink); }
+/* honey accent: labels and the rule under them */
+.label, .orbit-role, .hex-text .label { color: #B9822A; }
+.label--rule::after { background: #B9822A; }
+
+.cat-grid > .cat-card:only-child { grid-template-rows: auto auto auto auto; align-items: start; align-content: center; }
+.cat-grid > .cat-card:only-child .cat-visual { grid-row: 1 / span 4; grid-column: 1; align-self: center; }
+.cat-grid > .cat-card:only-child > :not(.cat-visual) { grid-column: 2; }
+.cat-grid > .cat-card:only-child h3 { margin: 10px 0 14px; }

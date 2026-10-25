@@ -23,22 +23,6 @@ const WORDMARK_SVG = (cls = "") => `<svg class="wordmark-svg ${cls}" viewBox="0 
   </g></svg>`;
 const MARK_SVG = (cls = "") => `<svg class="${cls}" viewBox="0 0 64 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${MARK_INNER}</svg>`;
 
-/* Day-arc marks: the same two peaks, with the sky changing per pack.
-sunrise = Morning Energy, sun = Everyday Essentials, moon = Evening Unwind */
-const PEAKS = `<path d="M3 45 L15.4 25.6 Q18.8 20.6 22.2 25.6 L34 45"/>
-<path d="M35 39.4 L42.4 25.6 Q45.8 20.6 49.2 25.6 L61.5 45"/>`;
-const SKY = {
-   sunrise: `<circle cx="32.2" cy="27" r="3.9" fill="currentColor" stroke="none"/>
-   <path d="M32.2 14.6v5.2M23.4 18.4l3.6 3.8M41 18.4l-3.6 3.8M18.6 25.4l5 1.2M45.8 25.4l-5 1.2" stroke-width="2.4"/>`,
-   sun: `<circle cx="32.2" cy="12" r="4.4" fill="currentColor" stroke="none"/>
-   <path d="M32.2 1.4v4M32.2 18.6v3.6M21.6 12h4M38.8 12h4M24.7 4.5l2.8 2.8M39.7 4.5l-2.8 2.8M24.7 19.5l2.8-2.8M39.7 19.5l-2.8-2.8" stroke-width="2.2"/>`,
-   moon: `<path d="M31.3 7.61 A6.6 6.6 0 1 0 37.68 16.76 A5.6 5.6 0 1 1 31.3 7.61 Z" fill="currentColor" stroke="none"/>
-   <circle cx="44.6" cy="7.4" r="1.15" fill="currentColor" stroke="none"/><circle cx="21.4" cy="11.2" r=".9" fill="currentColor" stroke="none"/>`
-};
-const markFor = (p, cls = "") => SKY[p && p.mark]
-? `<svg class="${cls}" viewBox="0 0 64 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${PEAKS}${SKY[p.mark]}</svg>`
-   : MARK_SVG(cls);
-
 /* Blurred olive-branch shadow for the hero wall and stone tile */
 function leafShadow(cls = "") {
   let leaves = "";
@@ -75,7 +59,35 @@ function geoConstruct(cls = "") {
   </svg>`;
 }
 
-/* Fine topographic waves rising from the lower right, as on the carton and sachet */
+
+
+/* Honeycomb clusters, as printed on the Honey Glow box: outline hexagons with a few filled in honey */
+function honeycombSVG(cls = "") {
+  const hx = (cx, cy, r, fill) => { const pts = []; for (let i = 0; i < 6; i++) { const a = Math.PI / 3 * i; pts.push((cx + r * Math.cos(a)).toFixed(1) + "," + (cy + r * Math.sin(a)).toFixed(1)); } return `<polygon points="${pts.join(" ")}"${fill ? ` fill="currentColor" fill-opacity=".55" stroke="none"` : ""}/>`; };
+  const r = 7, dx = r * 1.5, dy = r * Math.sqrt(3);
+  const cluster = (ox, oy, cells) => cells.map(([q, s_, f]) => hx(ox + q * dx, oy + s_ * dy + (q % 2 ? dy / 2 : 0), r, f)).join("");
+  return `<svg class="${cls}" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+    ${cluster(18, 92, [[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 1, 1], [0, 2, 0], [2, 0, 0], [1, -1, 0], [0, 3, 1], [1, 2, 0], [2, 1, 1]])}
+    ${cluster(168, 14, [[0, 0, 0], [1, 0, 1], [0, 1, 1], [1, -1, 0]])}
+    ${cluster(176, 118, [[0, 0, 0], [1, 0, 1], [0, 1, 0], [1, 1, 0], [0, 2, 1]])}
+    ${cluster(92, 178, [[0, 0, 1], [1, 0, 0], [0, 1, 0]])}
+  </svg>`;
+}
+
+/* Flowing ribbon wave (previous packaging; kept for reference): a band of parallel lines
+   running in from the lower left and off the right edge, rising at the end. */
+function ribbonSVG(cls = "") {
+  let paths = "";
+  const N = 22;
+  for (let i = 0; i < N; i++) {
+    const t = i / (N - 1), o = (t - .5) * 34;            // offset across the band
+    const y0 = 84 + o, y1 = 62 + o * .8, y2 = 92 + o * .9, y3 = 28 + o * .6, y4 = 50 + o * .5;
+    paths += `<path vector-effect="non-scaling-stroke" d="M-5 ${y0.toFixed(1)} C 30 ${y1.toFixed(1)}, 55 ${y2.toFixed(1)}, 95 ${(70 + o).toFixed(1)} S 150 ${y3.toFixed(1)}, 205 ${y4.toFixed(1)}" stroke-opacity="${(.35 + .65 * Math.abs(Math.sin(t * Math.PI))).toFixed(2)}"/>`;
+  }
+  return `<svg class="${cls}" viewBox="0 0 200 100" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width=".9" vector-effect="non-scaling-stroke" aria-hidden="true">${paths}</svg>`;
+}
+
+/* Fine topographic waves rising from the lower right (previous packaging; kept for reference) */
 function contourSVG(cls = "") {
   const hills = [{ c: 168, a: 92, w: 52 }, { c: 92, a: 52, w: 46 }];
   let paths = "";
@@ -96,6 +108,9 @@ function contourSVG(cls = "") {
 const ICON = {
   mark: MARK_SVG,
   contour: contourSVG,
+  ribbon: ribbonSVG,
+  honeycomb: honeycombSVG,
+  comb3: (cls = "") => `<svg class="${cls}" viewBox="0 0 40 30" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><polygon points="14,3 22,3 26,10 22,17 14,17 10,10"/><polygon points="6,16 14,16 18,23 14,30 6,30 2,23"/><polygon points="22,16 30,16 34,23 30,30 22,30 18,23"/></svg>`,
   tilde: (cls = "") => `<svg class="${cls}" viewBox="0 0 40 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 6 C7 1 11 1 15 5 S24 9 28 5 S35 1 38 4"/></svg>`,
   waves: (cls = "") => `<svg class="${cls}" viewBox="0 0 200 40" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width=".7" aria-hidden="true">
     <path d="M0 12 C30 4 50 20 80 12 S130 4 160 12 S190 18 200 14"/><path d="M0 18 C30 10 52 26 82 18 S132 10 162 18 S190 24 200 20"/>
@@ -113,61 +128,81 @@ const statusFlag = (status) => ({
 
 const productBySlug = (slug) => PRODUCTS.find((p) => p.slug === slug || (p.aliases || []).includes(slug));
 
-/* ---------- Carton ----------
-   opts.unbox: full sachet rig (tear strip, card, two-sided patch) for the unboxing sequence
-   opts.rx/ry: starting angle                                  */
+/* ---------- Hexagon rigid box (Deep Rest packaging) ----------
+   Geometry (concept): 7.5 in point to point, 6.5 in flat to flat, split lid:
+   the back half of the top hinges open. Modelled with the hexagon face toward
+   the camera (standing) so the same object lies flat with --rx.
+   opts.unbox: pouches + two-sided wearable inside for the unboxing sequence. */
 function carton(p, opts = {}) {
-  const { unbox = false, rx = -10, ry = -28, id = "", anchors = [] } = opts;
-  // Anchors: zero-size markers whose on-screen position drives callout lines (Lab)
+  const { unbox = false, rx = -6, ry = -18, id = "", anchors = [] } = opts;
   const A = (face) => anchors.filter((a) => a.face === face).map((a) => a.dot
     ? `<button type="button" class="anchor anchor-dot" data-anchor="${a.id}" data-pick="${a.id}" style="left:${a.x}%;top:${a.y}%" aria-label="Show detail: ${esc(a.title)}"></button>`
     : `<span class="anchor" data-anchor="${a.id}" style="left:${a.x}%;top:${a.y}%"></span>`).join("");
   const front = `
-    <div class="art">
-      ${markFor(p, "art-mark")}
-      <div class="art-word">${WORDMARK_SVG()}</div>
-      <div class="art-tag">Wellness, worn differently</div>
-      <div class="art-sku">
-        <div class="art-name">${p.boxName.map(esc).join("<br>")}</div>
-        ${ICON.tilde("art-tilde")}
-        <div class="art-benefit">${esc(p.benefit.slice(0, 2).join(" / "))}<br>${esc(p.benefit[2] || "")}</div>
-      </div>
-      ${ICON.contour("art-contour")}
-      <div class="art-count"><b>30</b><span>Wearables</span></div>
-    </div>
-    ${A("front")}`;
+    <div class="hart">
+      ${ICON.mark("hart-mark")}
+      <div class="hart-word">${WORDMARK_SVG()}</div>
+      <div class="hart-tag">${esc(SITE.tagline.replace(/\.$/, "").toLowerCase())}</div>
+      <div class="hart-name">${p.boxName.map(esc).join("<br>")}</div>
+      <div class="hart-rule"><i></i>${ICON.comb3("hart-comb")}<i></i></div>
+      <div class="hart-benefit">${p.benefit.map(esc).join(" • ")}</div>
+      <div class="hart-count"><b>${esc(p.count[0])}</b><span>${esc(p.count[1])}</span></div>
+      ${ICON.honeycomb("hart-honey")}
+    </div>${A("front")}`;
+  const lidInner = `
+    <div class="hart-lid">
+      <span class="hart-lid-line">${esc(p.lidLine[0])}</span>
+      <span class="hart-lid-sub">${esc(p.lidLine[1])}</span>
+    </div>`;
+  const pouch = (k) => `
+    <div class="hb-pouch" style="--k:${k}">
+      <div class="pouch-face">${ICON.mark("pouch-mark")}<span class="pouch-word">${WORDMARK_SVG()}</span><span class="pouch-sub">${esc(p.boxName.join(" "))}</span></div>
+    </div>`;
+  const interior = `
+    <div class="hb-floor board-navy">
+      ${[1, 2, 3].map(pouch).join("")}
+      ${unbox ? pouchRig(p, A) : pouch(0)}
+    </div>`;
   const back = `
-    <div class="art-back">
-      <h5>Proposed formula</h5>
-      <ul>${p.ingredients.map((i) => `<li><span>${esc(i.name)}</span><span>TBC</span></li>`).join("")}</ul>
-      <h5>Use</h5>
-      <p style="margin:0">Apply to clean, dry skin. Directions to be confirmed.</p>
+    <div class="hart hart-back">
+      ${ICON.mark("hart-mark")}
+      <div class="hart-word">${WORDMARK_SVG()}</div>
+      <div class="hart-back-name">${esc(p.boxName.join(" "))}</div>
+      <div class="hart-back-sub">${p.benefit.map(esc).join(" • ")}</div>
+      <div class="hart-back-cols">
+        <div><h5>how to use</h5>${(p.howTo || []).map((t, i) => `<p>${i + 1}. ${esc(t)}</p>`).join("")}</div>
+        <div><h5>ingredients</h5><p>${p.ingredients.map((i) => esc(i.name.replace(/ \(.*\)/, ""))).join(", ")}.</p><h5>caution</h5><p>For external use only. Do not use on broken or irritated skin. Avoid the eyes.</p></div>
+      </div>
+      <div class="hart-back-foot"><b>28 wearables</b><span>4 pouches of 7 • 4-week supply</span></div>
     </div>`;
-  const side = `<div class="art-side"><span class="vert">${esc(p.name)}</span><span class="dim" aria-hidden="true"></span><span class="vert">30 wearables</span></div>${A("right")}`;
-  const sideL = `<div class="art-side"><span class="vert">MATORI</span><span class="vert">Wellness, worn differently</span></div>`;
-
-  // Tray is always present (its top end closes the open sleeve); sachet only where it can be seen
-  const tray = `
-    <div class="drawer">
-      <div class="face kraft d-back"></div>
-      ${unbox ? sachetRig(p, A) : `<div class="face d-sachet"><span class="card"></span>${A("sachet")}</div>`}
-      <div class="face kraft d-left"></div>
-      <div class="face kraft d-right">${A("drawerRight")}</div>
-      <div class="face kraft d-top"></div>
-      <div class="face kraft d-bottom"></div>
-    </div>`;
-
+  const sides = [0, 1, 2, 3, 4, 5].map((k) => `<div class="hb-side board-navy" style="--k:${k}">${k === 4 ? `<span class="hb-side-text">${esc(p.name)} · ${esc(p.count.join(" "))}</span>` : ""}</div>`).join("");
   return `
-    <div class="carton" ${id ? `id="${id}"` : ""} style="--cat:${p.cat};--side:${p.side || "var(--brown)"};--rx:${rx}deg;--ry:${ry}deg">
-      ${tray}
-      <div class="sleeve">
-        <div class="face kraft f-back">${back}</div>
-        <div class="face board-dark f-left">${sideL}</div>
-        <div class="face board-dark f-right">${side}</div>
-        <div class="face kraft f-front">${front}</div>
+    <div class="carton hexbox" ${id ? `id="${id}"` : ""} style="--cat:${p.cat};--rx:${rx}deg;--ry:${ry}deg">
+      <div class="hb-back board-cream">${back}</div>
+      ${interior}
+      ${sides}
+      <div class="hb-front-low board-cream">${front}</div>
+      <div class="hb-lid-wrap">
+        <div class="hb-lid board-cream">${front}</div>
+        <div class="hb-lid-inner board-cream">${lidInner}</div>
       </div>
     </div>`;
 }
+
+/* Pouch rig for the unboxing: the fourth pouch lifts out, tears, and the wearable rises. */
+const pouchRig = (p, A = () => "") => `
+  <div class="face u-sachet hb-pouch hb-pouch--rig" style="--k:0">
+    ${A("sachet")}
+    <div class="us-patch">
+      <div class="usp-face usp-front">${patchArt()}${A("patch")}</div>
+      <div class="usp-face usp-back">
+        <span class="usp-adh"></span>
+        <span class="usp-liner usp-liner-l"></span><span class="usp-liner usp-liner-r"></span>
+      </div>
+    </div>
+    <div class="us-body pouch-face">${ICON.mark("pouch-mark")}<span class="pouch-word">${WORDMARK_SVG()}</span><span class="pouch-sub">${esc(p.boxName.join(" "))}</span></div>
+    <div class="us-tear"></div>
+  </div>`;
 
 /* Sachet rig used inside the carton during unboxing.
    Lives in the carton's 3D space so it lifts out of the real tray. */
@@ -183,7 +218,7 @@ const sachetRig = (p, A = () => "") => `
     </div>
     <div class="us-body">
       <div class="pouch-card">
-        ${markFor(p, "art-mark")}
+        ${ICON.mark("art-mark")}
         <div class="pw">${WORDMARK_SVG()}</div>
         <div class="ps"><b>${p.boxName.map(esc).join("<br>")}</b>${ICON.tilde("art-tilde")}<span>${esc(p.benefit.slice(0, 2).join(" / "))}</span><span>${esc(p.benefit[2] || "")}</span></div>
         ${ICON.contour("art-contour")}
@@ -192,21 +227,15 @@ const sachetRig = (p, A = () => "") => `
     <div class="us-tear"></div>
   </div>`;
 
-/* Clear sachet with printed card (hero still life) */
+/* Hexagon pouch (hero still life) */
 const sachetArt = (p) => `
-  <div class="pouch-body"></div>
-  <div class="pouch-card">
-    ${markFor(p, "art-mark")}
-    <div class="pw">${WORDMARK_SVG()}</div>
-    <div class="ps"><b>${p.boxName.map(esc).join("<br>")}</b>${ICON.tilde("art-tilde")}<span>${esc(p.benefit.slice(0, 2).join(" / "))}</span><span>${esc(p.benefit[2] || "")}</span></div>
-    ${ICON.contour("art-contour")}
-  </div>`;
+  <div class="hb-pouch hb-pouch--solo"><div class="pouch-face">${ICON.mark("pouch-mark")}<span class="pouch-word">${WORDMARK_SVG()}</span><span class="pouch-sub">${esc(p.boxName.join(" "))}</span></div></div>`;
 
 /* Patch: rounded pointy-top hexagon, cream face, translucent rim, dark brown mark (per patch renders) */
 const patchArt = (cls = "") => `<svg class="patch ${cls}" viewBox="0 0 90 100" aria-hidden="true">
-  <path d="M45 3 L86 26.5 L86 73.5 L45 97 L4 73.5 L4 26.5 Z" fill="rgba(244,232,218,.55)" stroke="rgba(244,232,218,.55)" stroke-width="6" stroke-linejoin="round"/>
-  <path d="M45 10 L80 30 L80 70 L45 90 L10 70 L10 30 Z" fill="#F0E5D7" stroke="#F0E5D7" stroke-width="5" stroke-linejoin="round"/>
-  <g transform="translate(25 35) scale(.63)" fill="none" stroke="#3E2B21" color="#3E2B21" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${MARK_INNER}</g>
+  <path d="M45 3 L86 26.5 L86 73.5 L45 97 L4 73.5 L4 26.5 Z" fill="rgba(240,216,170,.6)" stroke="rgba(240,216,170,.6)" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M45 10 L80 30 L80 70 L45 90 L10 70 L10 30 Z" fill="#F3E2C4" stroke="#F3E2C4" stroke-width="5" stroke-linejoin="round"/>
+  <g transform="translate(25 35) scale(.63)" fill="none" stroke="#5A3614" color="#5A3614" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${MARK_INNER}</g>
 </svg>`;
 
 const renderNote = (text = "Concept render. Not a photograph of the finished product.") => `<p class="meta">${esc(text)}</p>`;
@@ -222,7 +251,7 @@ function productCard(p) {
       <span class="label"><span class="hex-dot"></span>${esc(p.category)}</span>
       <h3 class="h3">${esc(p.name)}</h3>
       <p>${esc(p.short)}</p>
-      <p class="ingredients">Proposed: ${p.ingredients.filter((i) => i.name !== "Trace cofactors").map((i) => esc(i.name.replace(/ \(.*\)/, ""))).join(", ")}</p>
+      <p class="ingredients">${p.ingredients.filter((i) => i.name !== "Trace cofactors").map((i) => esc(i.name.replace(/ \(.*\)/, ""))).join(", ")}</p>
     </a>`;
 }
 

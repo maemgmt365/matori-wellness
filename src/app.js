@@ -1,6 +1,6 @@
 /* =========================================================
    MATORI · pages, router, interactions
-   Routes use the URL hash (#/products/sleep) so the site runs
+   Routes use the URL hash (#/products/honey-glow) so the site runs
    as a single static file anywhere. To move to a framework
    later, each page function maps 1:1 to a route component.
    ========================================================= */
@@ -20,21 +20,20 @@ Pages.home = () => `
     </div>
     <div class="wrap scene-grid">
       <div class="scene-copy">
-        <span class="label label--rule">Precision transdermal wellness</span>
-        <h1 class="display display--caps" id="hero-title">Wellness,<br>worn differently.</h1>
-        <p class="lead">An intentional approach to everyday wellness. Explore a new format for sleep, daytime energy, and essential nutrients.</p>
+        <span class="label label--rule">Wear better wellness</span>
+        <h1 class="display display--caps" id="hero-title">Glow on.</h1>
+        <p class="lead">One wearable, every day. Honey Glow is a daily skin wearable with copper peptide and honey, worn for up to eight hours. In development for 2027.</p>
         <div class="btn-row">
-          <a class="btn" href="#/products">Explore MATORI</a>
+          <a class="btn" href="#/products/honey-glow">Discover Honey Glow</a>
           <a class="btn btn--ghost" href="#/assessment">Find your routine</a>
         </div>
-        <ul class="hero-cats" aria-label="Product concepts">
-          ${PRODUCTS.map((p) => `<li style="--cat:${p.cat}"><span class="hex-dot" aria-hidden="true"></span>${esc(p.name)}</li>`).join("")}
+        <ul class="hero-cats" aria-label="Product">
+          <li style="--cat:var(--cat-skin)"><span class="hex-dot" aria-hidden="true"></span>Honey Glow · nourish, restore, radiate</li>
         </ul>
       </div>
       <div class="scene-products hero-intro" id="hero-products" aria-hidden="true">
         <div class="hero-geo-wrap" data-depth="0.04">${geoConstruct("hero-geo")}</div>
-        <div class="sp sp-carton" data-par="1" data-depth="0.08"><div class="stage">${carton(PRODUCTS[0], { rx: -4, ry: -22 })}</div></div>
-        <div class="sp sp-sachet" data-par="1.6" data-depth="0.16">${sachetArt(PRODUCTS[0])}</div>
+        <div class="sp sp-render" data-par="1" data-depth="0.08"><img class="hero-render" src="__ASSET:hg-front.webp__" alt="" width="1200" height="1166" decoding="async" fetchpriority="high"></div>
         <div class="sp sp-patch" data-par="2.2" data-depth="0.3">${patchArt()}</div>
       </div>
     </div>
@@ -42,14 +41,14 @@ Pages.home = () => `
   </section>
 
   <section class="mosaic" aria-label="About MATORI">
-    <div class="tile tile-skin" role="img" aria-label="Image placeholder: patch worn on skin">
+    <div class="tile tile-skin" role="img" aria-label="Image placeholder: wearable on skin">
       ${patchArt("skin-patch")}
-      <span class="ph-caption dev-only">Photography needed: patch worn on skin</span>
+      <span class="ph-caption dev-only">Photography needed: wearable on skin</span>
     </div>
     <div class="tile tile-text">
       <span class="label label--rule">About MATORI</span>
       <h2 class="h3">Considered science. Naturally inspired.</h2>
-      <p>MATORI pairs transdermal delivery with carefully selected ingredients, designed to fit into the day without another pill to remember.</p>
+      <p>MATORI puts proven skincare ingredients into a wearable, so they stay on skin for hours instead of minutes, and take one step instead of several.</p>
       <a class="tile-link" href="#/our-story">Our story</a>
     </div>
     <a class="tile tile-studio" href="#/collaborate">
@@ -67,17 +66,17 @@ Pages.home = () => `
   </section>
 
   <div class="attr-band" aria-label="Brand principles">
-    <ul>${["Precision", "Sustained", "Cellular", "Clean", "High-performance"].map((w) => `<li>${w}</li>`).join("")}</ul>
+    <ul>${["Nourish", "Restore", "Radiate", "Clean", "Considered"].map((w) => `<li>${w}</li>`).join("")}</ul>
   </div>
 
   <section class="section section--alt" aria-labelledby="cats-title">
     <div class="wrap">
       <div class="grid-2" style="align-items:end">
-        <h2 class="h2" id="cats-title">Three routines, one system.</h2>
-        <p class="lead measure">Each patch is designed for a moment in the day. The same kraft carton and copper ink across the range, with each product named for its moment.</p>
+        <h2 class="h2" id="cats-title">One wearable, done well.</h2>
+        <p class="lead measure">MATORI starts with skin. Honey Glow is one wearable, worn every day, four weeks to a box. Peel it on in the morning, peel it off in the evening.</p>
       </div>
       <div class="cat-grid">${PRODUCTS.map(productCard).join("")}</div>
-      <p class="meta" style="margin-top:28px">Proposed formulations in development. Ingredients, doses and availability are not final.</p>
+      <p class="meta" style="margin-top:28px">In development. Formula, wear time and availability are not final.</p>
     </div>
   </section>
 
@@ -86,38 +85,22 @@ Pages.home = () => `
       <div class="grid-2">
         <div>
           <h2 class="h2" id="phil-title">Less to take. More to consider.</h2>
-          <p class="lead measure" style="margin-top:24px">Wellness should fit into the day you already have. MATORI is built around a few considered products rather than a cabinet of bottles.</p>
+          <p class="lead measure" style="margin-top:24px">Skincare should fit into the day you already have. MATORI is built around one considered product rather than a counter full of bottles.</p>
         </div>
         <figure class="still">
-          <div class="still-frame"><img src="__ASSET:packaging-still.webp__" alt="Early MATORI concept render: an energy sachet beside its kraft carton, printed in copper ink" loading="lazy" width="640" height="854"></div>
-          <figcaption class="meta">Early concept render, shown under the energy patch's working name.</figcaption>
+          <div class="still-frame"><img src="__ASSET:hg-open.webp__" alt="MATORI Honey Glow hexagon box open, showing the honeycomb tray and the lid line: glow on." loading="lazy" width="1400" height="1050" decoding="async"></div>
+          <figcaption class="meta">Concept render of the Honey Glow box.</figcaption>
         </figure>
       </div>
       <div class="philosophy-body">
-        <div><h3>Fewer decisions</h3><p>Three routines that map to the day: evening, daytime, and every day. Nothing to measure or mix.</p></div>
-        <div><h3>Honest about the science</h3><p>Delivery through the skin depends on the ingredient and the formula. We say what is known and what is still being tested.</p></div>
-        <div><h3>Made to be kept</h3><p>A kraft carton, a clear resealable sachet and a shape designed to be worn without fuss.</p></div>
+        <div><h3>Fewer steps</h3><p>One wearable, once a day. Nothing to rub in, nothing on your hands, nothing on your clothes.</p></div>
+        <div><h3>Honest about the science</h3><p>What an ingredient does on skin depends on the ingredient, the formula and the wear time. We say what is known and what is still being tested.</p></div>
+        <div><h3>Made to be kept</h3><p>A kraft hexagon box that opens like a case, four pouches inside, and a wearable that sits flat under a shirt.</p></div>
       </div>
     </div>
   </section>
 
   ${unboxHTML(PRODUCTS[0])}
-
-<section class="routine-cta" aria-labelledby="routine-cta-title">
-<div class="wrap routine-cta-inner">
-<div>
-<span class="label label--rule">Find your routine</span>
-<h2 class="h2" id="routine-cta-title">What do you want more of?</h2>
-<p class="lead">Pick one and we'll suggest where to start.</p>
-</div>
-<div class="routine-cta-goals">
-<a class="goal-chip" href="#/assessment?goal=sleep" style="--cat:var(--cat-sleep)"><span class="hex-dot" aria-hidden="true"></span>Better sleep</a>
-<a class="goal-chip" href="#/assessment?goal=energy" style="--cat:var(--cat-energy)"><span class="hex-dot" aria-hidden="true"></span>Steady daytime energy</a>
-<a class="goal-chip" href="#/assessment?goal=nutrients" style="--cat:var(--cat-cellular)"><span class="hex-dot" aria-hidden="true"></span>Everyday nutrients</a>
-<a class="text-link routine-cta-unsure" href="#/assessment">Not sure yet? Start here</a>
-</div>
-</div>
-</section>
 
   <section class="section" aria-labelledby="sizes-title">
     <div class="wrap grid-2">
@@ -128,13 +111,13 @@ Pages.home = () => `
         <figcaption class="meta">Shown at true relative scale. Concept render.</figcaption>
       </figure>
       <div>
-        <span class="label">The patch</span>
-        <h2 class="h2" id="sizes-title" style="margin:16px 0 20px">One shape, three sizes.</h2>
-        <p class="lead measure">A rounded hexagon with a soft, translucent edge, designed to sit flat and stay discreet through the day.</p>
+        <span class="label">The wearable</span>
+        <h2 class="h2" id="sizes-title" style="margin:16px 0 20px">One shape, one size.</h2>
+        <p class="lead measure">A hexagon with a soft, translucent edge, designed to sit flat on the shoulder or upper chest for an eight-hour wear. 46.2 mm across is the working size; 40.4 mm is the alternative.</p>
         <ul class="size-list">
           ${SIZES.map((z) => `<li><span class="size-name">${z.name}</span><span class="size-mm">${z.mm} mm across</span></li>`).join("")}
         </ul>
-        <p class="meta">${flag("Proposed sizes")}Which sizes launch, and the dose for each, are still being confirmed.</p>
+        <p class="meta">${flag("Proposed")}Final size and dose are still being confirmed.</p>
       </div>
     </div>
   </section>
@@ -144,14 +127,14 @@ Pages.home = () => `
       <div class="grid-2" style="align-items:end">
         <h2 class="h2" id="sci-title">Form follows function.</h2>
         <div>
-          <p class="lead measure">Skin is built to keep things out. Whether an ingredient can pass through depends on its size, its chemistry and the patch that carries it.</p>
+          <p class="lead measure">Skin is built to keep things out. What an ingredient does there depends on its size, its chemistry and how long it stays in contact.</p>
           <a class="text-link" href="#/science">Read the science</a>
         </div>
       </div>
       <div class="principles">
-        <div><h3>The ingredient</h3><p>Molecular size and how readily a compound dissolves in oil or water shape how it behaves at the skin barrier.</p></div>
-        <div><h3>The formulation</h3><p>Concentration, carrier and adhesive design determine how much is released and how evenly.</p></div>
-        <div><h3>The evidence</h3><p>General research is a starting point. Claims about a MATORI patch will rest on testing of that finished patch.</p></div>
+        <div><h3>The ingredient</h3><p>Humectants hold water in the outer skin. Peptides are larger and slower, which is why wear time matters.</p></div>
+        <div><h3>The wearable</h3><p>Adhesive, carrier and load decide how evenly the formula sits against skin over eight hours.</p></div>
+        <div><h3>The evidence</h3><p>General research is a starting point. Claims about Honey Glow will rest on testing of the finished wearable.</p></div>
       </div>
     </div>
   </section>
@@ -174,7 +157,7 @@ Pages.home = () => `
   <section class="section section--alt final-cta" aria-labelledby="final-title">
     <div class="wrap">
       ${ICON.mark("final-mark")}
-      <h2 class="h2" id="final-title">Start with the routine that fits your day.</h2>
+      <h2 class="h2" id="final-title">One wearable. Every day. Glow on.</h2>
       <div class="btn-row">
         <a class="btn" href="#/products">Explore MATORI</a>
         <a class="btn btn--ghost" href="#/assessment">Find your routine</a>
@@ -186,6 +169,11 @@ function unboxHTML(p) {
   return `
   <section class="unbox" id="unbox" aria-labelledby="unbox-title" style="--p:0">
     <div class="unbox-sticky">
+      <div class="unbox-layers" aria-hidden="true">
+        ${geoConstruct("ul-geo")}
+        ${ICON.mark("ul-mark")}
+        ${ICON.contour("ul-contour")}
+      </div>
       <div class="wrap unbox-grid">
         <div class="unbox-copy">
           <h2 class="h2" id="unbox-title">Open the box.</h2>
@@ -205,11 +193,11 @@ function unboxHTML(p) {
         </div>
         <div class="unbox-stage" id="unbox-stage" tabindex="0" role="group" aria-label="MATORI ${esc(p.name)} carton. Scroll to unpack it, drag or use the left and right arrow keys to turn it.">
           <div class="stage">
-            <div class="unbox-rig">${carton(p, { unbox: true, rx: -6, ry: -30, id: "unbox-carton" })}</div>
+            <div class="unbox-rig">${carton(p, { unbox: true, rx: -5, ry: -14, id: "unbox-carton" })}</div>
           </div>
         </div>
       </div>
-      <p class="unbox-hint meta" id="unbox-hint">Scroll to open. Drag to turn.</p>
+      <p class="unbox-hint meta" id="unbox-hint">Scroll to open.</p>
       <p class="unbox-note meta">Concept render. Not a photograph of the finished product.</p>
     </div>
   </section>`;
@@ -270,8 +258,8 @@ Pages.lab = () => `
 Pages.products = () => `
   <header class="page-head"><div class="wrap">
     <span class="label">Products</span>
-    <h1 class="display">Three routines, worn through the day.</h1>
-    <p class="lead">Each MATORI patch is designed for a moment: evening, daytime or every day. All three are in development.</p>
+    <h1 class="display">Start with skin.</h1>
+    <p class="lead">Honey Glow is MATORI's first wearable, in development for 2027.</p>
   </div></header>
   <section class="section--tight"><div class="wrap product-rows">
     ${PRODUCTS.map((p) => `
@@ -281,7 +269,7 @@ Pages.products = () => `
           <span class="label" style="display:flex;align-items:center;gap:10px"><span class="hex-dot"></span>${esc(p.category)} <span style="color:var(--ink-faint)">/ ${esc(p.timeOfDay)}</span></span>
           <h2 class="h2" style="margin:12px 0 14px">${esc(p.name)}</h2>
           <p class="measure" style="color:var(--ink-soft)">${esc(p.short)}</p>
-          <p class="meta">Proposed: ${p.ingredients.map((i) => esc(i.name)).join(", ")}</p>
+          <p class="meta">${p.ingredients.map((i) => esc(i.name.replace(/ \(.*\)/, ""))).join(", ")}</p>
         </div>
         <span class="btn btn--ghost btn--small">View ${esc(p.name)}</span>
       </a>`).join("")}
@@ -289,8 +277,8 @@ Pages.products = () => `
   <section class="section section--alt"><div class="wrap grid-2">
     <h2 class="h2">Pricing, when we launch.</h2>
     <div>
-      <p class="lead">Preliminary pricing is $${SITE.pricing.single} for a single carton of 30 and $${SITE.pricing.subscription} per month by subscription.</p>
-      <p class="meta">${flag("Preliminary")} Checkout and subscriptions are not available yet.</p>
+      <p class="lead">Pricing for a four-week box, and a monthly option, will be published closer to launch.</p>
+      <p class="meta">${flag("Pre-launch")} Checkout and subscriptions are not available yet.</p>
     </div>
   </div></section>`;
 
@@ -319,10 +307,10 @@ Pages.product = (slug) => {
         <h1 class="display" style="font-size:clamp(2.75rem,1.8rem + 3.4vw,4.75rem);margin:16px 0 20px">${esc(p.name)}</h1>
         <p class="lead">${esc(p.short)}</p>
         <div class="price-block">
-          <div><div class="amt">$${SITE.pricing.single}</div><div class="meta">Single carton, 30 wearables</div></div>
-          <div><div class="amt">$${SITE.pricing.subscription}<small> / month</small></div><div class="meta">Subscription</div></div>
+          <div><div class="amt">4 weeks</div><div class="meta">28 wearables, 4 pouches of 7</div></div>
+          <div><div class="amt">$<span class="price-tbc">TBC</span></div><div class="meta">Per box. Pricing to be announced</div></div>
         </div>
-        <p class="meta" style="margin-bottom:22px">${flag("Preliminary pricing")} Not yet available to purchase.</p>
+        <p class="meta" style="margin-bottom:22px">${flag("Pre-launch")} Pricing published closer to launch. Not yet available to purchase.</p>
         <div class="btn-row">
           <button type="button" class="btn" disabled aria-disabled="true">Checkout not yet available</button>
           <a class="btn btn--ghost" href="#/assessment">Find your routine</a>
@@ -338,12 +326,12 @@ Pages.product = (slug) => {
         <section class="pdp-block" id="purpose"><h2>Purpose</h2><p class="serif-body measure-wide">${esc(p.purpose)}</p></section>
 
         <section class="pdp-block" id="ingredients">
-          <h2>Proposed ingredients ${flag("Doses to be confirmed")}</h2>
+          <h2>Ingredients ${flag("Working formula")}</h2>
           <div class="data-table-wrap"><table class="data-table">
-            <thead><tr><th scope="col">Ingredient</th><th scope="col">What it is</th><th scope="col">Dose</th></tr></thead>
+            <thead><tr><th scope="col">Ingredient</th><th scope="col">What it is</th><th scope="col">Per wearable</th></tr></thead>
             <tbody>${p.ingredients.map((i) => `<tr><td>${esc(i.name)}</td><td>${esc(i.role)}</td><td class="num">${i.dose ? esc(i.dose) : "TBC"}</td></tr>`).join("")}</tbody>
           </table></div>
-          <p class="meta" style="margin-top:14px">Proposed formulation. Feasibility of each ingredient in the finished patch is still being evaluated.</p>
+          <p class="meta" style="margin-top:14px">Working formula. Amounts and stability in the finished wearable are still being confirmed.</p>
         </section>
 
         <section class="pdp-block" id="specs">
@@ -359,22 +347,20 @@ Pages.product = (slug) => {
         <section class="pdp-block" id="apply">
           <h2>How to apply ${flag("Draft")}</h2>
           <ol class="steps">
-            <li><div><strong>Choose a spot.</strong> Clean, dry, intact skin. Recommended placement will be confirmed through testing.</div></li>
-            <li><div><strong>Open one pouch.</strong> Tear at the notch and remove the patch.</div></li>
-            <li><div><strong>Peel and press.</strong> Remove the two-part liner, press firmly and hold for a few seconds.</div></li>
-            <li><div><strong>Wear, then remove.</strong> Wear duration to be confirmed. Peel off gently and discard.</div></li>
+            ${(p.howTo || []).map((t) => `<li><div>${esc(t)}</div></li>`).join("")}
+            ${p.howToNote ? `<li><div>${esc(p.howToNote)}</div></li>` : ""}
           </ol>
         </section>
 
         <section class="pdp-block" id="safety">
           <h2>Safety ${flag("Under review")}</h2>
           ${p.considerations.map((c) => `<div class="note-box"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p></div>`).join("")}
-          <div class="note-box"><h3>General</h3><p>Do not apply to irritated or broken skin. Remove if irritation occurs. Speak with a healthcare professional before use if you are pregnant, breastfeeding, taking medication or have a medical condition. Final warnings will be set after product-specific safety and regulatory review.</p></div>
+          <div class="note-box"><h3>General</h3><p>Do not apply to irritated or broken skin. Remove if irritation occurs. Check with a doctor before use if you are pregnant, breastfeeding or under dermatological care. Final warnings will be set after product-specific safety and label review.</p></div>
         </section>
 
         <section class="pdp-block" id="evidence">
           <h2>Evidence ${flag("Pending finished-product data")}</h2>
-          <p class="measure-wide" style="color:var(--ink-soft)">Evidence for this product will be listed here in two parts: general research on the ingredients, and testing of the finished MATORI patch, including release and adhesion data. Neither has been published yet.</p>
+          <p class="measure-wide" style="color:var(--ink-soft)">Evidence for this product will be listed here in two parts: general research on the ingredients, and testing of the finished wearable, including adhesion and skin-feel data. Neither has been published yet.</p>
           <a class="text-link" href="#/science">How MATORI approaches evidence</a>
         </section>
 
@@ -387,86 +373,87 @@ Pages.product = (slug) => {
     </div>
   </div>
 
-  <section class="section section--alt" style="margin-top:var(--section)">
+  ${others.length ? `<section class="section section--alt" style="margin-top:var(--section)">
     <div class="wrap">
       <h2 class="h2">Also in the system</h2>
       <div class="cat-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">${others.map(productCard).join("")}</div>
     </div>
-  </section>`;
+  </section>` : ""}`;
 };
 
 const qa = (item) => `<details class="qa"><summary>${esc(item.q)}</summary><div class="ans"><p>${esc(item.a)}</p></div></details>`;
 
 Pages.science = () => {
   const sections = [
-    ["what", "What transdermal delivery is"],
-    ["barrier", "Skin as a barrier"],
-    ["oral", "How it differs from oral supplements"],
+    ["what", "What a skin wearable is"],
+    ["barrier", "How skin takes things in"],
+    ["cream", "How it differs from a cream"],
     ["properties", "Why ingredient properties matter"],
-    ["ingredients", "The proposed ingredients"],
-    ["finished", "Evidence for the finished patch"],
+    ["ingredients", "The ingredients"],
+    ["finished", "Evidence for the finished wearable"],
     ["quality", "Quality and safety"],
     ["wear", "Wear, adhesion and skin"],
     ["refs", "References"]
   ];
+  const p = PRODUCTS[0];
   return `
   <header class="page-head"><div class="wrap">
     <span class="label">The Science</span>
     <h1 class="display">Form follows function.</h1>
-    <p class="lead">How delivery through the skin works, what it depends on, and what we can and cannot say yet about MATORI patches.</p>
-    <div class="evidence-key">${flag("General science", "info")} ${flag("MATORI product evidence: pending")}</div>
+    <p class="lead">How a wearable works on skin, what it depends on, and what we can and cannot say yet about Honey Glow.</p>
+    <div class="evidence-key">${flag("General science", "info")} ${flag("Honey Glow test data: pending")}</div>
   </div></header>
   <div class="wrap sci-layout">
     <nav class="pdp-toc" aria-label="On this page" style="padding-top:48px"><ul>
       ${sections.map(([id, t]) => `<li><a href="#/science" data-scroll="${id}">${t}</a></li>`).join("")}
     </ul></nav>
     <div>
-      <section class="sci-block" id="what"><h2>What transdermal delivery is</h2>
-        <p>Transdermal delivery means a compound passes through the skin and into the body, rather than being swallowed. Patches have been used for decades for a small number of well-characterised medicines, such as nicotine and certain hormones.</p>
-        <p>That track record shows the format can work for the right molecule in the right formulation. It does not mean every ingredient can be delivered this way.</p>
+      <section class="sci-block" id="what"><h2>What a skin wearable is</h2>
+        <p>A skin wearable is a thin cosmetic patch: an adhesive layer that holds skincare ingredients against the skin for hours at a time. The format is familiar from sheet masks and hydrocolloid patches; the difference is wear time and placement.</p>
+        <p>Honey Glow is a cosmetic. It is designed to care for the look and feel of skin, not to treat or prevent a condition.</p>
         ${flag("General science", "info")}
       </section>
-      <section class="sci-block" id="barrier"><h2>Skin as a barrier</h2>
-        <p>Skin's main job is protection. Its outermost layer, the stratum corneum, is a tightly packed arrangement of cells and lipids that limits what passes through.</p>
+      <section class="sci-block" id="barrier"><h2>How skin takes things in</h2>
+        <p>Skin's main job is protection. Its outermost layer, the stratum corneum, is a tightly packed arrangement of cells and lipids. Cosmetic ingredients work mostly in and on this layer: humectants draw and hold water there, conditioning agents soften it, and small actives can reach the living layers just beneath.</p>
         <div class="layers" role="list">
-          <div role="listitem"><strong>Stratum corneum</strong><span>The main barrier. Most compounds struggle to cross it.</span></div>
-          <div role="listitem"><strong>Viable epidermis</strong><span>Living cell layers beneath the surface.</span></div>
-          <div role="listitem"><strong>Dermis</strong><span>Contains the small blood vessels through which absorbed compounds can enter circulation.</span></div>
+          <div role="listitem"><strong>Stratum corneum</strong><span>Where humectants like urea, glycol and honey do their work.</span></div>
+          <div role="listitem"><strong>Viable epidermis</strong><span>Living cell layers. Small peptides can reach here with time and the right carrier.</span></div>
+          <div role="listitem"><strong>Dermis</strong><span>Deeper structure. Cosmetic products are not designed to act here.</span></div>
         </div>
         ${flag("General science", "info")}
       </section>
-      <section class="sci-block" id="oral"><h2>How it differs from oral supplements</h2>
-        <p>Swallowed supplements pass through the digestive system and liver before reaching circulation, and absorption varies by nutrient and person. A patch avoids that route, which can change how and when a compound arrives.</p>
-        <p>Avoiding digestion is not automatically better. Many nutrients are absorbed well by mouth, and the skin admits far less than the gut for most compounds. The right format depends on the ingredient.</p>
+      <section class="sci-block" id="cream"><h2>How it differs from a cream</h2>
+        <p>A cream sits on skin for minutes before it is rubbed in, dries or transfers to clothing. A wearable holds the same kind of ingredients in place under a seal for hours, so the skin beneath stays hydrated and in contact with them the whole time.</p>
+        <p>That is the case for the format. What it does not do is change what an ingredient is: a humectant is still a humectant. The gains are time, placement and consistency, and they have to be shown on the finished wearable.</p>
         ${flag("General science", "info")}
       </section>
       <section class="sci-block" id="properties"><h2>Why ingredient properties matter</h2>
-        <p>Compounds that pass through skin passively tend to be small, often cited as under about 500 daltons, and to dissolve reasonably well in both oil and water. Larger or very water-loving molecules usually need formulation help, and some may not be practical at all.</p>
-        <p>Dose matters too. A patch can only hold and release a limited amount, so ingredients needed in large quantities are harder to deliver this way.</p>
+        <p>Small, water-loving molecules such as urea and glycols move readily into the outer skin. Peptides are larger and move more slowly, which is one reason a long wear time suits them. Essential oils are volatile and are there for scent and sensation, not absorption.</p>
+        <p>Load matters too. A wearable holds about ten milligrams of formula, so every ingredient is chosen for what it does at a small amount.</p>
         ${flag("General science", "info")}
       </section>
-      <section class="sci-block" id="ingredients"><h2>The proposed ingredients</h2>
-        <p>Molecular size is one useful signal, not a verdict. This table is general reference only and says nothing yet about MATORI's finished patches.</p>
+      <section class="sci-block" id="ingredients"><h2>The ingredients</h2>
+        <p>Molecular size is one useful signal, not a verdict. This table is general reference and says nothing yet about the finished wearable.</p>
         <div class="data-table-wrap"><table class="data-table">
           <thead><tr><th scope="col">Ingredient</th><th scope="col">Approx. molecular weight</th><th scope="col">General note</th></tr></thead>
-          <tbody>${INGREDIENT_SCIENCE.map((i) => `<tr><td>${esc(i.name)}</td><td class="num">${i.mw.toLocaleString()} g/mol</td><td>${esc(i.note)}</td></tr>`).join("")}</tbody>
+          <tbody>${INGREDIENT_SCIENCE.map((i) => `<tr><td>${esc(i.name)}</td><td class="num">${i.mw ? i.mw.toLocaleString() + " g/mol" : "Mixture"}</td><td>${esc(i.note)}</td></tr>`).join("")}</tbody>
         </table></div>
         <p class="meta" style="margin-top:12px">${flag("General science", "info")} References to be added after review.</p>
       </section>
-      <section class="sci-block" id="finished"><h2>Evidence for the finished patch</h2>
-        <p>Claims about a MATORI product will rest on testing of that product: how much of each ingredient is released, over what period, and how well the patch stays on. That work has not been completed, so we make no product-specific absorption or duration claims.</p>
-        ${flag("MATORI product evidence: pending")}
+      <section class="sci-block" id="finished"><h2>Evidence for the finished wearable</h2>
+        <p>Claims about Honey Glow will rest on testing of Honey Glow: how the adhesive performs over eight hours, how skin feels and measures before and after wear, and how the copper peptide holds up in the matrix. That work has not been completed, so we make no product-specific performance claims yet.</p>
+        ${flag("Honey Glow test data: pending")}
       </section>
       <section class="sci-block" id="quality"><h2>Quality and safety</h2>
-        <p>Before launch, each product will be reviewed for ingredient quality, finished-product testing, skin compatibility and safety, including interactions for ingredients such as melatonin, 5-HTP, caffeine and vitamin K. Manufacturing and testing partners will be named here once confirmed.</p>
+        <p>Before launch, Honey Glow will be reviewed for ingredient quality, finished-product stability, skin compatibility (including a patch test protocol for the essential oils) and label compliance as a cosmetic. Manufacturing and testing partners will be named here once confirmed.</p>
         ${flag("To be confirmed")}
       </section>
       <section class="sci-block" id="wear"><h2>Wear, adhesion and skin</h2>
-        <p>Wear time, water resistance and placement depend on the adhesive and the patch design, and will be confirmed through testing. As with any skin patch, apply to clean, intact skin and remove it if irritation occurs.</p>
+        <p>Wear time is up to eight hours, one wearable a day, on the shoulder, trap or upper chest. Water and sweat resistance will be confirmed through adhesion testing. Apply to clean, dry, intact skin and remove it if irritation occurs.</p>
         <a class="text-link" href="#/faq">Common questions</a>
       </section>
       <section class="sci-block" id="refs"><h2>References</h2>
-        <p>A reviewed reference list will be published here, separated into general literature and MATORI product data.</p>
+        <p>A reviewed reference list will be published here, separated into general literature and Honey Glow test data.</p>
         ${flag("To be added")}
       </section>
     </div>
@@ -477,7 +464,7 @@ Pages.ourStory = () => `
   <header class="page-head"><div class="wrap">
     <span class="label">Our Story</span>
     <h1 class="display">Built around a better way to approach wellness.</h1>
-    <p class="lead">MATORI started with a simple question: could everyday wellness be easier to keep up and more honest about how it works? Transdermal delivery offered a different format, and a reason to design the whole experience with care.</p>
+    <p class="lead">MATORI started with a simple question: could everyday skincare be simpler to keep up and more honest about how it works? A wearable offered a different format, and a reason to design the whole experience with care.</p>
   </div></header>
   <section class="section"><div class="wrap">
     <div class="grid-2" style="align-items:end">
@@ -638,7 +625,7 @@ Pages.notFound = () => `
 
 /* ---------- ROUTER ---------- */
 const ROUTES = [
-   { re: /^\/?$/, page: () => Pages.home(), title: "MATORI | Wellness, worn differently", nav: "" },
+  { re: /^\/?$/, page: () => Pages.home(), title: "MATORI | Wear better wellness", nav: "" },
   { re: /^\/products\/?$/, page: () => Pages.products(), title: "Products | MATORI", nav: "products" },
   { re: /^\/products\/([\w-]+)\/?$/, page: (m) => Pages.product(m[1]), title: (m) => `${productBySlug(m[1])?.name || "Not found"} | MATORI`, nav: "products" },
   { re: /^\/science\/?$/, page: () => Pages.science(), title: "The Science | MATORI", nav: "science" },
@@ -914,11 +901,11 @@ function mountUnbox(section) {
     st.setProperty("--ry", ry.toFixed(2) + "deg");
     st.setProperty("--rx", rx.toFixed(2) + "deg");
     st.setProperty("--slide", `calc(var(--h) * ${v("slide").toFixed(4)})`);
+    st.setProperty("--open", (v("slide") * -250).toFixed(1) + "deg");   // lid: back half of the top hinges open
     st.setProperty("--sy", `calc(var(--h) * ${v("sachetY").toFixed(4)})`);
     st.setProperty("--sz", `calc(var(--u) * ${v("sachetZ").toFixed(1)})`);
     // counter-rotate the sachet so it ends up facing the viewer
-    const ryN = ((((ry - spin) % 360) + 540) % 360) - 180; // -180..180, so a full turn earlier never unwinds here
-     st.setProperty("--sry", (-ryN * face).toFixed(2) + "deg");
+    st.setProperty("--sry", (-(ry - spin) * face).toFixed(2) + "deg");
     st.setProperty("--srx", (-rx * face).toFixed(2) + "deg");
     st.setProperty("--boxFade", v("boxFade").toFixed(3));
     st.setProperty("--tear", v("tear").toFixed(3));
@@ -929,6 +916,7 @@ function mountUnbox(section) {
     st.setProperty("--peel", v("peel").toFixed(3));
     st.setProperty("--sFade", v("sFade").toFixed(3));
     rig.style.transform = `translate3d(0, calc(var(--u) * ${v("rigY").toFixed(1)}), calc(var(--u) * ${v("rigZ").toFixed(1)}))`;
+    section.style.setProperty("--p", p.toFixed(4));
     const step = Math.max(0, UNBOX_STEPS.findIndex((s) => p >= s.from && p < s.to));
     if (step !== activeStep) {
       activeStep = step;
@@ -942,9 +930,7 @@ function mountUnbox(section) {
     if (staticMode) return;
     const r = section.getBoundingClientRect();
     const total = section.offsetHeight - window.innerHeight;
-    const np = Math.min(1, Math.max(0, -r.top / (total || 1)));
-     if (Math.abs(np - p) < 0.0005 && np !== 0 && np !== 1) return;
-     p = np;
+    p = Math.min(1, Math.max(0, -r.top / (total || 1)));
     if (p > 0.02) hint.style.opacity = 0;
     schedule();
   };
@@ -1107,10 +1093,6 @@ function mountGoals() {
     if (focus) b.focus();
     out.innerHTML = goalResult(GOALS.find((g) => g.id === b.dataset.goal)); out.hidden = false;
   };
-   // Arriving from the homepage prompt (#/assessment?goal=sleep): preselect that goal
-   const want = new URLSearchParams(location.hash.split("?")[1] || "").get("goal");
-   const pre = btns.find((b) => b.dataset.goal === want);
-   if (pre) { select(pre); requestAnimationFrame(() => out.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "center" })); }
   btns.forEach((b, i) => {
     b.addEventListener("click", () => select(b));
     b.addEventListener("keydown", (e) => {
