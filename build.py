@@ -28,4 +28,10 @@ out_dir.mkdir(exist_ok=True)
 (out_dir / "index.html").write_text(out)
 (out_dir / "CNAME").write_text("matoriwellness.com\n")
 (out_dir / ".nojekyll").write_text("")
+(out_dir / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://matoriwellness.com/sitemap.xml\n")
+(out_dir / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://matoriwellness.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>\n</urlset>\n')
+for name in ["og.jpg", "logo.png"]:
+    srcf = src / "assets" / name
+    if srcf.exists(): (out_dir / name).write_bytes(srcf.read_bytes())
+    elif Path(str(srcf) + ".b64").exists(): (out_dir / name).write_bytes(base64.b64decode("".join(Path(str(srcf) + ".b64").read_text().split())))
 print(f"Built docs/index.html ({len(out)/1024:.0f} KB)")
