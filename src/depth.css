@@ -23,7 +23,7 @@ section[aria-labelledby="collab-title"] {
 }
 section[aria-labelledby="collab-title"] .pathway-list { border-top-color: rgba(74,44,16,.4); }
 section[aria-labelledby="collab-title"] .pathway-list li { border-bottom-color: rgba(74,44,16,.22); }
-section[aria-labelledby="collab-title"] .pathway-list span:last-child { color: #5A4B3E; }
+section[aria-labelledby="collab-title"] .pathway-list span:last-child { color: var(--copper-ink); }
 section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
 
 /* Soft vignette at the edges of the big stages so objects sit in a space, not on a sheet */
@@ -60,8 +60,7 @@ section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
     linear-gradient(118deg, transparent 0 46%, rgba(74,44,16,.1) 46% 60%, transparent 60%),
     radial-gradient(120% 100% at 50% 50%, transparent 50%, rgba(74,44,16,.16)),
     linear-gradient(100deg, #DFCBB4 0%, #F0ECE5 40%, #E6D5C0 75%, #CFB89E 100%); }
-.sp-carton::after { background: radial-gradient(50% 50% at 50% 50%, rgba(74,44,16,.5), transparent 70%); height: calc(var(--u) * 28); }
-.sp-sachet { filter: drop-shadow(-14px 22px 22px rgba(74,44,16,.3)); }
+
 .sp-patch { filter: drop-shadow(0 10px 12px rgba(74,44,16,.3)); }
 
 /* Mosaic tiles: give the two photo-less tiles real depth */
@@ -77,10 +76,10 @@ section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
 .tile-text { box-shadow: inset 0 0 0 1px rgba(74,44,16,.06); }
 
 /* ---------- Type contrast ---------- */
-:root { --ink-soft: #5C4A38; --ink-faint: #8A7660; }
+:root { --ink-soft: #5C4A38; --ink-faint: #6E5A44; }
 .lead { color: #5C4A38; }
 .scene-copy .lead { color: #4A3826; }
-.meta { color: #8A7660; }
+.meta { color: var(--ink-faint); }
 
 /* ---------- Phone fixes ---------- */
 @media (max-width: 979px) {
@@ -88,8 +87,8 @@ section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
   .scene-products { height: clamp(440px, 110vw, 560px); --u: clamp(0.72px, 0.16vw + 0.2px, 1px); }
   .scene-bg .ledge { height: 19%; }
   .scene-bg .stone-block { bottom: 17%; height: 30%; }
-  .sp-carton { right: 10%; bottom: 14%; }
-  .sp-sachet { right: calc(10% + var(--u) * 135); bottom: 12.5%; }
+  
+  
   .sp-patch { right: calc(10% + var(--u) * 82); bottom: 10%; }
   .scene-note { position: static; display: block; padding: 10px var(--gutter) 14px; text-align: right; background: #CBC4B8; color: #4A3D32; }
   .hero-scene { padding-bottom: 0; }
@@ -127,7 +126,7 @@ section[aria-labelledby="collab-title"] .lead { color: #4A3D32; }
 .attr-band { background: var(--slate); color: #E6E1D7; }
 section[aria-labelledby="sci-title"] { background: var(--slate); }
 .mosaic { background: var(--slate-deep); }
-.hotspot, .carton .anchor-dot { border-color: var(--copper); }
+.carton .anchor-dot { border-color: var(--copper); }
 .btn--ghost { color: var(--slate-ink); border-color: rgba(43,47,53,.35); }
 .btn--ghost:hover { border-color: var(--slate-ink); }
 .goal[aria-checked="true"], .radio-set label:has(input:checked) { border-color: var(--copper-ink); box-shadow: inset 0 0 0 1px var(--copper-ink); }
@@ -143,25 +142,17 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .brand .wordmark-svg { width: 118px; }
 .footer-brand .wordmark-svg { width: 132px; }
 .mobile-menu .wordmark-svg { width: 110px; }
-.art-word { margin-top: calc(var(--h) * .025); padding-left: 0; width: calc(var(--w) * .66); }
-.art-word .wordmark-svg { width: 100%; }
+
 .pouch-card .pw { margin-top: calc(var(--u) * 8); width: calc(var(--u) * 86); }
 .pouch-card .pw .wordmark-svg { width: 100%; }
-.art-tag { margin-top: calc(var(--h) * .016); }
+
 /* The mark picks up the same copper gradient */
 .brand svg:not(.wordmark-svg), .art-mark, .final-mark, .pouch-card .art-mark { stroke: url(#copper-grad); }
 .brand svg:not(.wordmark-svg) circle, .art-mark circle, .final-mark circle, .pouch-card .art-mark circle { fill: url(#copper-grad); }
 .art-mark { width: calc(var(--w) * .25); }
 
 /* ---------- Light on the objects: one key light, top-left, so faces read as surfaces ---------- */
-.f-front::after, .f-back::after, .d-top::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background:
-    linear-gradient(118deg, rgba(255,250,240,.42) 0%, rgba(255,250,240,.12) 32%, transparent 50%, rgba(74,44,16,.10) 78%, rgba(74,44,16,.2) 100%);
-}
-.f-right::after, .f-left::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,250,240,.12), transparent 40%, rgba(0,0,0,.22)); }
-.f-front > .art, .f-front > .anchor, .f-front > .anchor-dot { position: absolute; z-index: 1; }
-.f-front { box-shadow: inset 0 0 0 1px rgba(74,44,16,.08); }
+
 .patch { filter: drop-shadow(0 6px 8px rgba(74,44,16,.28)) drop-shadow(0 1px 1px rgba(74,44,16,.18)); }
 
 /* Less grain: the paper texture should be felt, not seen */
@@ -188,53 +179,24 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
   transform-style: preserve-3d; transform: rotateX(-14deg) rotateY(var(--a, 0deg));
 }
 @media (max-width: 760px) { .orbit-world { top: 32%; --R: clamp(110px, 30vw, 150px); } .orbit-scene { perspective-origin: 50% 30%; } }
-.orbit-equator {
-  position: absolute; left: calc(var(--R) * -1); top: calc(var(--R) * -1); width: calc(var(--R) * 2); height: calc(var(--R) * 2);
-  border: 1px solid var(--copper); border-radius: 50%; opacity: .8;
-  transform: rotateX(90deg);
-}
-.orbit-equator--outer { left: calc(var(--R) * -1.22); top: calc(var(--R) * -1.22); width: calc(var(--R) * 2.44); height: calc(var(--R) * 2.44); border-style: dashed; opacity: .3; }
-.orbit-ticks { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
-.orbit-ticks span { position: absolute; left: 0; top: 0; width: 1px; height: 10px; background: var(--copper); opacity: .4; transform: rotateY(calc(var(--k) * 10deg)) translateZ(calc(var(--R) * 1.1)) rotateX(90deg); }
+
 .orbit-node {
   position: absolute; left: 0; top: 0; transform-style: preserve-3d;
   transform: rotateY(calc(var(--i) * 90deg)) translateZ(var(--R)) rotateY(calc(var(--i) * -90deg - var(--a, 0deg))) rotateX(14deg);
   display: flex; flex-direction: column; align-items: center; gap: 10px; translate: -50% -50%;
   transition: opacity .4s var(--ease);
 }
-.orbit-disc {
-  width: clamp(76px, 9vw, 112px); aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--copper); padding: 0; cursor: pointer;
-  background: radial-gradient(60% 60% at 35% 30%, #FBF6EE, #E6D9C8); color: var(--slate-ink);
-  display: grid; place-items: center; overflow: hidden; position: relative;
-  box-shadow: 0 18px 30px -16px rgba(43,47,53,.5), inset 0 0 0 4px #F4ECE2;
-  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
-}
-.orbit-disc img { width: 100%; height: 100%; object-fit: cover; }
+
 .orbit-initial { font-family: var(--serif); font-size: 1.75rem; font-weight: 300; }
-.orbit-node.is-front .orbit-disc { transform: scale(1.22); box-shadow: 0 28px 40px -18px rgba(43,47,53,.55), inset 0 0 0 4px #F4ECE2, 0 0 0 1px var(--copper); }
-.orbit-tag { font-size: 0.6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
-.orbit-node.is-front .orbit-tag { color: var(--accent); font-weight: 600; }
-.orbit-card {
-  position: absolute; left: 0; top: 0; width: 300px; padding: 20px 22px; opacity: 0; pointer-events: none;
-  background: color-mix(in srgb, var(--surface) 95%, transparent); border-left: 2px solid var(--copper);
-  box-shadow: 0 22px 44px -24px rgba(43,47,53,.5); transform-origin: left center;
-}
-.orbit-card .label { margin: 0 0 6px; }
-.orbit-card .h3 { font-size: 1.5rem; margin-bottom: 4px; }
+
 .orbit-role { font-size: var(--fs-meta); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-.orbit-bio, .orbit-contrib { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.5; }
-.orbit-contrib:empty { display: none; }
-.orbit-card .text-link { pointer-events: auto; }
+.orbit-bio { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.5; }
+
 .orbit-controls { position: absolute; left: 0; right: 0; bottom: 16px; display: flex; justify-content: center; align-items: center; gap: 16px; }
-@media (max-width: 760px) { .orbit-card { width: min(300px, calc(100% - 32px)); padding: 14px 16px; } .orbit-controls { bottom: auto; top: 14px; } .orbit-stage { height: 640px; } }
+@media (max-width: 760px) {  .orbit-controls { bottom: auto; top: 14px; } .orbit-stage { height: 640px; } }
 
 /* ---------- Unboxing: the construction lies on the floor under the carton ---------- */
-.ul-geo {
-  left: 61%; top: auto; bottom: 6%; width: min(110vh, 1100px);
-  transform: translate(-50%, 0) perspective(900px) rotateX(64deg) scale(calc(.9 + var(--p) * .5)) rotate(calc(var(--p) * 30deg));
-  transform-origin: 50% 50%; opacity: .55;
-}
-@media (max-width: 979px) { .ul-geo { left: 50%; bottom: 22%; width: 140vw; } }
+
 .ul-contour { filter: blur(1px); opacity: .12; }
 .unbox-rig::after {
   content: ""; position: absolute; left: 50%; top: 50%; width: calc(var(--u) * 260); height: calc(var(--u) * 50);
@@ -248,28 +210,9 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 
 /* ---------- Unboxing: two axes. A standing construction behind, the floor construction below,
    and a hexagonal cage around the carton that peels open from its base. ---------- */
-.ul-geo-wall {
-  position: absolute; width: min(88vh, 820px); height: auto; left: 61%; top: 46%;
-  transform: translate(-50%, -50%) scale(calc(.8 + var(--p) * .3)) rotate(calc(var(--p) * -20deg));
-  opacity: .28;
-}
-.ul-geo-wall .g4 { display: none; }
-@media (max-width: 979px) { .ul-geo-wall { left: 50%; top: 36%; width: 120vw; } }
+
 .unbox { --open: clamp(0, calc((var(--p) - .06) * 2.2), 1); }
-.cage {
-  position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d;
-  transform: translateY(calc(var(--h) * .5 + var(--u) * 8)) scale(calc(.92 + var(--p) * .5));
-  color: var(--copper); pointer-events: none;
-}
-.cage-panel {
-  position: absolute; left: calc(var(--u) * -105); bottom: 0; width: calc(var(--u) * 210); height: calc(var(--u) * 400);
-  transform-origin: 50% 100%;
-  transform: rotateY(calc(var(--k) * 60deg)) translateZ(calc(var(--u) * 215)) rotateX(calc(var(--open) * -96deg));
-  border: 1px solid currentColor; border-top-width: 2px;
-  background: linear-gradient(180deg, rgba(74,44,16,.05), rgba(74,44,16,.0) 60%);
-  opacity: calc(.55 - var(--open) * .2); backface-visibility: visible;
-}
-.cage-panel svg { position: absolute; inset: 8% 10%; width: 80%; height: 84%; opacity: .7; }
+
 .unbox .carton { position: relative; z-index: 1; }
 
 /* ---------- Team ring: out of the window, bigger, with a floor construction that opens
@@ -279,31 +222,22 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .orbit-stage::after { display: none; }
 .orbit-scene { perspective: 1600px; perspective-origin: 50% 34%; }
 .orbit-world { --R: clamp(180px, 23vw, 330px); top: 46%; }
-.orbit-geo {
-  position: absolute; left: calc(var(--R) * -1.6); top: calc(var(--R) * -1.6); width: calc(var(--R) * 3.2); height: calc(var(--R) * 3.2);
-  transform: rotateX(90deg) rotate(calc(var(--a, 0deg) * -1)) scale(calc(.72 + var(--g, 0) * .34));
-  opacity: calc(.3 + var(--g, 0) * .4);
-  --g1: 1; --g2: var(--g, 0); --g3: var(--g, 0); --g4: var(--g, 0);
-}
-.orbit-equator--outer { opacity: calc(.15 + var(--g, 0) * .3); transform: rotateX(90deg) scale(calc(1 + var(--g, 0) * .12)); }
+
 .orbit-node { transition: opacity .5s var(--ease), translate .6s var(--ease); }
 .orbit.is-settled .orbit-node:not(.is-front) { opacity: .55; }
 .orbit-node.is-front { translate: -50% -62%; }
-.orbit-disc { width: clamp(84px, 10vw, 128px); }
-.orbit-card { width: 320px; }
+
 @media (max-width: 760px) { .orbit-stage { height: 680px; } .orbit-world { --R: clamp(120px, 32vw, 160px); top: 30%; } }
 
 /* ---------- Unboxing focus: the carton is the sharp thing in front; everything else falls back ---------- */
 .unbox-stage { --u: clamp(0.72px, 0.06vw + 0.5px, 1.2px); }
 .unbox-layers { filter: blur(1.6px); }
-.ul-geo-wall { opacity: .18; transform: translate(-50%, -50%) scale(calc(.7 + var(--p) * .25)) rotate(calc(var(--p) * -20deg)); }
-.ul-geo { opacity: .34; }
+
 .ul-contour { opacity: .08; filter: blur(2px); }
 .ul-mark { opacity: .02; }
-.cage-panel { opacity: calc(.34 - var(--open) * .14); filter: blur(calc(.4px + var(--open) * 1.2px)); }
-.cage-panel svg { opacity: .55; }
+
 /* The three panels facing the camera would sit over the carton, so they are faintest */
-.cage-panel[style*="--k:0"], .cage-panel[style*="--k:1"], .cage-panel[style*="--k:5"] { opacity: calc(.18 - var(--open) * .08); }
+
 /* Spotlight: the stage darkens toward its edges as the box opens, pulling the eye to the centre */
 .unbox-sticky::after {
   background:
@@ -330,28 +264,10 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
   --open: 0;
 }
 /* Floor: turns with the carton, spreads with the tray, rises for the patch */
-.ul-geo {
-  opacity: calc(.26 + var(--spread) * .14);
-  transform:
-    translate(-50%, calc(var(--lift) * -46%)) perspective(900px)
-    rotateX(calc(64deg - var(--lift) * 64deg))
-    scale(calc(.78 + var(--spread) * .5 - var(--lift) * .55))
-    rotate(calc(var(--ry, 0deg) * -1 + 24deg));
-}
-.ul-geo .g4 { display: block; }
+
 /* Wall: counter-turns slightly behind the box (parallax), brightens briefly while it turns */
-.ul-geo-wall {
-  opacity: calc(.12 + var(--g2) * (1 - var(--g3)) * .14);
-  transform: translate(-50%, -50%) scale(calc(.72 + var(--spread) * .2)) rotate(calc(var(--ry, 0deg) * .35));
-}
+
 /* Cage: one panel opens per 60 degrees of the turn, in the direction the box turns */
-.cage-panel {
-  --open: clamp(0, calc((var(--p) - .16 - var(--k) * .028) * 6), 1);
-  transform: rotateY(calc(var(--k) * 60deg)) translateZ(calc(var(--u) * 215)) rotateX(calc(var(--open) * -96deg));
-  opacity: calc(.34 - var(--open) * .16); filter: blur(calc(.4px + var(--open) * 1.2px));
-}
-.cage-panel[style*="--k:0"], .cage-panel[style*="--k:1"], .cage-panel[style*="--k:5"] { opacity: calc(.18 - var(--open) * .1); }
-.cage { transform: translateY(calc(var(--h) * .5 + var(--u) * 8)) scale(calc(.92 + var(--spread) * .5)); }
 
 /* ---------- Team ring v3: the front bubble opens into the card; the rest fall back and skew ---------- */
 .orbit-stage { height: clamp(700px, 92vh, 900px); }
@@ -365,56 +281,31 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
   filter: blur(calc((1 - var(--depth, 1)) * .9px));
   transition: none; translate: -50% -50%;
 }
-.orbit-node .orbit-disc { transition: transform .5s var(--ease), opacity .4s var(--ease), box-shadow .5s var(--ease); transform: scale(calc(.7 + (var(--depth, 1) + 1) * .18)); }
-.orbit-node .orbit-tag { transition: opacity .3s var(--ease); }
-.orbit-node.is-open .orbit-disc, .orbit-node.is-open .orbit-tag { opacity: 0; pointer-events: none; transform: scale(.4); }
-.orbit-panel {
-  position: absolute; left: 50%; top: 50%; translate: -50% -56%;
-  width: min(880px, calc(100vw - 2 * var(--gutter))); display: grid; grid-template-columns: 300px 1fr; gap: 0;
-  background: var(--surface); border-left: 2px solid var(--copper);
-  box-shadow: 0 40px 70px -30px rgba(43,47,53,.55), 0 0 0 1px rgba(43,47,53,.06);
-  opacity: 0; transform: scale(.42); transform-origin: 50% 50%; pointer-events: none;
-  transition: opacity .45s var(--ease) .15s, transform .65s var(--ease) .1s;
-}
-.orbit-node.is-open .orbit-panel { opacity: 1; transform: scale(1); pointer-events: auto; }
-.orbit-portrait { aspect-ratio: 4 / 5; border-radius: var(--radius-arch); overflow: hidden; margin: 24px 0 24px 24px; background: radial-gradient(60% 60% at 35% 30%, #FBF6EE, #E6D9C8); display: grid; place-items: center; color: var(--slate-ink); }
-.orbit-portrait img { width: 100%; height: 100%; object-fit: cover; }
-.orbit-portrait .orbit-initial { font-size: 3rem; }
-.orbit-text { padding: 36px 36px 32px 32px; display: flex; flex-direction: column; justify-content: center; }
-.orbit-text .h3 { font-size: 2rem; margin: 6px 0 4px; }
-.orbit-text .orbit-role { margin-bottom: 14px; }
-.orbit-text .orbit-bio { font-size: var(--fs-small); }
+
 .orbit-controls { bottom: 24px; gap: 20px; }
-.orbit-equator, .orbit-equator--outer { opacity: .5; }
-.orbit-geo { opacity: calc(.14 + var(--g, 0) * .22); }
+
 @media (max-width: 860px) {
   .orbit-stage { height: 760px; }
   .orbit-world { --R: clamp(130px, 34vw, 170px); top: 44%; }
-  .orbit-panel { grid-template-columns: 1fr; width: min(360px, calc(100vw - 32px)); translate: -50% -50%; }
-  .orbit-portrait { aspect-ratio: 16 / 9; margin: 16px 16px 0; border-radius: 999px 999px 0 0; }
-  .orbit-text { padding: 18px 20px 22px; }
-  .orbit-text .h3 { font-size: 1.5rem; }
+  
+  
+  
+  
   .orbit-controls { top: auto; bottom: 16px; }
 }
 
 /* Panels live on a flat layer over the ring, centred where the front bubble sits */
-.orbit-panels { position: absolute; inset: 0; pointer-events: none; }
-.orbit-panel { left: 50%; top: 56%; translate: -50% -50%; }
-.orbit-panel.is-open { opacity: 1; transform: scale(1); pointer-events: auto; }
-@media (max-width: 860px) { .orbit-panel { top: 52%; } }
+
 /* Keep the other three in view: ring sits higher, the open card sits at the front of the ring */
 .orbit-world { top: 40%; }
-.orbit-panel { top: 68%; width: min(680px, calc(100vw - 2 * var(--gutter))); grid-template-columns: 220px 1fr; }
-.orbit-portrait { margin: 20px 0 20px 20px; }
-.orbit-text { padding: 28px 28px 26px 26px; }
-.orbit-text .h3 { font-size: 1.75rem; }
+
 .orbit-controls { bottom: 18px; }
 @media (max-width: 860px) {
   .orbit-world { top: 30%; }
-  .orbit-panel { top: 62%; width: min(340px, calc(100vw - 32px)); grid-template-columns: 1fr; }
-  .orbit-portrait { aspect-ratio: 16 / 7; margin: 14px 14px 0; }
-  .orbit-text { padding: 16px 18px 20px; }
-  .orbit-text .h3 { font-size: 1.375rem; }
+  
+  
+  
+  
   .orbit-stage { height: 760px; }
 }
 
@@ -430,7 +321,7 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
   translate: -50% -50%; opacity: calc(.45 + var(--near) * .55); filter: blur(calc((1 - var(--near)) * 1.1px));
   transition: none;
 }
-.orbit-node .orbit-disc, .orbit-node .orbit-tag, .orbit-panels { display: none; }
+
 .hexnode {
   --size: calc(var(--u-hex, 1px) * 150 + var(--near) * var(--near) * var(--u-hex, 1px) * 330);
   position: relative; width: var(--size); height: calc(var(--size) * 1.1547);
@@ -467,7 +358,7 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 /* soft contact shadow under each hexagon, stronger up close */
 .orbit-node::after { content: ""; position: absolute; left: 50%; top: 100%; width: 70%; height: 10%; translate: -50% -10%; background: radial-gradient(50% 50% at 50% 50%, rgba(43,47,53,calc(.15 + var(--near) * .3)), transparent 70%); filter: blur(5px); pointer-events: none; }
 .orbit-controls { bottom: 14px; }
-.orbit-geo { opacity: calc(.14 + var(--g, 0) * .16); }
+
 @media (max-width: 860px) { .orbit-stage { height: 640px; } .orbit-world { --R: clamp(130px, 36vw, 170px); top: 48%; } .orbit-scene { perspective: 900px; perspective-origin: 50% 32%; } }
 
 /* v4 refinements: true hexagon outline, calmer size, readable text on phones */
@@ -498,17 +389,8 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 
 /* ---- 1. Unboxing ---- */
 .unbox-layers { filter: none; }
-.ul-geo-wall, .cage, .ul-contour, .ul-mark { display: none; }
+.ul-contour, .ul-mark { display: none; }
 .unbox-stage > .stage { animation: none; }
-.ul-geo {
-  left: 61%; top: 72%; width: min(64vh, 600px);
-  opacity: calc(.22 + var(--spread) * .12);
-  transform:
-    translate(-50%, -50%) perspective(900px) rotateX(66deg)
-    scale(calc(.8 + var(--spread) * .3))
-    rotate(calc(var(--ry, 0deg) * -1 + 24deg));
-}
-@media (max-width: 979px) { .ul-geo { left: 50%; top: 40%; width: min(80vw, 420px); } }
 
 /* ---- 2. Team ring: solar-system scale ---- */
 .orbit-stage { height: clamp(560px, 80vh, 720px); }
@@ -543,8 +425,7 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .hex-text .orbit-bio { font-size: clamp(11px, calc(var(--size) * .031), 13px); line-height: 1.45; -webkit-line-clamp: 4; }
 .hex-text .text-link { font-size: 10px; letter-spacing: .14em; margin-top: 6px; }
 .orbit-node::after { opacity: calc(.4 + var(--near) * .6); }
-.orbit-equator, .orbit-equator--outer { opacity: .35; }
-.orbit-geo { opacity: calc(.1 + var(--g, 0) * .12); }
+
 .orbit-controls { bottom: 10px; }
 @media (max-width: 860px) {
   .orbit { --u-hex: .62px; }
@@ -561,12 +442,6 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .label, .tile-link, .btn, .nav-primary a, .header-actions .link-quiet, .attr-band li, .orbit-count { letter-spacing: .14em; }
 
 /* Philosophy still: a live render replaces the soft raster so the scene is sharp at every size */
-.still-live { position: relative; background: linear-gradient(160deg, #EFE6D9 0%, #E4D8C7 55%, #D9CBB7 100%); box-shadow: inset 0 0 0 1px rgba(43,47,53,.06); }
-.still-live::before { content: ""; position: absolute; inset: 0; background: linear-gradient(118deg, rgba(255,250,242,.55) 0%, transparent 42%, transparent 70%, rgba(74,44,16,.08) 100%); }
-.still-scene { position: absolute; inset: 0; --u: clamp(.5px, .055vw + .25px, 1px); }
-.still-scene .sp-carton { right: 15%; bottom: 17%; }
-.still-scene .sp-sachet { right: calc(15% + var(--u) * 150); bottom: 15%; width: calc(var(--u) * 170); height: calc(var(--u) * 300); }
-@media (max-width: 979px) { .still-scene { --u: clamp(.45px, .12vw + .1px, .7px); } .still-scene .sp-carton { right: 10%; } .still-scene .sp-sachet { right: calc(10% + var(--u) * 150); } }
 
 /* =====================================================================
    SPEC v3 (Oct 6, evening). Two signature scenes, built to the agreed
@@ -585,7 +460,6 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
   --spread: clamp(0, calc((var(--p) - .37) * 14), 1); /* one ring wider as the tray slides */
   --lift: 0;
 }
-.ul-geo { opacity: calc(.24 + var(--spread) * .08); }
 
 /* ---- Ring: orbit placement ---- */
 .orbit-stage { height: clamp(700px, 90vh, 820px); }
@@ -594,8 +468,6 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .orbit-node {
   transform: rotateY(var(--ang, 0deg)) translateZ(var(--R)) rotateY(calc(var(--ang, 0deg) * -1 - var(--a, 0deg))) rotateX(6deg);
 }
-.orbit-equator { opacity: .75; border: 1px solid rgba(74,44,16,.45); }
-.orbit-equator--outer { display: none; }
 
 /* planets: 20% of front size at the back, each with its own base size */
 .hexnode {
@@ -609,54 +481,27 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 /* bloom: as the hexagon crosses into the front position, two outlines ripple outward and fade */
 .hexnode { --b: clamp(0, calc((var(--near) - .88) * 8.3), 1); }           /* 0 before the front, 1 at the front */
 .hex-frame { overflow: visible; }
-.hex-frame .ripple { transform-origin: 50% 50%; transform-box: fill-box; stroke-width: 1px; }
-.hex-frame .ripple--1 { transform: scale(calc(1 + var(--b) * .28)); opacity: calc((1 - var(--b)) * var(--b) * 2.6); }
-.hex-frame .ripple--2 { transform: scale(calc(1 + var(--b) * .56)); opacity: calc((1 - var(--b)) * var(--b) * 1.6); }
 
 /* ---- the sun: MATORI mark with an aurora behind it, seen through the floor lines ---- */
-.orbit-sun {
-  /* the sun sits above the ring plane at its centre, so it is never hidden behind the front planet */
-  position: absolute; left: 50%; top: calc(var(--R) * -.92); width: calc(var(--R) * .9); height: calc(var(--R) * .7);
-  translate: -50% -50%; transform: rotateY(calc(var(--a, 0deg) * -1)); pointer-events: none;
-}
-.orbit-sun-mark { position: absolute; left: 50%; bottom: 30%; width: calc(var(--R) * .19); translate: -50%; color: var(--copper); opacity: .9; z-index: 1; }
-.aurora {
-  /* curtains of light rising from the sun, dissolving upward */
-  position: absolute; inset: -30% -20% 14%; z-index: 0; overflow: visible;
-  -webkit-mask: linear-gradient(to top, transparent 0, #000 28%, rgba(0,0,0,.65) 62%, transparent 100%);
-          mask: linear-gradient(to top, transparent 0, #000 28%, rgba(0,0,0,.65) 62%, transparent 100%);
-  opacity: calc(.6 + var(--g, 0) * .4);
-  transition: opacity .8s var(--ease);
-}
-.aurora i {
-  position: absolute; bottom: 0; height: 100%; width: 16%; display: block; border-radius: 40% 40% 0 0;
-  filter: blur(12px); transform-origin: 50% 100%;
-  animation: aurora 12s ease-in-out infinite alternate;
-}
-.aurora i:nth-child(1) { left: 30%; background: linear-gradient(to top, rgba(74,44,16,.4), rgba(74,44,16,.12) 55%, transparent); animation-duration: 14s; }
-.aurora i:nth-child(2) { left: 46%; width: 14%; background: linear-gradient(to top, rgba(217,164,65,.5), rgba(217,164,65,.16) 60%, transparent); animation-duration: 19s; animation-delay: -6s; }
-.aurora i:nth-child(3) { left: 56%; width: 18%; background: linear-gradient(to top, rgba(255,246,232,.95), rgba(255,246,232,.35) 55%, transparent); animation-duration: 16s; animation-delay: -11s; }
+
 @keyframes aurora {
   0%   { transform: skewX(-14deg) scaleY(.85) translateX(-6%); }
   50%  { transform: skewX(8deg) scaleY(1.08) translateX(5%); }
   100% { transform: skewX(-4deg) scaleY(.95) translateX(0); }
 }
-@media (prefers-reduced-motion: reduce) { .aurora i { animation: none; } }
-.orbit-geo { opacity: calc(.12 + var(--g, 0) * .1); }
-
 
 @media (max-width: 860px) {
   .orbit { --u-hex: .62px; }
   .orbit-stage { height: 560px; }
   .orbit-scene { perspective: 1700px; perspective-origin: 50% 42%; }
   .orbit-world { --R: clamp(150px, 42vw, 180px); top: 58%; }
-  .orbit-sun { top: calc(var(--R) * -1.1); width: calc(var(--R) * 1.1); height: calc(var(--R) * .7); }
+  
   .hex-text { top: 45%; bottom: 12%; }
   .hex-text .orbit-bio { font-size: 11px; }
 }
 
 /* =====================================================================
-   DEEP REST PACKAGING (Oct 24): hexagon rigid box, navy on textured white.
+   HEXAGON PACKAGING (Oct 24): kraft rigid box with gold edge.
    Replaces the kraft matchbox carton. Same hooks (--rx, --ry, --slide,
    --sy, --sz, --sry, --boxFade, patch vars) so the unboxing engine is unchanged.
    ===================================================================== */
@@ -684,7 +529,7 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
   width: var(--hw); height: var(--hh);
 }
 .hexbox > * { position: absolute; }
-.hexbox .hb-back { inset: 0; -webkit-mask: var(--hexmask); mask: var(--hexmask); transform: rotateY(180deg) translateZ(calc(var(--hd) * .5)); filter: brightness(.96); }
+.hexbox .hb-back { inset: 0; -webkit-mask: var(--hexmask); mask: var(--hexmask); transform: rotateY(180deg) translateZ(calc(var(--hd) * .5)); }
 .hexbox .hb-floor { inset: 0; transform: translateZ(calc(var(--hd) * -.5 + var(--u) * 1.5)); transform-style: preserve-3d; background: none; }
 .hexbox .hb-floor::before { content: ""; position: absolute; inset: 0; background: #D7B98C linear-gradient(160deg, rgba(255,245,225,.4), transparent 45%, rgba(74,44,16,.18)); -webkit-mask: var(--hexmask); mask: var(--hexmask); }
 .hexbox .hb-side {
@@ -693,10 +538,6 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
   transform: rotateZ(calc(var(--k) * 60deg)) translateY(calc(var(--hh) * -.5)) rotateX(90deg);
   backface-visibility: visible; display: grid; place-items: center; overflow: hidden;
 }
-.hexbox .hb-side[style*="--k:0"] { filter: brightness(1.12); }
-.hexbox .hb-side[style*="--k:1"], .hexbox .hb-side[style*="--k:5"] { filter: brightness(1.0); }
-.hexbox .hb-side[style*="--k:2"], .hexbox .hb-side[style*="--k:4"] { filter: brightness(.8); }
-.hexbox .hb-side[style*="--k:3"] { filter: brightness(.7); }
 .hb-side-text { font-family: var(--brand); font-size: calc(var(--u) * 7); letter-spacing: .3em; text-transform: uppercase; font-weight: 500; white-space: nowrap; color: #5A3614; transform: rotate(180deg); }
 .hexbox .hb-front-low { inset: 0; -webkit-mask: var(--lowmask); mask: var(--lowmask); transform: translateZ(calc(var(--hd) * .5)); }
 /* lid hinge is the back edge of the box: the back half of the top lifts like a trunk lid, inner face toward you */
@@ -709,28 +550,20 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 /* hairline navy edges on the hexagon face, as on the box */
 .hb-front-low::before, .hb-lid::before { content: ""; position: absolute; inset: 0; -webkit-mask: var(--hexmask); mask: var(--hexmask); box-shadow: inset 0 0 0 calc(var(--u) * 2.2) #C9A061, inset 0 0 0 calc(var(--u) * 3) rgba(90,54,20,.25); pointer-events: none; }
 
-/* Front artwork, laid out from the Deep Rest render */
+/* Front artwork: the printed face image (see .hart-img); legacy text layout rules below are unused */
 .hart { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; padding-top: calc(var(--hh) * .11); font-family: var(--brand); color: var(--copper); overflow: hidden; }
 .hart-mark { width: calc(var(--hw) * .11); height: auto; }
 .hart-word { width: calc(var(--hw) * .36); margin-top: calc(var(--hh) * .012); }
 .hart-word .wordmark-svg { width: 100%; height: auto; display: block; }
-.hart-tag { margin-top: calc(var(--hh) * .02); font-size: calc(var(--hw) * .03); letter-spacing: .12em; font-weight: 500; white-space: nowrap; }
-.hart-name { margin-top: calc(var(--hh) * .05); font-family: var(--serif); font-weight: 700; font-size: calc(var(--hw) * .1); line-height: .92; letter-spacing: -.005em; text-align: center; }
-.hart-rule { display: flex; align-items: center; gap: calc(var(--u) * 5); margin: calc(var(--hh) * .02) 0 calc(var(--hh) * .012); color: #B9822A; }
-.hart-rule i { display: block; width: calc(var(--hw) * .11); height: 1px; background: currentColor; opacity: .7; }
-.hart-comb { width: calc(var(--hw) * .05); height: auto; }
-.hart-benefit { font-size: calc(var(--hw) * .028); letter-spacing: .06em; font-weight: 500; white-space: nowrap; }
-.hart-count { margin-top: calc(var(--hh) * .035); display: flex; flex-direction: column; align-items: center; line-height: 1; }
-.hart-count b { font-size: calc(var(--hw) * .055); font-weight: 700; letter-spacing: .02em; }
-.hart-count span { font-size: calc(var(--hw) * .027); font-weight: 500; margin-top: calc(var(--u) * 2); }
-.hart-honey { position: absolute; inset: 0; width: 100%; height: 100%; color: #B9822A; opacity: .75; pointer-events: none; }
 
 /* Pouches: white hexagons in the navy interior */
 .hb-pouch { position: absolute; left: 50%; top: 50%; width: calc(var(--hw) * .3); height: calc(var(--hw) * .3 * .866); margin: calc(var(--hw) * -.13) 0 0 calc(var(--hw) * -.15); transform: translate3d(var(--px, 0px), var(--py0, 0px), calc(var(--u) * 5)); }
-.hb-pouch[style*="--k:1"] { --px: calc(var(--hw) * -.29); --py0: calc(var(--hh) * -.1); }
-.hb-pouch[style*="--k:2"] { --px: 0px; --py0: calc(var(--hh) * -.19); }
-.hb-pouch[style*="--k:3"] { --px: calc(var(--hw) * .29); --py0: calc(var(--hh) * -.1); }
-.hb-pouch[style*="--k:0"] { --px: 0px; --py0: calc(var(--hh) * .14); }
+/* all four pouches sit under the lid half of the top, so none is ever behind the fixed half */
+.hb-pouch { width: calc(var(--hw) * .22); height: calc(var(--hw) * .22 * .866); margin: calc(var(--hw) * -.0953) 0 0 calc(var(--hw) * -.11); }
+.hb-pouch[style*="--k:1"] { --px: calc(var(--hw) * -.25); --py0: calc(var(--hh) * -.19); }
+.hb-pouch[style*="--k:2"] { --px: 0px; --py0: calc(var(--hh) * -.33); }
+.hb-pouch[style*="--k:3"] { --px: calc(var(--hw) * .25); --py0: calc(var(--hh) * -.19); }
+.hb-pouch[style*="--k:0"] { --px: 0px; --py0: calc(var(--hh) * -.11); }
 .pouch-face {
   position: absolute; inset: 0; -webkit-mask: var(--hexmask); mask: var(--hexmask);
   background: linear-gradient(160deg, #FBFAF7, #E9E6E0); color: var(--copper);
@@ -747,8 +580,8 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 
 /* the rig pouch lifts out along the same vars the old sachet used */
 .hexbox .u-sachet.hb-pouch--rig {
-  margin: calc(var(--hw) * -.13) 0 0 calc(var(--hw) * -.15); width: calc(var(--hw) * .3); height: calc(var(--hw) * .3 * .866);
-  transform: translate3d(0, calc(var(--hh) * .14 + var(--sy, 0px)), calc(var(--u) * 5 + var(--sz, 0px))) rotateY(var(--sry, 0deg)) rotateX(var(--srx, 0deg));
+  margin: calc(var(--hw) * -.0953) 0 0 calc(var(--hw) * -.11); width: calc(var(--hw) * .22); height: calc(var(--hw) * .22 * .866);
+  transform: translate3d(0, calc(var(--hh) * -.11 + var(--sy, 0px)), calc(var(--u) * 5 + var(--sz, 0px))) rotateY(var(--sry, 0deg)) rotateX(var(--srx, 0deg));
   transform-style: preserve-3d; backface-visibility: visible;
 }
 .hexbox .us-body { position: absolute; inset: 0; opacity: var(--sFade, 1); }
@@ -759,7 +592,7 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .unbox .hexbox .hb-floor { opacity: 1; }
 .unbox .hexbox .hb-floor::before { opacity: var(--boxFade, 1); }
 
-/* Hero: the Deep Rest render stands on the ledge; edges dissolve into the wall */
+/* Hero: the Honey Glow render stands on the ledge; edges dissolve into the wall */
 .sp-render { right: 4%; bottom: 9%; width: min(62%, calc(var(--u) * 620)); z-index: 1; }
 .hero-render { width: 100%; height: auto; display: block; }
 .sp-patch { right: calc(6% + var(--u) * 40); bottom: 9%; }
@@ -796,7 +629,7 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
    linework was built for the earlier brand; it reads cold next to kraft
    and honey. Scenes now sit on a soft pool of warm light instead.
    ===================================================================== */
-.hero-geo-wrap, .ul-geo, .orbit-geo, .ul-geo-wall, .cage { display: none !important; }
+
 .unbox-stage::before {
   content: ""; position: absolute; left: 50%; top: 68%; width: min(70vw, 760px); height: min(26vw, 280px); translate: -50% -50%;
   background: radial-gradient(50% 50% at 50% 50%, rgba(217,164,65,.28), rgba(217,164,65,.08) 55%, transparent 72%);
@@ -807,7 +640,6 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
   content: ""; position: absolute; left: 50%; top: 58%; width: min(60vw, 720px); height: min(22vw, 240px); translate: -50% -50%;
   background: radial-gradient(50% 50% at 50% 50%, rgba(217,164,65,.22), transparent 70%); pointer-events: none;
 }
-.orbit-equator { border-color: rgba(185,130,42,.45); }
 .hero-render { filter: drop-shadow(0 30px 40px rgba(74,44,16,.18)); }
 .attr-band { background: var(--kraft); color: var(--copper-ink); }
 .site-footer { background: #4A2C10; color: #F1E3CB; }
@@ -820,10 +652,50 @@ section[aria-labelledby="sci-title"] { background: var(--slate); }
 .btn { background: var(--copper-ink); border-color: var(--copper-ink); color: #FBF6EC; }
 .btn:hover { background: transparent; color: var(--copper-ink); }
 /* honey accent: labels and the rule under them */
-.label, .orbit-role, .hex-text .label { color: #B9822A; }
-.label--rule::after { background: #B9822A; }
+.label, .orbit-role, .hex-text .label { color: #7F5210; }
+.label--rule::after { background: #7F5210; }
 
 .cat-grid > .cat-card:only-child { grid-template-rows: auto auto auto auto; align-items: start; align-content: center; }
 .cat-grid > .cat-card:only-child .cat-visual { grid-row: 1 / span 4; grid-column: 1; align-self: center; }
 .cat-grid > .cat-card:only-child > :not(.cat-visual) { grid-column: 2; }
 .cat-grid > .cat-card:only-child h3 { margin: 10px 0 14px; }
+
+/* =====================================================================
+   AUDIT PASS (Oct 25, evening): consistency and contrast
+   ===================================================================== */
+/* The 3D box wears the approved packaging artwork; the hand-drawn front and its painted edge are retired. */
+.hart-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; display: block; pointer-events: none; user-select: none; -webkit-user-select: none; }
+.hb-front-low::before, .hb-lid::before { display: none; }
+.hb-front-low, .hb-lid { background: #D1AF80; }
+/* Team carousel: no ring, no sun, no ripples. The orbit motion stays. */
+.orbit-stage::before { display: none !important; }
+/* Wordmark on dark surfaces: a solid light stroke, not the copper gradient (which vanished into the footer). */
+.site-footer .wordmark-svg, .site-footer .wordmark-svg * { stroke: #F1E3CB; }
+.site-footer .brand svg:not(.wordmark-svg), .site-footer .brand svg:not(.wordmark-svg) * { stroke: #E0B25C; }
+.site-footer .brand svg:not(.wordmark-svg) circle { fill: #E0B25C; }
+/* Contrast: every small label and caption now clears 4.5:1 on bone, sand and kraft */
+.size-board .sb-dim, .size-board .sb-dim span { color: var(--copper-ink); }
+.sb-dim { border-top-color: var(--copper-ink); opacity: .9; }
+.sb-dim::before, .sb-dim::after { background: var(--copper-ink); }
+.hart-back p, .hart-back h5 { color: var(--copper-ink); }
+.hb-side-text { color: #3E240C; }
+/* Headline focus after route change is for screen readers, not a visible box */
+h1[tabindex="-1"]:focus, [tabindex="-1"]:focus:not(:focus-visible) { outline: none; }
+/* inner contents appear only once the lid has started to open (see --inner in app.js) */
+.unbox .hexbox .hb-pouch { opacity: var(--inner, 1); }
+/* Team carousel sizing without the sun above it: shorter stage, ring centred */
+.orbit { margin-top: clamp(20px, 3vw, 36px); }
+.orbit-stage { height: clamp(560px, 72vh, 680px); }
+.orbit-scene { perspective-origin: 50% 46%; }
+.orbit-world { top: 50%; }
+@media (max-width: 860px) { .orbit-stage { height: 520px; } .orbit-world { top: 50%; } }
+/* The lid's inner face is only needed once the lid moves; coplanar with the lid it leaves a compositing seam */
+.unbox .hexbox .hb-lid-inner { opacity: var(--lidOpen, 1); }
+.pdp-stage .hexbox .hb-lid-inner { display: none; }
+/* Side panels: flat colour only. Gradients and filters on these near-edge-on planes smeared past the box in Chromium. */
+.hexbox .hb-side { background-image: none; background-color: #C9A061; }
+.hexbox .hb-side[style*="--k:0"] { background-color: #D9B57B; }
+.hexbox .hb-side[style*="--k:2"], .hexbox .hb-side[style*="--k:4"] { background-color: #B48B4F; }
+.hexbox .hb-side[style*="--k:3"] { background-color: #A67D44; }
+/* During the fade-out the back face and the lid's outer skin go first, so no mirrored print shows through the translucent box */
+.unbox .hexbox > .hb-back, .unbox .hexbox .hb-lid { opacity: clamp(0, calc((var(--boxFade, 1) - .35) / .65), 1); }

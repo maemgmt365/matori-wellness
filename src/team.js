@@ -28,22 +28,16 @@ function orbitHTML() {
     <div class="wrap">
       <div class="grid-2" style="align-items:end">
         <h2 class="h2" id="team-title">Meet the team.</h2>
-        <p class="lead measure">Four partners in orbit. Turn the ring, or choose a person, and they come forward and open.</p>
+        <p class="lead measure">Four partners. Turn the carousel or choose a person, and they come forward.</p>
       </div>
       <div class="orbit" id="orbit" style="--a:0deg">
-        <div class="orbit-stage" id="orbit-stage" tabindex="0" role="group" aria-label="Team ring. Swipe, drag, or use the arrow keys to turn it.">
+        <div class="orbit-stage" id="orbit-stage" tabindex="0" role="group" aria-label="Team carousel. Swipe, drag, or use the arrow keys to turn it.">
           <div class="orbit-scene">
             <div class="orbit-world">
-              ${geoConstruct("orbit-geo")}
-              <div class="orbit-equator"></div>
-              <div class="orbit-sun" aria-hidden="true">
-                <div class="aurora"><i></i><i></i><i></i></div>
-                ${ICON.mark("orbit-sun-mark")}
-              </div>
               ${P.map((p, i) => `
                 <div class="orbit-node" data-node="${i}" style="--i:${i};--ang:${ORBIT_ANGLES[i % ORBIT_ANGLES.length]}deg;--base:${ORBIT_BASES[i % ORBIT_BASES.length]};--rel:0deg;--depth:1">
                   <article class="hexnode" data-pick="${i}" aria-label="${esc(p.name)}, ${esc(p.role)}">
-                    <svg class="hex-frame" viewBox="0 0 86.6 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="43.3,0 86.6,25 86.6,75 43.3,100 0,75 0,25"/><polygon class="inner" points="43.3,4 83.1,27 83.1,73 43.3,96 3.5,73 3.5,27"/><polygon class="ripple ripple--1" points="43.3,0 86.6,25 86.6,75 43.3,100 0,75 0,25"/><polygon class="ripple ripple--2" points="43.3,0 86.6,25 86.6,75 43.3,100 0,75 0,25"/></svg>
+                    <svg class="hex-frame" viewBox="0 0 86.6 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="43.3,0 86.6,25 86.6,75 43.3,100 0,75 0,25"/><polygon class="inner" points="43.3,4 83.1,27 83.1,73 43.3,96 3.5,73 3.5,27"/></svg>
                     <div class="hex-portrait">${p.headshot ? `<img src="${esc(p.headshot)}" alt="Portrait of ${esc(p.name)}">` : `<span class="orbit-initial">${esc(p.initials)}</span>`}</div>
                     <div class="hex-text">
                       <p class="label">${p.n} / ${String(P.length).padStart(2, "0")}</p>
@@ -144,10 +138,4 @@ mountPage = function () {
   __mountPage();
   const o = document.getElementById("orbit");
   if (o) cleanup.push(mountOrbit(o));
-  // Mirror the carton's rotation onto the section so the floor construction turns with the box
-  const section = document.getElementById("unbox"), cartonEl = document.getElementById("unbox-carton");
-  if (section && cartonEl) cleanup.push(whileVisible(section, () => {
-    const ry = cartonEl.style.getPropertyValue("--ry") || "0deg";
-    if (section.style.getPropertyValue("--ry") !== ry) section.style.setProperty("--ry", ry);
-  }));
 };

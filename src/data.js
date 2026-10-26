@@ -177,22 +177,3 @@ const FAQ = [
 ];
 
 /* ---------- Lab: interaction models (route #/lab, not in the nav) ---------- */
-/* Model A: pick a detail, the carton turns to it and a line pulls the detail out.
-   face: where the anchor lives (front, right, sachet). x/y: % position on that face.
-   pose: carton angle (deg) and tray slide (fraction of height) when selected.   */
-const CALLOUTS = [
-  { id: "notch",   face: "front",  x: 50, y: 10, pose: { rx: -12, ry: -16, slide: 0 },     title: "Thumb notch",    text: "A 1.0 in cut-out on the sleeve. Push here and the tray rises." },
-  { id: "mark",    face: "front",  x: 50, y: 21, pose: { rx: -6,  ry: -10, slide: 0 },     title: "The mark",       text: "Two peaks and a rising sun, printed in a single copper ink." },
-  { id: "benefit", face: "front",  x: 56, y: 58, pose: { rx: -6,  ry: -26, slide: 0 },     title: "Product line",   text: "Name, tilde and a three-part benefit line, laid out the same on every product." },
-  { id: "contour", face: "front",  x: 74, y: 86, pose: { rx: -14, ry: -34, slide: 0 },     title: "Contour print",  text: "Fine topographic lines rising from the corner, echoing the mountain in the mark." },
-  { id: "side",    face: "right",  x: 50, y: 46, pose: { rx: -8,  ry: -66, slide: 0 },     title: "Side panels",    text: "Dark brown board on the long sides, matchbox style. 0.75 in deep (concept)." },
-  { id: "tray",    face: "sachet", x: 50, y: 7,  pose: { rx: -16, ry: -22, slide: -0.42 }, title: "Tray and sachet", text: "The kraft tray slides out to reveal a clear, resealable sachet." }
-];
-
-/* Model B: exploded view. Each layer separates along the depth axis. */
-const EXPLODE_PARTS = [
-  { id: "x-sleeve", face: "front",       x: 50, y: 72, title: "Kraft sleeve",  text: "3.5 × 6 × 0.75 in (concept)" },
-  { id: "x-tray",   face: "drawerRight", x: 50, y: 30, title: "Inner tray",    text: "Slides out through the open ends" },
-  { id: "x-sachet", face: "sachet",      x: 50, y: 60, title: "Clear sachet",  text: "Resealable, with a printed card" },
-  { id: "x-patch",  face: "patch",       x: 50, y: 50, title: "Patch",         text: "Rounded hexagon, three proposed sizes" }
-];

@@ -32,7 +32,6 @@ Pages.home = () => `
         </ul>
       </div>
       <div class="scene-products hero-intro" id="hero-products" aria-hidden="true">
-        <div class="hero-geo-wrap" data-depth="0.04">${geoConstruct("hero-geo")}</div>
         <div class="sp sp-render" data-par="1" data-depth="0.08"><img class="hero-render" src="__ASSET:hg-front.webp__" alt="" width="1200" height="1166" decoding="async" fetchpriority="high"></div>
         <div class="sp sp-patch" data-par="2.2" data-depth="0.3">${patchArt()}</div>
       </div>
@@ -169,11 +168,6 @@ function unboxHTML(p) {
   return `
   <section class="unbox" id="unbox" aria-labelledby="unbox-title" style="--p:0">
     <div class="unbox-sticky">
-      <div class="unbox-layers" aria-hidden="true">
-        ${geoConstruct("ul-geo")}
-        ${ICON.mark("ul-mark")}
-        ${ICON.contour("ul-contour")}
-      </div>
       <div class="wrap unbox-grid">
         <div class="unbox-copy">
           <h2 class="h2" id="unbox-title">Open the box.</h2>
@@ -202,58 +196,6 @@ function unboxHTML(p) {
     </div>
   </section>`;
 }
-
-Pages.lab = () => `
-  <header class="page-head"><div class="wrap">
-    <span class="label">Lab</span>
-    <h1 class="display">Interaction models</h1>
-    <p class="lead">Two ways to pull detail out of the product. Try both, then pick what carries into the main site. Drag either carton to turn it.</p>
-  </div></header>
-
-  <section class="section lab-model" id="lab-a" aria-labelledby="lab-a-title">
-    <div class="wrap lab-grid">
-      <div class="lab-side">
-        <p class="label">Model A</p>
-        <h2 class="h3" id="lab-a-title">Focus and pull</h2>
-        <p class="lab-intro">Pick a detail. The carton turns to it, a ring opens on the spot, and a line pulls the detail out.</p>
-        <ol class="lab-list">
-          ${CALLOUTS.map((c, i) => `<li><button type="button" data-callout="${i}"><span class="n">${String(i + 1).padStart(2, "0")}</span>${esc(c.title)}</button></li>`).join("")}
-        </ol>
-        <button type="button" class="btn btn--ghost btn--small" id="lab-a-tour">Play tour</button>
-      </div>
-      <div class="lab-stage" id="lab-a-stage" tabindex="0" role="group" aria-label="Carton with detail callouts. Use arrow keys to turn it.">
-        <div class="stage"><div class="lab-rig">${carton(PRODUCTS[0], { id: "lab-a-carton", rx: -12, ry: -16, anchors: CALLOUTS.map((c) => ({ ...c, dot: true })) })}</div></div>
-        <svg class="lab-lines" aria-hidden="true">
-          <polyline class="cl-line" points=""/>
-          <circle class="cl-ring2" r="0"/><circle class="cl-ring1" r="0"/>
-          <g class="cl-ticks">${[0, 1, 2, 3].map(() => `<line x1="0" y1="0" x2="0" y2="0"/>`).join("")}</g>
-          <circle class="cl-dot" r="3"/>
-        </svg>
-        <div class="lab-card" id="lab-a-card" aria-live="polite"><p class="label"></p><h3 class="h4"></h3><p></p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt lab-model" id="lab-b" aria-labelledby="lab-b-title">
-    <div class="wrap lab-grid">
-      <div class="lab-side">
-        <p class="label">Model B</p>
-        <h2 class="h3" id="lab-b-title">Exploded view</h2>
-        <p class="lab-intro">Pull the layers apart along one axis. Lines tie each part back to the construction line and its label.</p>
-        <label class="lab-range"><span>Explode</span><input type="range" id="lab-b-range" min="0" max="100" value="0"></label>
-        <button type="button" class="btn btn--ghost btn--small" id="lab-b-play">Play</button>
-      </div>
-      <div class="lab-stage" id="lab-b-stage" tabindex="0" role="group" aria-label="Exploded carton. Use arrow keys to turn it.">
-        <div class="stage"><div class="lab-rig">${carton(PRODUCTS[0], { id: "lab-b-carton", unbox: true, rx: -14, ry: -52, anchors: EXPLODE_PARTS })}</div></div>
-        <svg class="lab-lines" aria-hidden="true">
-          <polyline class="ex-axis" points=""/>
-          ${EXPLODE_PARTS.map(() => `<g class="ex-node"><polyline class="ex-lead" points=""/><circle class="ex-ring" r="0"/><circle class="ex-dot" r="2.5"/></g>`).join("")}
-        </svg>
-        ${EXPLODE_PARTS.map((x) => `<div class="ex-label"><strong>${esc(x.title)}</strong><span>${esc(x.text)}</span></div>`).join("")}
-      </div>
-    </div>
-    <div class="wrap"><p class="meta" style="margin-top:20px">Concept renders. Not photographs of the finished product.</p></div>
-  </section>`;
 
 Pages.products = () => `
   <header class="page-head"><div class="wrap">
@@ -299,7 +241,7 @@ Pages.product = (slug) => {
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap">
           ${renderNote()}
-          <button type="button" class="icon-btn" id="pdp-reset">Reset view</button>
+          <button type="button" class="btn btn--ghost btn--small" id="pdp-reset">Reset view</button>
         </div>
       </div>
       <div>
@@ -460,34 +402,6 @@ Pages.science = () => {
   </div>`;
 };
 
-Pages.ourStory = () => `
-  <header class="page-head"><div class="wrap">
-    <span class="label">Our Story</span>
-    <h1 class="display">Built around a better way to approach wellness.</h1>
-    <p class="lead">MATORI started with a simple question: could everyday skincare be simpler to keep up and more honest about how it works? A wearable offered a different format, and a reason to design the whole experience with care.</p>
-  </div></header>
-  <section class="section"><div class="wrap">
-    <div class="grid-2" style="align-items:end">
-      <h2 class="h2">The founding partners</h2>
-      <p class="meta dev-only">${flag("Placeholder profiles")} Names, roles, biographies and headshots will be added from each partner's questionnaire.</p>
-    </div>
-    ${SITE.publicMode && !FOUNDERS.some((f) => f.name)
-      ? `<p class="lead measure" style="margin-top:32px">Founder profiles are on their way. In the meantime, <a href="#/collaborate">get in touch</a>.</p>`
-      : `<div class="founder-grid">${FOUNDERS.map(founderCard).join("")}</div>`}
-  </div></section>
-  <section class="section section--alt"><div class="wrap grid-2">
-    <h2 class="h2">A shared vision</h2>
-    <div class="serif-body measure">
-      <p>We want to build a wellness brand that earns trust slowly: products that are pleasant to use, design that respects the person using it, and science described plainly, including its limits.</p>
-      <p class="meta dev-only">${flag("Draft")} Shared founding story and mission to be written with the partners.</p>
-    </div>
-  </div></section>
-  <section class="section final-cta"><div class="wrap">
-    ${ICON.mark("final-mark")}
-    <h2 class="h2">See what we're making.</h2>
-    <div class="btn-row"><a class="btn" href="#/products">Explore MATORI</a><a class="btn btn--ghost" href="#/collaborate">Get in touch</a></div>
-  </div></section>`;
-
 Pages.collaborate = () => `
   <header class="page-head"><div class="wrap">
     <span class="label">Collaborate</span>
@@ -633,7 +547,6 @@ const ROUTES = [
   { re: /^\/collaborate\/?$/, page: () => Pages.collaborate(), title: "Collaborate with MATORI", nav: "collaborate" },
   { re: /^\/assessment\/?$/, page: () => Pages.assessment(), title: "Find Your Routine | MATORI", nav: "assessment" },
   { re: /^\/faq\/?$/, page: () => Pages.faq(), title: "FAQ | MATORI", nav: "faq" },
-  { re: /^\/lab\/?$/, page: () => Pages.lab(), title: "Lab | MATORI", nav: "" },
   { re: /^\/(privacy|terms)\/?$/, page: (m) => Pages.legal(m[1]), title: (m) => `${m[1] === "privacy" ? "Privacy" : "Terms"} | MATORI`, nav: "" }
 ];
 
@@ -666,10 +579,6 @@ function router() {
 }
 
 function mountPage() {
-  const la = document.getElementById("lab-a");
-  if (la) cleanup.push(mountCallouts(la));
-  const lb = document.getElementById("lab-b");
-  if (lb) cleanup.push(mountExploded(lb));
   const ub = document.getElementById("unbox");
   if (ub) cleanup.push(mountUnbox(ub));
   const pdp = document.getElementById("pdp-stage");
@@ -736,14 +645,6 @@ function mountRotatable(surface, cartonEl, base, resetBtn, onChange) {
 }
 
 /* ---------- Lab helpers ---------- */
-const ease = (t) => 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3);
-const lerp = (a, b, t) => a + (b - a) * t;
-function anchorPoint(stage, id) {
-  const el = stage.querySelector(`[data-anchor="${id}"]`);
-  if (!el) return null;
-  const s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
-  return { x: r.left + r.width / 2 - s.left, y: r.top + r.height / 2 - s.top };
-}
 function whileVisible(el, frame) {
   let raf = 0, on = false;
   const loop = (now) => { frame(now); if (on) raf = requestAnimationFrame(loop); };
@@ -753,125 +654,6 @@ function whileVisible(el, frame) {
 }
 
 /* Model A: focus and pull */
-function mountCallouts(root) {
-  const stage = root.querySelector(".lab-stage"), cartonEl = document.getElementById("lab-a-carton");
-  const card = document.getElementById("lab-a-card"), line = root.querySelector(".cl-line");
-  const ring1 = root.querySelector(".cl-ring1"), ring2 = root.querySelector(".cl-ring2"), dot = root.querySelector(".cl-dot");
-  const ticks = [...root.querySelectorAll(".cl-ticks line")], btns = [...root.querySelectorAll("[data-callout]")];
-  const tourBtn = document.getElementById("lab-a-tour");
-  const instant = reduceMotion();
-  const rot = mountRotatable(stage, cartonEl, CALLOUTS[0].pose, null);
-  let idx = 0, t0 = 0, tour = 0;
-
-  const select = (i, fromUser = true) => {
-    idx = i; const c = CALLOUTS[i];
-    rot.setBase({ rx: c.pose.rx, ry: c.pose.ry });
-    cartonEl.style.setProperty("--slide", `calc(var(--h) * ${c.pose.slide})`);
-    card.querySelector(".label").textContent = `${String(i + 1).padStart(2, "0")} / ${String(CALLOUTS.length).padStart(2, "0")}`;
-    card.querySelector("h3").textContent = c.title; card.querySelector("p:last-child").textContent = c.text;
-    btns.forEach((b, j) => b.toggleAttribute("aria-current", j === i));
-    root.querySelectorAll(".anchor-dot").forEach((d) => d.classList.toggle("is-active", d.dataset.pick === c.id));
-    t0 = performance.now() + (instant ? -2000 : 450);   // wait for the turn, then pull
-    if (fromUser) stopTour();
-  };
-  const stopTour = () => { clearInterval(tour); tour = 0; tourBtn.textContent = "Play tour"; };
-  const startTour = () => { tourBtn.textContent = "Stop tour"; tour = setInterval(() => select((idx + 1) % CALLOUTS.length, false), 3400); };
-
-  const frame = (now) => {
-    const a = anchorPoint(stage, CALLOUTS[idx].id); if (!a) return;
-    const W = stage.clientWidth, H = stage.clientHeight, cw = card.offsetWidth, ch = card.offsetHeight;
-    const tRing = ease((now - t0 + 250) / 450), tPull = ease((now - t0) / 700);
-    const dir = a.x >= W / 2 ? 1 : -1;
-    // keep the card inside the arch: clear of the curved top and the edges
-    let tx = dir > 0 ? a.x + 120 : a.x - 120 - cw;
-    tx = Math.max(28, Math.min(W - cw - 28, tx));
-    const ty = Math.max(H * 0.22, Math.min(H - ch - 24, a.y - ch / 2 - 30));
-    const docked = W < 560;   // narrow screens: the card docks under the carton instead of beside it
-    const fx = docked ? (W - cw) / 2 : tx, fy = docked ? H - ch - 18 : ty;
-    const cx = lerp(a.x - cw / 2, fx, tPull), cy = lerp(a.y - ch / 2, fy, tPull);
-    card.style.transform = `translate(${cx.toFixed(1)}px, ${cy.toFixed(1)}px) scale(${(0.8 + 0.2 * tPull).toFixed(3)})`;
-    card.style.opacity = tPull.toFixed(3);
-    const attachX = docked ? cx + cw / 2 : dir > 0 ? cx : cx + cw, attachY = docked ? cy : cy + 26;
-    const ex = docked ? lerp(a.x, a.x + dir * 30, tPull) : lerp(a.x, a.x + dir * 54, tPull);
-    const ey = docked ? lerp(a.y, attachY - 24, tPull) : lerp(a.y, attachY, tPull);
-    line.setAttribute("points", `${a.x.toFixed(1)},${a.y.toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)} ${attachX.toFixed(1)},${attachY.toFixed(1)}`);
-    line.style.opacity = tPull > 0.02 ? 1 : 0;
-    [ring1, ring2, dot].forEach((c) => { c.setAttribute("cx", a.x.toFixed(1)); c.setAttribute("cy", a.y.toFixed(1)); });
-    ring1.setAttribute("r", (13 * tRing).toFixed(2)); ring2.setAttribute("r", (24 * tRing).toFixed(2));
-    ring2.style.opacity = tRing * 0.8; dot.style.opacity = tRing;
-    ticks.forEach((l, k) => {
-      const ang = (Math.PI / 2) * k + Math.PI / 4 + (1 - tRing) * 0.6, r0 = 28 * tRing, r1 = 34 * tRing;
-      l.setAttribute("x1", (a.x + r0 * Math.cos(ang)).toFixed(1)); l.setAttribute("y1", (a.y + r0 * Math.sin(ang)).toFixed(1));
-      l.setAttribute("x2", (a.x + r1 * Math.cos(ang)).toFixed(1)); l.setAttribute("y2", (a.y + r1 * Math.sin(ang)).toFixed(1));
-    });
-  };
-
-  const onClick = (e) => {
-    const b = e.target.closest("[data-callout]"); if (b) return select(+b.dataset.callout);
-    const d = e.target.closest("[data-pick]"); if (d) return select(CALLOUTS.findIndex((c) => c.id === d.dataset.pick));
-    if (e.target.closest("#lab-a-tour")) { if (tour) stopTour(); else startTour(); }
-  };
-  root.addEventListener("click", onClick);
-  select(0, false);
-  const stop = whileVisible(stage, frame);
-  return () => { stop(); stopTour(); rot.destroy(); root.removeEventListener("click", onClick); };
-}
-
-/* Model B: exploded view along the depth axis */
-function mountExploded(root) {
-  const stage = root.querySelector(".lab-stage"), cartonEl = document.getElementById("lab-b-carton");
-  const range = document.getElementById("lab-b-range"), play = document.getElementById("lab-b-play");
-  const axis = root.querySelector(".ex-axis"), nodes = [...root.querySelectorAll(".ex-node")], labels = [...root.querySelectorAll(".ex-label")];
-  const rot = mountRotatable(stage, cartonEl, { rx: -14, ry: -52 }, null);
-  let e = 0, anim = 0;
-  const apply = () => {
-    const st = cartonEl.style;
-    st.setProperty("--tz", `calc(var(--u) * ${(135 * e).toFixed(1)})`);
-    st.setProperty("--slide", `calc(var(--h) * ${(-0.16 * e).toFixed(4)})`);
-    st.setProperty("--sz", `calc(var(--u) * ${(115 * e).toFixed(1)})`);
-    st.setProperty("--sy", `calc(var(--h) * ${(-0.1 * e).toFixed(4)})`);
-    st.setProperty("--pz", `calc(var(--u) * ${(105 * e).toFixed(1)})`);
-    st.setProperty("--py", `calc(var(--u) * ${(-40 * e).toFixed(1)})`);
-    root.style.setProperty("--e", e.toFixed(3));
-  };
-  const frame = () => {
-    const W = stage.clientWidth, pts = EXPLODE_PARTS.map((x) => anchorPoint(stage, x.id));
-    if (pts.some((p) => !p)) return;
-    const show = ease((e - 0.35) / 0.45);
-    axis.setAttribute("points", pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" "));
-    axis.style.opacity = Math.min(1, e * 2) * 0.9;
-    const order = pts.map((p, i) => [p, i]).sort((a, b) => a[0].y - b[0].y);
-    const colX = W - (W < 700 ? 148 : 262);
-    order.forEach(([p, i], rank) => {
-      const g = nodes[i], lab = labels[i];
-      const H = stage.clientHeight, ly = H * 0.24 + rank * ((H * 0.62) / Math.max(1, order.length - 1));
-      const lx = lerp(p.x, colX, show);
-      g.querySelector(".ex-lead").setAttribute("points", `${p.x.toFixed(1)},${p.y.toFixed(1)} ${lerp(p.x, colX - 40, show).toFixed(1)},${lerp(p.y, ly, show).toFixed(1)} ${(lx - 8).toFixed(1)},${lerp(p.y, ly, show).toFixed(1)}`);
-      g.querySelector(".ex-lead").style.opacity = show;
-      const ring = g.querySelector(".ex-ring"), dt = g.querySelector(".ex-dot");
-      [ring, dt].forEach((c) => { c.setAttribute("cx", p.x.toFixed(1)); c.setAttribute("cy", p.y.toFixed(1)); });
-      ring.setAttribute("r", (4 + 10 * e).toFixed(1)); ring.style.opacity = Math.min(1, e * 2) * 0.8; dt.style.opacity = Math.min(1, e * 3);
-      lab.style.transform = `translate(${lx.toFixed(1)}px, ${(lerp(p.y, ly, show) - 14).toFixed(1)}px)`;
-      lab.style.opacity = show;
-    });
-  };
-  const onRange = () => { cancelAnimationFrame(anim); e = range.value / 100; apply(); };
-  const onPlay = () => {
-    cancelAnimationFrame(anim);
-    const from = e, to = e > 0.5 ? 0 : 1, t0 = performance.now(), dur = reduceMotion() ? 1 : 1500;
-    const step = (now) => { const t = ease((now - t0) / dur); e = lerp(from, to, t); range.value = Math.round(e * 100); apply(); if (t < 1) anim = requestAnimationFrame(step); };
-    anim = requestAnimationFrame(step);
-    play.textContent = to ? "Collapse" : "Play";
-  };
-  range.addEventListener("input", onRange); play.addEventListener("click", onPlay);
-  apply();
-  const stop = whileVisible(stage, frame);
-  return () => { stop(); cancelAnimationFrame(anim); rot.destroy(); range.removeEventListener("input", onRange); play.removeEventListener("click", onPlay); };
-}
-
-/* ---------- Scroll-driven unboxing ----------
-   Progress (0 to 1) comes from how far the tall section has scrolled past
-   the viewport. Every visual value is read from UNBOX_TIMELINE in data.js. */
 const smooth = (t) => t * t * (3 - 2 * t);
 function sampleTrack(keys, p) {
   if (p <= keys[0][0]) return keys[0][1];
@@ -915,6 +697,9 @@ function mountUnbox(section) {
     st.setProperty("--pry", v("patchRy").toFixed(1) + "deg");
     st.setProperty("--peel", v("peel").toFixed(3));
     st.setProperty("--sFade", v("sFade").toFixed(3));
+    // pouches and the wearable stay hidden until the box tips toward the viewer; before that they bled through the front face
+    st.setProperty("--inner", rx > 8 || v("sachetZ") > 0 ? "1" : "0");
+    st.setProperty("--lidOpen", v("slide") < -0.02 ? "1" : "0");
     rig.style.transform = `translate3d(0, calc(var(--u) * ${v("rigY").toFixed(1)}), calc(var(--u) * ${v("rigZ").toFixed(1)}))`;
     section.style.setProperty("--p", p.toFixed(4));
     const step = Math.max(0, UNBOX_STEPS.findIndex((s) => p >= s.from && p < s.to));

@@ -36,85 +36,13 @@ function leafShadow(cls = "") {
   return `<svg class="${cls}" viewBox="0 0 360 280" aria-hidden="true" fill="currentColor"><path d="M10 0 Q 120 90 330 250" stroke="currentColor" stroke-width="3" fill="none"/>${leaves}</svg>`;
 }
 
-/* Fine-line geometric construction (inspired by geometric linework tattoos):
-   compass circles, an inscribed hexagon, star triangles, radial axes and node dots.
-   Every stroke uses pathLength=1 so CSS can "draw" it via --g1..--g4 (0 to 1). */
-function geoConstruct(cls = "") {
-  const C = 500, R = 470, r2 = 300, hex = [], tri1 = [], tri2 = [];
-  for (let i = 0; i < 6; i++) { const a = (Math.PI / 3) * i - Math.PI / 2; hex.push([C + r2 * Math.cos(a), C + r2 * Math.sin(a)]); }
-  hex.forEach((p, i) => (i % 2 ? tri2 : tri1).push(p));
-  const pts = (arr) => arr.map((p) => p.map((n) => n.toFixed(1)).join(",")).join(" ");
-  const L = (x1, y1, x2, y2) => `<line pathLength="1" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
-  const Ci = (x, y, rr) => `<circle pathLength="1" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rr}"/>`;
-  const dot = (x, y, rr = 4) => `<circle class="geo-dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rr}"/>`;
-  let ticks = "";
-  for (let i = 0; i < 72; i++) { const a = (Math.PI * 2 * i) / 72, l = i % 6 ? 10 : 22; ticks += L(C + R * Math.cos(a), C + R * Math.sin(a), C + (R - l) * Math.cos(a), C + (R - l) * Math.sin(a)); }
-  const petals = hex.map(([x, y]) => Ci(x, y, 150)).join("");
-  return `<svg class="geo ${cls}" viewBox="0 0 1000 1000" fill="none" stroke="currentColor" aria-hidden="true">
-    <g class="g1">${Ci(C, C, R)}${L(C - R - 20, C, C + R + 20, C)}${L(C, C - R - 20, C, C + R + 20)}
-      ${dot(C - R, C)}${dot(C + R, C)}${dot(C, C - R)}${dot(C, C + R)}</g>
-    <g class="g2"><polygon pathLength="1" points="${pts(hex)}"/>${Ci(C, C, r2)}${hex.map(([x, y]) => L(C, C, x, y)).join("")}${hex.map(([x, y]) => dot(x, y, 5)).join("")}</g>
-    <g class="g3">${petals}<polygon pathLength="1" points="${pts(tri1)}"/><polygon pathLength="1" points="${pts(tri2)}"/>${Ci(C, C, 150)}</g>
-    <g class="g4">${ticks}${Ci(C, C, R + 26)}${dot(C, C, 6)}</g>
-  </svg>`;
-}
 
 
 
 /* Honeycomb clusters, as printed on the Honey Glow box: outline hexagons with a few filled in honey */
-function honeycombSVG(cls = "") {
-  const hx = (cx, cy, r, fill) => { const pts = []; for (let i = 0; i < 6; i++) { const a = Math.PI / 3 * i; pts.push((cx + r * Math.cos(a)).toFixed(1) + "," + (cy + r * Math.sin(a)).toFixed(1)); } return `<polygon points="${pts.join(" ")}"${fill ? ` fill="currentColor" fill-opacity=".55" stroke="none"` : ""}/>`; };
-  const r = 7, dx = r * 1.5, dy = r * Math.sqrt(3);
-  const cluster = (ox, oy, cells) => cells.map(([q, s_, f]) => hx(ox + q * dx, oy + s_ * dy + (q % 2 ? dy / 2 : 0), r, f)).join("");
-  return `<svg class="${cls}" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
-    ${cluster(18, 92, [[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 1, 1], [0, 2, 0], [2, 0, 0], [1, -1, 0], [0, 3, 1], [1, 2, 0], [2, 1, 1]])}
-    ${cluster(168, 14, [[0, 0, 0], [1, 0, 1], [0, 1, 1], [1, -1, 0]])}
-    ${cluster(176, 118, [[0, 0, 0], [1, 0, 1], [0, 1, 0], [1, 1, 0], [0, 2, 1]])}
-    ${cluster(92, 178, [[0, 0, 1], [1, 0, 0], [0, 1, 0]])}
-  </svg>`;
-}
-
-/* Flowing ribbon wave (previous packaging; kept for reference): a band of parallel lines
-   running in from the lower left and off the right edge, rising at the end. */
-function ribbonSVG(cls = "") {
-  let paths = "";
-  const N = 22;
-  for (let i = 0; i < N; i++) {
-    const t = i / (N - 1), o = (t - .5) * 34;            // offset across the band
-    const y0 = 84 + o, y1 = 62 + o * .8, y2 = 92 + o * .9, y3 = 28 + o * .6, y4 = 50 + o * .5;
-    paths += `<path vector-effect="non-scaling-stroke" d="M-5 ${y0.toFixed(1)} C 30 ${y1.toFixed(1)}, 55 ${y2.toFixed(1)}, 95 ${(70 + o).toFixed(1)} S 150 ${y3.toFixed(1)}, 205 ${y4.toFixed(1)}" stroke-opacity="${(.35 + .65 * Math.abs(Math.sin(t * Math.PI))).toFixed(2)}"/>`;
-  }
-  return `<svg class="${cls}" viewBox="0 0 200 100" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width=".9" vector-effect="non-scaling-stroke" aria-hidden="true">${paths}</svg>`;
-}
-
-/* Fine topographic waves rising from the lower right (previous packaging; kept for reference) */
-function contourSVG(cls = "") {
-  const hills = [{ c: 168, a: 92, w: 52 }, { c: 92, a: 52, w: 46 }];
-  let paths = "";
-  hills.forEach((h, k) => {
-    for (let i = 0; i < 13; i++) {
-      const amp = h.a - i * 5.2, wid = h.w + i * 4, base = 122 + i * 0.6 - k * 2;
-      let d = "";
-      for (let x = -10; x <= 210; x += 10) {
-        const y = base - amp * Math.exp(-(((x - h.c) / wid) ** 2)) - (x / 210) * (18 - i);
-        d += (x === -10 ? "M" : "L") + x + " " + y.toFixed(1) + " ";
-      }
-      paths += `<path d="${d}"/>`;
-    }
-  });
-  return `<svg class="${cls}" viewBox="0 0 200 120" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width=".45" aria-hidden="true">${paths}</svg>`;
-}
 
 const ICON = {
   mark: MARK_SVG,
-  contour: contourSVG,
-  ribbon: ribbonSVG,
-  honeycomb: honeycombSVG,
-  comb3: (cls = "") => `<svg class="${cls}" viewBox="0 0 40 30" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><polygon points="14,3 22,3 26,10 22,17 14,17 10,10"/><polygon points="6,16 14,16 18,23 14,30 6,30 2,23"/><polygon points="22,16 30,16 34,23 30,30 22,30 18,23"/></svg>`,
-  tilde: (cls = "") => `<svg class="${cls}" viewBox="0 0 40 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 6 C7 1 11 1 15 5 S24 9 28 5 S35 1 38 4"/></svg>`,
-  waves: (cls = "") => `<svg class="${cls}" viewBox="0 0 200 40" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width=".7" aria-hidden="true">
-    <path d="M0 12 C30 4 50 20 80 12 S130 4 160 12 S190 18 200 14"/><path d="M0 18 C30 10 52 26 82 18 S132 10 162 18 S190 24 200 20"/>
-    <path d="M0 24 C32 16 54 32 84 24 S134 16 164 24 S192 30 200 26"/><path d="M0 30 C34 22 56 38 86 30 S136 22 166 30 S194 36 200 32"/></svg>`,
   hex: (cls = "") => `<svg class="${cls}" viewBox="0 0 32 28" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M8.5 1.5h15L31 14l-7.5 12.5h-15L1 14z"/></svg>`
 };
 
@@ -128,7 +56,7 @@ const statusFlag = (status) => ({
 
 const productBySlug = (slug) => PRODUCTS.find((p) => p.slug === slug || (p.aliases || []).includes(slug));
 
-/* ---------- Hexagon rigid box (Deep Rest packaging) ----------
+/* ---------- Hexagon rigid box (Honey Glow packaging) ----------
    Geometry (concept): 7.5 in point to point, 6.5 in flat to flat, split lid:
    the back half of the top hinges open. Modelled with the hexagon face toward
    the camera (standing) so the same object lies flat with --rx.
@@ -138,17 +66,9 @@ function carton(p, opts = {}) {
   const A = (face) => anchors.filter((a) => a.face === face).map((a) => a.dot
     ? `<button type="button" class="anchor anchor-dot" data-anchor="${a.id}" data-pick="${a.id}" style="left:${a.x}%;top:${a.y}%" aria-label="Show detail: ${esc(a.title)}"></button>`
     : `<span class="anchor" data-anchor="${a.id}" style="left:${a.x}%;top:${a.y}%"></span>`).join("");
-  const front = `
-    <div class="hart">
-      ${ICON.mark("hart-mark")}
-      <div class="hart-word">${WORDMARK_SVG()}</div>
-      <div class="hart-tag">${esc(SITE.tagline.replace(/\.$/, "").toLowerCase())}</div>
-      <div class="hart-name">${p.boxName.map(esc).join("<br>")}</div>
-      <div class="hart-rule"><i></i>${ICON.comb3("hart-comb")}<i></i></div>
-      <div class="hart-benefit">${p.benefit.map(esc).join(" • ")}</div>
-      <div class="hart-count"><b>${esc(p.count[0])}</b><span>${esc(p.count[1])}</span></div>
-      ${ICON.honeycomb("hart-honey")}
-    </div>${A("front")}`;
+  /* Front face: the approved packaging artwork (same render as the hero), so the
+     3D box matches the printed box exactly, bear included. */
+  const front = `<img class="hart-img" src="__ASSET:hg-face.webp__" alt="" draggable="false">${A("front")}`;
   const lidInner = `
     <div class="hart-lid">
       <span class="hart-lid-line">${esc(p.lidLine[0])}</span>
@@ -204,34 +124,6 @@ const pouchRig = (p, A = () => "") => `
     <div class="us-tear"></div>
   </div>`;
 
-/* Sachet rig used inside the carton during unboxing.
-   Lives in the carton's 3D space so it lifts out of the real tray. */
-const sachetRig = (p, A = () => "") => `
-  <div class="face u-sachet">
-    ${A("sachet")}
-    <div class="us-patch">
-      <div class="usp-face usp-front">${patchArt()}${A("patch")}</div>
-      <div class="usp-face usp-back">
-        <span class="usp-adh"></span>
-        <span class="usp-liner usp-liner-l"></span><span class="usp-liner usp-liner-r"></span>
-      </div>
-    </div>
-    <div class="us-body">
-      <div class="pouch-card">
-        ${ICON.mark("art-mark")}
-        <div class="pw">${WORDMARK_SVG()}</div>
-        <div class="ps"><b>${p.boxName.map(esc).join("<br>")}</b>${ICON.tilde("art-tilde")}<span>${esc(p.benefit.slice(0, 2).join(" / "))}</span><span>${esc(p.benefit[2] || "")}</span></div>
-        ${ICON.contour("art-contour")}
-      </div>
-    </div>
-    <div class="us-tear"></div>
-  </div>`;
-
-/* Hexagon pouch (hero still life) */
-const sachetArt = (p) => `
-  <div class="hb-pouch hb-pouch--solo"><div class="pouch-face">${ICON.mark("pouch-mark")}<span class="pouch-word">${WORDMARK_SVG()}</span><span class="pouch-sub">${esc(p.boxName.join(" "))}</span></div></div>`;
-
-/* Patch: rounded pointy-top hexagon, cream face, translucent rim, dark brown mark (per patch renders) */
 const patchArt = (cls = "") => `<svg class="patch ${cls}" viewBox="0 0 90 100" aria-hidden="true">
   <path d="M45 3 L86 26.5 L86 73.5 L45 97 L4 73.5 L4 26.5 Z" fill="rgba(240,216,170,.6)" stroke="rgba(240,216,170,.6)" stroke-width="6" stroke-linejoin="round"/>
   <path d="M45 10 L80 30 L80 70 L45 90 L10 70 L10 30 Z" fill="#F3E2C4" stroke="#F3E2C4" stroke-width="5" stroke-linejoin="round"/>
@@ -240,10 +132,6 @@ const patchArt = (cls = "") => `<svg class="patch ${cls}" viewBox="0 0 90 100" a
 
 const renderNote = (text = "Concept render. Not a photograph of the finished product.") => `<p class="meta">${esc(text)}</p>`;
 
-const photoPlaceholder = (caption, cls = "", style = "") =>
-  `<div class="ph ${cls}" style="${style}" role="img" aria-label="Image placeholder: ${esc(caption)}"><span class="ph-caption dev-only">Photography needed: ${esc(caption)}</span></div>`;
-
-/* ---------- Product card (homepage + overview) ---------- */
 function productCard(p) {
   return `
     <a class="cat-card" href="#/products/${p.slug}" style="--cat:${p.cat}">
@@ -253,24 +141,4 @@ function productCard(p) {
       <p>${esc(p.short)}</p>
       <p class="ingredients">${p.ingredients.filter((i) => i.name !== "Trace cofactors").map((i) => esc(i.name.replace(/ \(.*\)/, ""))).join(", ")}</p>
     </a>`;
-}
-
-/* ---------- Founder card ---------- */
-function founderCard(f, i) {
-  const n = i + 1;
-  const name = f.name || `Founding Partner ${n}`;
-  const initials = f.name ? f.name.split(" ").map((s) => s[0]).slice(0, 2).join("") : String(n);
-  const portrait = f.headshot
-    ? `<img src="${esc(f.headshot)}" alt="Portrait of ${esc(f.name)}" loading="lazy">`
-    : photoPlaceholder(`headshot, partner ${n}`, "", "height:100%");
-  return `
-    <article class="founder-card">
-      <div class="portrait">${portrait}</div>
-      <h3 class="h3">${esc(name)}</h3>
-      <p class="role">${f.role ? esc(f.role) : "Title and role to be supplied"}</p>
-      ${f.name ? "" : `<p class="dev-only">${flag("Awaiting partner questionnaire")}</p>`}
-      <p>${f.bio ? esc(f.bio) : "A short professional biography will appear here: background, relevant accomplishments and the experience this partner brings."}</p>
-      <p class="contrib">${f.contribution ? esc(f.contribution) : "A few sentences on what this partner contributes to MATORI and why they joined."}</p>
-      ${f.linkedin ? `<a class="text-link" href="${esc(f.linkedin)}" rel="noopener" target="_blank">LinkedIn profile</a>` : ""}
-    </article>`;
 }
