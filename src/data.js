@@ -79,33 +79,32 @@ const FOUNDERS = [
    progress is inside [from, to). TIMELINE keys are [progress, value] pairs;
    values ease between keys. Edit timing here, not in the animation code.   */
 const UNBOX_STEPS = [
-  { from: 0.00, to: 0.16, title: "The box", body: "A hexagon rigid box in kraft board, one brown ink, a gold edge and honeycomb running up the sides. Scroll to open it." },
-  { from: 0.16, to: 0.36, title: "Turn it", body: "The back carries how to use, the full ingredient list and the cautions. Nothing hidden.", dl: [["Box", "7.5 × 6.5 in, hexagon (concept)"]] },
-  { from: 0.36, to: 0.52, title: "Lift the lid", body: "The back half of the top hinges open. Inside the lid: glow on. One wearable, every day." },
-  { from: 0.52, to: 0.70, title: "Four weeks", body: "Four pouches, one for each week. Seven wearables on a honeycomb sheet in each.", dl: [["Contents", "28 wearables"]] },
-  { from: 0.70, to: 0.84, title: "Open a pouch", body: "Tear at the top, peel one wearable off the sheet, reseal the pouch." },
-  { from: 0.84, to: 1.01, title: "Wear it", body: "Press onto clean, dry skin on the shoulder, trap or upper chest. Wear for up to eight hours, then peel off gently.", dl: [["Size", "46.2 mm hexagon (proposed)"]], cta: { label: "Discover Honey Glow", href: "#/products/honey-glow" } }
+  { from: 0.00, to: 0.20, title: "The box", body: "A hexagon rigid box in kraft board, one brown ink, a gold edge and honeycomb running up the sides. Scroll to open it.", dl: [["Box", "7.5 × 6.5 in, hexagon (concept)"]] },
+  { from: 0.20, to: 0.40, title: "Lift the lid", body: "The back half of the top hinges open. Inside the lid: glow on. One wearable, every day." },
+  { from: 0.40, to: 0.625, title: "Four weeks", body: "Four pouches, one for each week. Seven wearables on a honeycomb sheet in each.", dl: [["Contents", "28 wearables"]] },
+  { from: 0.625, to: 0.80, title: "Open a pouch", body: "Tear at the top, peel one wearable off the sheet, reseal the pouch." },
+  { from: 0.80, to: 1.01, title: "Wear it", body: "Press onto clean, dry skin on the shoulder, trap or upper chest. Wear for up to eight hours, then peel off gently.", dl: [["Size", "46.2 mm hexagon (proposed)"]], cta: { label: "Discover Honey Glow", href: "#/products/honey-glow" } }
 ];
 
 /* Rhythm: hold, move, hold. Nothing moves in the first 8% of scroll. Each step
    moves in its first ~40% and holds still for the rest so the copy can be read.  */
 const UNBOX_TIMELINE = {
-  ry:      [[0, -14], [0.17, -14], [0.24, 166], [0.30, 166], [0.36, -18], [0.45, -8]],                // front · turn to the back · hold · return to 3/4
-  rx:      [[0, -6], [0.17, -6], [0.24, -10], [0.30, -10], [0.36, -8], [0.40, -8], [0.48, 30], [0.99, 30]],   // tips toward you so you look down into the open box
+  ry:      [[0, -14], [0.20, -14], [0.31, -8]],                                            // front, easing to 3/4 as the lid lifts
+  rx:      [[0, -6], [0.20, -6], [0.25, -8], [0.35, 30], [0.99, 30]],                      // tips toward you so you look down into the open box
   rigZ:    [[0, 0]],
-  rigY:    [[0, 50], [0.52, 50], [0.60, 95], [0.70, 95], [0.76, 150]],                   // camera follows the sachet, then the patch
-  slide:   [[0.42, 0], [0.50, -0.42]],
-  sachetY: [[0.53, 0], [0.60, -0.46]],
-  sachetZ: [[0.55, 0], [0.64, 200]],
-  face:    [[0.56, 0], [0.64, 1]],
-  boxFade: [[0.56, 1], [0.64, 0.35], [0.84, 0.35], [0.90, 0]],                             // carton dims behind the sachet, leaves for the patch
-  tear:    [[0.71, 0], [0.76, 1]],
-  patchY:  [[0.74, 0], [0.80, -90], [0.86, -40], [0.92, 30]],
-  patchZ:  [[0.85, 0], [0.91, 220]],
-  patchS:  [[0.85, 1], [0.92, 1.9]],
-  patchRy: [[0.86, 0], [0.90, 180], [0.93, 180], [0.97, 360]],                             // show liner, then face
-  peel:    [[0.90, 0], [0.94, 1]],
-  sFade:   [[0.85, 1], [0.90, 0]]
+  rigY:    [[0, 50], [0.40, 50], [0.50, 95], [0.625, 95], [0.70, 150]],                   // camera follows the sachet, then the patch
+  slide:   [[0.275, 0], [0.375, -0.42]],
+  sachetY: [[0.4125, 0], [0.50, -0.46]],
+  sachetZ: [[0.4375, 0], [0.55, 200]],
+  face:    [[0.45, 0], [0.55, 1]],
+  boxFade: [[0.45, 1], [0.55, 0.35], [0.80, 0.35], [0.875, 0]],                           // carton dims behind the sachet, leaves for the patch
+  tear:    [[0.6375, 0], [0.70, 1]],
+  patchY:  [[0.675, 0], [0.75, -90], [0.825, -40], [0.90, 30]],
+  patchZ:  [[0.8125, 0], [0.8875, 220]],
+  patchS:  [[0.8125, 1], [0.90, 1.9]],
+  patchRy: [[0.825, 0], [0.875, 180], [0.9125, 180], [0.9625, 360]],                      // show liner, then face
+  peel:    [[0.875, 0], [0.925, 1]],
+  sFade:   [[0.8125, 1], [0.875, 0]]
 };
 
 /* ---------- Patch sizes (proposed; load per size intentionally not published) ---------- */

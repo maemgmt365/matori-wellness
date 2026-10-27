@@ -675,7 +675,7 @@ main { min-height: 60vh; outline: none; }
 .leaf-shadow { filter: blur(7px); opacity: .1; }
 
 /* ---------- UNBOXING (scroll-driven, sticky stage) ---------- */
-.unbox { position: relative; height: 620vh; background: var(--bg-alt); }
+.unbox { position: relative; height: 540vh; background: var(--bg-alt); }
 .unbox-sticky {
   position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--header-h));
   height: calc(100vh - var(--header-h)); height: calc(100dvh - var(--header-h));
